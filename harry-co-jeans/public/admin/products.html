@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Product Management — HARRY &amp; CO Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="/assets/tailwind.config.js"></script>
+</head>
+<body class="bg-surface-container-lowest text-on-background font-body-md antialiased flex h-screen overflow-hidden">
+
+  <!-- Main Work Area -->
+  <div class="flex-1 flex flex-col h-full overflow-hidden">
+    <!-- Top Bar -->
+    <header class="h-16 border-b border-outline-variant bg-background px-6 flex items-center justify-between shrink-0">
+      <div class="flex items-center gap-3">
+        <button class="md:hidden text-primary p-2 hover:bg-surface-container rounded-lg">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+        <h1 class="text-base font-bold text-primary uppercase tracking-tight">CATALOG MANAGEMENT &middot; PRODUCTS</h1>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="/admin/edit-product" class="bg-primary text-on-primary text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-lg hover:bg-black/80 transition flex items-center gap-1.5 shadow-md">
+          <span class="material-symbols-outlined text-[18px]">add</span>
+          + Add New Product
+        </a>
+      </div>
+    </header>
+
+    <!-- Scrollable Content -->
+    <main class="flex-1 overflow-y-auto p-6 md:p-8 space-y-6">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h2 class="text-2xl font-headline-lg font-bold text-primary">ALL PRODUCTS</h2>
+          <p class="text-xs text-secondary mt-0.5">Manage existing products, add new denim releases, or delete archived items.</p>
+        </div>
+
+        <!-- Search & Filter -->
+        <div class="flex items-center gap-3 w-full sm:w-auto">
+          <div class="relative flex-1 sm:w-64">
+            <span class="material-symbols-outlined absolute left-3 top-2.5 text-secondary text-[18px]">search</span>
+            <input id="product-search" type="text" placeholder="Search by SKU or title..." class="w-full bg-white border border-outline-variant rounded-lg pl-9 pr-3 py-2 text-xs focus:outline-none focus:border-primary"/>
+          </div>
+          <select id="status-filter" class="bg-white border border-outline-variant rounded-lg px-3 py-2 text-xs font-bold text-primary focus:outline-none focus:border-primary cursor-pointer">
+            <option value="all">Status: All</option>
+            <option value="active">Active</option>
+            <option value="draft">Draft</option>
+            <option value="archived">Archived</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Products Table Card -->
+      <div class="bg-white border border-outline-variant rounded-2xl shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs text-left">
+            <thead class="bg-surface-container font-bold text-primary uppercase border-b border-outline-variant">
+              <tr>
+                <th class="p-4 w-16">Image</th>
+                <th class="p-4">Product Title &amp; SKU</th>
+                <th class="p-4">Fit / Category</th>
+                <th class="p-4">Price</th>
+                <th class="p-4">Total Stock</th>
+                <th class="p-4">Status</th>
+                <th class="p-4 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="products-table-body" class="divide-y divide-outline-variant/40">
+              <tr><td colspan="7" class="p-8 text-center text-secondary">Loading products...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="delete-modal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl p-6 max-w-sm w-full space-y-4 shadow-2xl">
+      <div class="w-12 h-12 rounded-full bg-error-container text-error flex items-center justify-center mx-auto">
+        <span class="material-symbols-outlined text-[28px]">delete_forever</span>
+      </div>
+      <div class="text-center">
+        <h3 class="text-base font-bold text-primary">Delete Product?</h3>
+        <p id="delete-modal-msg" class="text-xs text-secondary mt-1">This will permanently remove the product, all variant inventory, and images from the store.</p>
+      </div>
+      <div class="flex gap-2 pt-2">
+        <button id="btn-confirm-delete" class="flex-1 bg-error text-white text-xs font-bold uppercase py-2.5 rounded-lg hover:bg-red-700 transition">Delete</button>
+        <button id="btn-cancel-delete" class="flex-1 bg-surface-container text-primary text-xs font-bold uppercase py-2.5 rounded-lg hover:bg-surface-container-high transition">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { api, qsFromParams } from '/assets/js/core/api.js';
+    import { money } from '/assets/js/core/format.js';
+    import { toast } from '/assets/js/core/ui.js';
+    import { initAdminChrome } from '/assets/js/components/admin-nav.js';
+
+    const user = await initAdminChrome('products');
+    if (user) loadProducts();
+
+    const tbody = document.getElementById('products-table-body');
+    const searchInput = document.getElementById('product-search');
+    const statusSelect = document.getElementById('status-filter');
+
+    let deleteTargetId = null;
+    const deleteModal = document.getElementById('delete-modal');
+    const deleteModalMsg = document.getElementById('delete-modal-msg');
+    const confirmDeleteBtn = document.getElementById('btn-confirm-delete');
+    const cancelDeleteBtn = document.getElementById('btn-cancel-delete');
+
+    async function loadProducts() {
+      tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-secondary">Loading products...</td></tr>';
+      try {
+        const queryObj = {
+          q: searchInput.value.trim() || undefined,
+          status: statusSelect.value !== 'all' ? statusSelect.value : undefined,
+        };
+
+        const res = await api.get('/admin/products' + qsFromParams(queryObj));
+        const products = res.products || [];
+
+        if (!products.length) {
+          tbody.innerHTML = '<tr><td colspan="7" class="p-12 text-center text-secondary font-semibold">No products found. Click "+ Add New Product" to create one.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = products.map(p => `
+          <tr class="hover:bg-surface-container-low transition group">
+            <td class="p-4">
+              <img src="${p.mainImage || ''}" alt="${p.title}" class="w-12 h-16 object-cover bg-surface-container rounded-lg shadow-sm"/>
+            </td>
+            <td class="p-4">
+              <div class="font-bold text-primary text-sm line-clamp-1">${p.title}</div>
+              <div class="text-[11px] font-mono text-secondary mt-0.5">${p.sku}</div>
+            </td>
+            <td class="p-4">
+              <span class="font-semibold text-primary capitalize">${p.fit || 'Classic'}</span>
+              <span class="text-secondary">&middot; ${p.productType || 'Jeans'}</span>
+            </td>
+            <td class="p-4">
+              <span class="font-bold text-primary">${money(p.basePrice)}</span>
+              ${p.compareAtPrice ? `<span class="text-[10px] text-secondary line-through block">${money(p.compareAtPrice)}</span>` : ''}
+            </td>
+            <td class="p-4">
+              <span class="font-bold ${p.totalStock < 10 ? 'text-amber-600' : 'text-primary'}">${p.totalStock} units</span>
+            </td>
+            <td class="p-4">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${
+                p.status === 'active' ? 'bg-emerald-100 text-emerald-800' :
+                p.status === 'draft' ? 'bg-amber-100 text-amber-800' :
+                'bg-surface-container-high text-secondary'
+              }">${p.status}</span>
+            </td>
+            <td class="p-4 text-right">
+              <div class="flex items-center justify-end gap-2">
+                <a href="/admin/edit-product?id=${p.id}" class="bg-surface-container hover:bg-surface-container-high text-primary px-3 py-1.5 rounded-lg text-xs font-bold uppercase transition">
+                  Edit
+                </a>
+                <button class="btn-delete-prod bg-error-container hover:bg-red-200 text-error px-3 py-1.5 rounded-lg text-xs font-bold uppercase transition" data-id="${p.id}" data-title="${p.title}">
+                  Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+        `).join('');
+
+        // Wire Delete Buttons
+        document.querySelectorAll('.btn-delete-prod').forEach(b => {
+          b.addEventListener('click', () => {
+            deleteTargetId = b.dataset.id;
+            deleteModalMsg.textContent = `Are you sure you want to permanently delete '${b.dataset.title}'?`;
+            deleteModal.classList.remove('hidden');
+          });
+        });
+
+      } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="7" class="p-8 text-center text-error font-bold">${err.message || 'Failed to load products.'}</td></tr>`;
+      }
+    }
+
+    // Modal Handlers
+    cancelDeleteBtn.addEventListener('click', () => {
+      deleteModal.classList.add('hidden');
+      deleteTargetId = null;
+    });
+
+    confirmDeleteBtn.addEventListener('click', async () => {
+      if (!deleteTargetId) return;
+      try {
+        await api.del(`/admin/products/${deleteTargetId}`);
+        toast('Product deleted successfully', 'success');
+        deleteModal.classList.add('hidden');
+        deleteTargetId = null;
+        loadProducts();
+      } catch (err) {
+        toast(err.message || 'Failed to delete product', 'error');
+      }
+    });
+
+    // Search & Filter Listeners
+    let timer;
+    searchInput.addEventListener('input', () => {
+      clearTimeout(timer);
+      timer = setTimeout(loadProducts, 350);
+    });
+    statusSelect.addEventListener('change', loadProducts);
+  </script>
+</body>
+</html>

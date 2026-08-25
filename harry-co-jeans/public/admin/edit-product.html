@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Product Studio — HARRY &amp; CO Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="/assets/tailwind.config.js"></script>
+</head>
+<body class="bg-surface-container-lowest text-on-background font-body-md antialiased flex h-screen overflow-hidden">
+
+  <!-- Main Work Area -->
+  <div class="flex-1 flex flex-col h-full overflow-hidden">
+    <!-- Top Bar -->
+    <header class="h-16 border-b border-outline-variant bg-background px-6 flex items-center justify-between shrink-0">
+      <div class="flex items-center gap-3">
+        <button class="md:hidden text-primary p-2 hover:bg-surface-container rounded-lg">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+        <a href="/admin/products" class="text-xs font-bold uppercase tracking-wider text-secondary hover:text-primary">&larr; Products Catalog</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <button id="btn-save-top" class="bg-primary text-on-primary text-xs font-bold uppercase tracking-wider px-6 py-2 rounded-lg hover:bg-black/80 transition flex items-center gap-1.5 shadow">
+          <span class="material-symbols-outlined text-[16px]">save</span>
+          Save Product
+        </button>
+      </div>
+    </header>
+
+    <!-- Scrollable Form Container -->
+    <main class="flex-1 overflow-y-auto p-6 md:p-8 space-y-6">
+      <div class="flex justify-between items-end border-b border-outline-variant/60 pb-4">
+        <div>
+          <span class="text-xs uppercase tracking-widest font-bold text-secondary">ATELIER STUDIO</span>
+          <h1 id="page-title" class="text-2xl font-headline-lg font-bold text-primary">ADD NEW PRODUCT</h1>
+        </div>
+        <button id="btn-delete-product" class="hidden bg-error-container text-error text-xs font-bold uppercase px-4 py-2 rounded-lg hover:bg-red-200 transition">
+          Delete Product
+        </button>
+      </div>
+
+      <form id="product-form" class="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-16">
+        <!-- Main Form Left Column -->
+        <div class="lg:col-span-2 space-y-6">
+          <!-- Basic Information Card -->
+          <div class="bg-white border border-outline-variant rounded-2xl p-6 shadow-sm space-y-4">
+            <h2 class="text-sm font-bold uppercase tracking-wider text-primary border-b border-outline-variant/60 pb-3">BASIC INFORMATION</h2>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-secondary mb-1">Product Title *</label>
+              <input type="text" name="title" id="title-input" required placeholder="e.g. The 1968 Vintage Straight Selvedge" class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 text-sm focus:outline-none focus:border-primary"/>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase text-secondary mb-1">SKU *</label>
+                <input type="text" name="sku" required placeholder="e.g. HC-VSS-001" class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 text-sm font-mono focus:outline-none focus:border-primary"/>
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-secondary mb-1">URL Slug</label>
+                <input type="text" name="slug" placeholder="e.g. 1968-vintage-straight-selvedge" class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 text-sm font-mono focus:outline-none focus:border-primary"/>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase text-secondary mb-1">Fit Silhouette</label>
+                <select name="fit" class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 text-xs font-bold focus:outline-none focus:border-primary">
+                  <option value="straight">Straight Fit</option>
+                  <option value="slim">Slim Tapered</option>
+                  <option value="relaxed">Relaxed Fit</option>
+                  <option value="baggy">Baggy Wide-Leg</option>
+                  <option value="oversized">Oversized</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-secondary mb-1">Category</label>
+                <select name="productType" class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 text-xs font-bold focus:outline-none focus:border-primary">
+                  <option value="Jeans">Jeans</option>
+                  <option value="Jackets">Jackets</option>
+                  <option value="Shirts">Shirts</option>
+                  <option value="Accessories">Accessories</option>
+                </select>
+              </div>
+              <div class="col-span-2 sm:col-span-1">
+                <label class="block text-xs font-bold uppercase text-secondary mb-1">Gender</label>
+                <select name="gender" class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 text-xs font-bold focus:outline-none focus:border-primary">
+                  <option value="unisex">Unisex</option>
+                  <option value="men">Men</option>
+                  <option value="women">Women</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-secondary mb-1">Full Description</label>
+              <textarea name="description" rows="4" placeholder="Detailed story of the denim weight, mill origins, and cut..." class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 text-sm focus:outline-none focus:border-primary"></textarea>
+            </div>
+          </div>
+
+          <!-- Product Media & Images Card -->
+          <div class="bg-white border border-outline-variant rounded-2xl p-6 shadow-sm space-y-4">
+            <h2 class="text-sm font-bold uppercase tracking-wider text-primary border-b border-outline-variant/60 pb-3">PRODUCT PHOTOGRAPHY</h2>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-secondary mb-1">Main Image URL</label>
+              <input type="url" id="main-image-url" name="imageUrl" placeholder="https://lh3.googleusercontent.com/... or /uploads/..." class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 text-sm focus:outline-none focus:border-primary"/>
+            </div>
+
+            <!-- Upload Box -->
+            <div class="border-2 border-dashed border-outline-variant rounded-xl p-4 text-center hover:bg-surface-container-low transition">
+              <input type="file" id="file-upload-input" accept="image/*" class="hidden"/>
+              <button type="button" id="btn-browse-file" class="text-xs font-bold uppercase tracking-wider text-primary flex items-center justify-center gap-1 mx-auto">
+                <span class="material-symbols-outlined text-[20px]">cloud_upload</span>
+                Or Upload Image From Computer
+              </button>
+              <p id="upload-status" class="text-[11px] text-secondary mt-1">Supports JPG, PNG, WebP up to 10MB</p>
+            </div>
+
+            <!-- Image Previews Container -->
+            <div id="image-previews" class="flex flex-wrap gap-3 pt-2"></div>
+          </div>
+
+          <!-- Variants & Inventory Matrix Card -->
+          <div class="bg-white border border-outline-variant rounded-2xl p-6 shadow-sm space-y-4">
+            <div class="flex justify-between items-center border-b border-outline-variant/60 pb-3">
+              <h2 class="text-sm font-bold uppercase tracking-wider text-primary">SIZES &amp; STOCK MATRIX</h2>
+              <button type="button" id="btn-add-size-row" class="text-xs font-bold uppercase text-primary underline">+ Add Size</button>
+            </div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-xs text-left">
+                <thead class="bg-surface-container font-bold text-primary uppercase">
+                  <tr>
+                    <th class="p-2.5">Waist / Size</th>
+                    <th class="p-2.5">Color Wash</th>
+                    <th class="p-2.5">Price (₹)</th>
+                    <th class="p-2.5">Stock Qty</th>
+                    <th class="p-2.5 w-10"></th>
+                  </tr>
+                </thead>
+                <tbody id="variants-tbody" class="divide-y divide-outline-variant/40">
+                  <!-- Dynamically populated variant rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Craft Specs & Care -->
+          <div class="bg-white border border-outline-variant rounded-2xl p-6 shadow-sm space-y-4">
+            <h2 class="text-sm font-bold uppercase tracking-wider text-primary border-b border-outline-variant/60 pb-3">FIT STYLING &amp; FABRIC CARE</h2>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-secondary mb-1">Fit &amp; Styling Bullets (1 per line)</label>
+              <textarea name="fitStyling" rows="3" placeholder="Straight leg silhouette with a mid-high rise&#10;Button fly with custom anti-rust brass donut buttons" class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 text-sm focus:outline-none focus:border-primary"></textarea>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-secondary mb-1">Fabric &amp; Care Details</label>
+              <textarea name="fabricCare" rows="2" placeholder="14oz 100% Cotton Kaihara Mills. Wash inside out in cold water..." class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 text-sm focus:outline-none focus:border-primary"></textarea>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-secondary mb-1">Tags (comma separated)</label>
+              <input type="text" name="tags" placeholder="selvedge, kaihara, raw denim, bestseller" class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 text-sm focus:outline-none focus:border-primary"/>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side Settings Column -->
+        <div class="lg:col-span-1 space-y-6">
+          <!-- Pricing & Status Card -->
+          <div class="bg-white border border-outline-variant rounded-2xl p-6 shadow-sm space-y-4 sticky top-24">
+            <h2 class="text-sm font-bold uppercase tracking-wider text-primary border-b border-outline-variant/60 pb-3">PRICING &amp; STATUS</h2>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-secondary mb-1">Base Price (INR ₹) *</label>
+              <input type="number" name="basePrice" id="base-price-input" required min="0" placeholder="4990" class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 text-base font-bold text-primary focus:outline-none focus:border-primary"/>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-secondary mb-1">Compare-at / Original Price (INR ₹)</label>
+              <input type="number" name="compareAtPrice" min="0" placeholder="6490" class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 text-sm text-secondary focus:outline-none focus:border-primary"/>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase text-secondary mb-1">Store Visibility</label>
+              <select name="status" class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 text-xs font-bold text-primary focus:outline-none focus:border-primary">
+                <option value="active">Active (Visible in Storefront)</option>
+                <option value="draft">Draft (Hidden)</option>
+                <option value="archived">Archived</option>
+              </select>
+            </div>
+
+            <div class="pt-2">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" name="isNew" checked class="rounded border-outline-variant text-primary focus:ring-primary"/>
+                <span class="text-xs font-semibold text-primary">Mark as "New Release" badge</span>
+              </label>
+            </div>
+
+            <div class="pt-4 border-t border-outline-variant">
+              <button type="submit" class="w-full bg-primary text-on-primary text-xs font-bold uppercase tracking-wider py-4 rounded-lg hover:bg-black/80 transition shadow-lg flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">check</span>
+                Save &amp; Publish
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <script type="module">
+    import { api } from '/assets/js/core/api.js';
+    import { toast, params, busy } from '/assets/js/core/ui.js';
+    import { initAdminChrome } from '/assets/js/components/admin-nav.js';
+
+    const user = await initAdminChrome('products');
+    const { id } = params();
+    const isEdit = Boolean(id);
+
+    const form = document.getElementById('product-form');
+    const pageTitle = document.getElementById('page-title');
+    const deleteBtn = document.getElementById('btn-delete-product');
+    const saveTopBtn = document.getElementById('btn-save-top');
+    const variantsTbody = document.getElementById('variants-tbody');
+    const mainImageUrl = document.getElementById('main-image-url');
+    const previewsContainer = document.getElementById('image-previews');
+    const fileInput = document.getElementById('file-upload-input');
+    const browseFileBtn = document.getElementById('btn-browse-file');
+    const uploadStatus = document.getElementById('upload-status');
+
+    let currentImages = [];
+
+    // Default sizes for new product
+    const DEFAULT_SIZES = ['28', '30', '32', '34', '36', '38'];
+
+    function renderVariantRows(variants = []) {
+      const list = variants.length > 0 ? variants : DEFAULT_SIZES.map(sz => ({ size: sz, color: 'Raw Indigo', price: form.elements.basePrice?.value || 4990, stock: 20 }));
+      variantsTbody.innerHTML = list.map((v, i) => `
+        <tr class="variant-row">
+          <td class="p-2.5">
+            <input type="text" class="v-size w-16 bg-surface-container-low border border-outline-variant rounded p-1.5 font-bold" value="${v.size || '32'}"/>
+          </td>
+          <td class="p-2.5">
+            <input type="text" class="v-color w-full bg-surface-container-low border border-outline-variant rounded p-1.5" value="${v.color || 'Raw Indigo'}"/>
+          </td>
+          <td class="p-2.5">
+            <input type="number" class="v-price w-24 bg-surface-container-low border border-outline-variant rounded p-1.5 font-bold" value="${v.price || 4990}"/>
+          </td>
+          <td class="p-2.5">
+            <input type="number" class="v-stock w-20 bg-surface-container-low border border-outline-variant rounded p-1.5 font-bold" value="${v.stock !== undefined ? v.stock : 20}"/>
+          </td>
+          <td class="p-2.5 text-right">
+            <button type="button" class="btn-del-vrow text-secondary hover:text-error">
+              <span class="material-symbols-outlined text-[16px]">close</span>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+
+      document.querySelectorAll('.btn-del-vrow').forEach(b => {
+        b.addEventListener('click', (e) => {
+          e.target.closest('tr').remove();
+        });
+      });
+    }
+
+    document.getElementById('btn-add-size-row').addEventListener('click', () => {
+      const tr = document.createElement('tr');
+      tr.className = 'variant-row';
+      tr.innerHTML = `
+        <td class="p-2.5"><input type="text" class="v-size w-16 bg-surface-container-low border border-outline-variant rounded p-1.5 font-bold" value="32"/></td>
+        <td class="p-2.5"><input type="text" class="v-color w-full bg-surface-container-low border border-outline-variant rounded p-1.5" value="Raw Indigo"/></td>
+        <td class="p-2.5"><input type="number" class="v-price w-24 bg-surface-container-low border border-outline-variant rounded p-1.5 font-bold" value="${form.elements.basePrice?.value || 4990}"/></td>
+        <td class="p-2.5"><input type="number" class="v-stock w-20 bg-surface-container-low border border-outline-variant rounded p-1.5 font-bold" value="20"/></td>
+        <td class="p-2.5 text-right"><button type="button" class="btn-del-vrow text-secondary hover:text-error"><span class="material-symbols-outlined text-[16px]">close</span></button></td>
+      `;
+      tr.querySelector('.btn-del-vrow').addEventListener('click', () => tr.remove());
+      variantsTbody.appendChild(tr);
+    });
+
+    function renderImagePreviews() {
+      previewsContainer.innerHTML = currentImages.map((img, idx) => `
+        <div class="relative w-20 aspect-[3/4] bg-surface-container rounded-lg overflow-hidden border ${idx === 0 ? 'border-primary' : 'border-outline-variant'} group">
+          <img src="${img.url}" class="w-full h-full object-cover"/>
+          <button type="button" class="btn-remove-img absolute top-1 right-1 bg-black/70 text-white rounded p-0.5" data-idx="${idx}">
+            <span class="material-symbols-outlined text-[14px]">close</span>
+          </button>
+        </div>
+      `).join('');
+
+      document.querySelectorAll('.btn-remove-img').forEach(b => {
+        b.addEventListener('click', () => {
+          currentImages.splice(Number(b.dataset.idx), 1);
+          renderImagePreviews();
+        });
+      });
+    }
+
+    // Direct Image File Upload Handler
+    browseFileBtn.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const fd = new FormData();
+      fd.append('image', file);
+      uploadStatus.textContent = 'Uploading image...';
+
+      try {
+        const res = await api.upload('/admin/products/upload', fd);
+        uploadStatus.textContent = 'Upload successful!';
+        currentImages.unshift({ url: res.url, isMain: 1 });
+        mainImageUrl.value = res.url;
+        renderImagePreviews();
+        toast('Image uploaded', 'success');
+      } catch (err) {
+        uploadStatus.textContent = 'Upload failed: ' + (err.message || 'Error');
+        toast(err.message || 'Upload failed', 'error');
+      }
+    });
+
+    mainImageUrl.addEventListener('change', (e) => {
+      const val = e.target.value.trim();
+      if (val && !currentImages.some(i => i.url === val)) {
+        currentImages.unshift({ url: val, isMain: 1 });
+        renderImagePreviews();
+      }
+    });
+
+    async function initPage() {
+      if (isEdit) {
+        pageTitle.textContent = 'EDIT PRODUCT';
+        deleteBtn.classList.remove('hidden');
+
+        try {
+          const res = await api.get(`/admin/products/${id}`);
+          const p = res.product;
+          if (!p) throw new Error('Product not found');
+
+          form.elements.title.value = p.title || '';
+          form.elements.sku.value = p.sku || '';
+          form.elements.slug.value = p.slug || '';
+          form.elements.fit.value = p.fit || 'straight';
+          form.elements.productType.value = p.productType || 'Jeans';
+          form.elements.gender.value = p.gender || 'unisex';
+          form.elements.description.value = p.description || '';
+          form.elements.basePrice.value = p.basePrice || 0;
+          form.elements.compareAtPrice.value = p.compareAtPrice || '';
+          form.elements.status.value = p.status || 'active';
+          form.elements.isNew.checked = Boolean(p.isNew);
+          form.elements.fitStyling.value = (p.fitStyling || []).join('\n');
+          form.elements.fabricCare.value = p.fabricCare || '';
+          form.elements.tags.value = (p.tags || []).join(', ');
+
+          currentImages = p.images || [];
+          if (currentImages[0]) mainImageUrl.value = currentImages[0].url;
+          renderImagePreviews();
+          renderVariantRows(p.variants || []);
+        } catch (err) {
+          toast(err.message || 'Failed to load product', 'error');
+        }
+      } else {
+        renderVariantRows();
+      }
+    }
+
+    // Submit handler
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      await saveProduct();
+    });
+    saveTopBtn.addEventListener('click', saveProduct);
+
+    async function saveProduct() {
+      const title = form.elements.title.value.trim();
+      const basePrice = Number(form.elements.basePrice.value);
+      if (!title || !basePrice) {
+        toast('Title and Base Price are required', 'error');
+        return;
+      }
+
+      // Collect variants
+      const variants = [];
+      document.querySelectorAll('.variant-row').forEach(row => {
+        const size = row.querySelector('.v-size').value.trim();
+        const color = row.querySelector('.v-color').value.trim();
+        const price = Number(row.querySelector('.v-price').value) || basePrice;
+        const stock = Number(row.querySelector('.v-stock').value) || 0;
+        if (size) variants.push({ size, color, price, stock });
+      });
+
+      // Images
+      let images = currentImages;
+      if (images.length === 0 && mainImageUrl.value.trim()) {
+        images = [{ url: mainImageUrl.value.trim(), isMain: 1 }];
+      }
+
+      const payload = {
+        title,
+        sku: form.elements.sku.value.trim(),
+        slug: form.elements.slug.value.trim(),
+        fit: form.elements.fit.value,
+        productType: form.elements.productType.value,
+        gender: form.elements.gender.value,
+        description: form.elements.description.value.trim(),
+        basePrice,
+        compareAtPrice: form.elements.compareAtPrice.value ? Number(form.elements.compareAtPrice.value) : null,
+        status: form.elements.status.value,
+        isNew: form.elements.isNew.checked,
+        fitStyling: form.elements.fitStyling.value.split('\n').map(s => s.trim()).filter(Boolean),
+        fabricCare: form.elements.fabricCare.value.trim(),
+        tags: form.elements.tags.value.split(',').map(s => s.trim()).filter(Boolean),
+        images,
+        variants,
+      };
+
+      try {
+        if (isEdit) {
+          await api.patch(`/admin/products/${id}`, payload);
+          toast('Product updated successfully!', 'success');
+        } else {
+          await api.post('/admin/products', payload);
+          toast('Product created successfully!', 'success');
+        }
+        setTimeout(() => { location.href = '/admin/products'; }, 800);
+      } catch (err) {
+        toast(err.message || 'Failed to save product', 'error');
+      }
+    }
+
+    // Delete handler
+    deleteBtn.addEventListener('click', async () => {
+      if (confirm('Are you sure you want to delete this product?')) {
+        try {
+          await api.del(`/admin/products/${id}`);
+          toast('Product deleted', 'info');
+          location.href = '/admin/products';
+        } catch (err) {
+          toast(err.message || 'Failed to delete product', 'error');
+        }
+      }
+    });
+
+    initPage();
+  </script>
+</body>
+</html>

@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rewards Fulfillment - H&amp;C Jeans</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Montserrat:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary": "#ffffff",
+                      "on-tertiary-fixed-variant": "#484645",
+                      "surface-container-high": "#ebe7e6",
+                      "secondary-fixed-dim": "#c6c6c7",
+                      "background": "#fdf8f8",
+                      "outline": "#747878",
+                      "on-secondary": "#ffffff",
+                      "primary-fixed": "#e5e2e1",
+                      "on-primary-fixed": "#1c1b1b",
+                      "on-primary-container": "#858383",
+                      "outline-variant": "#c4c7c7",
+                      "on-secondary-container": "#616363",
+                      "surface-tint": "#5f5e5e",
+                      "primary-container": "#1c1b1b",
+                      "inverse-on-surface": "#f4f0ef",
+                      "surface-container-lowest": "#ffffff",
+                      "surface": "#fdf8f8",
+                      "inverse-surface": "#313030",
+                      "surface-container-low": "#f7f3f2",
+                      "surface-variant": "#e5e2e1",
+                      "on-tertiary-container": "#868381",
+                      "secondary-container": "#dfe0e0",
+                      "on-error": "#ffffff",
+                      "secondary": "#5d5f5f",
+                      "tertiary-fixed": "#e6e1df",
+                      "surface-dim": "#ddd9d8",
+                      "on-surface": "#1c1b1b",
+                      "on-primary-fixed-variant": "#474646",
+                      "on-surface-variant": "#444748",
+                      "primary": "#000000",
+                      "on-primary": "#ffffff",
+                      "on-secondary-fixed": "#1a1c1c",
+                      "error": "#ba1a1a",
+                      "surface-bright": "#fdf8f8",
+                      "error-container": "#ffdad6",
+                      "surface-container": "#f1edec",
+                      "on-secondary-fixed-variant": "#454747",
+                      "secondary-fixed": "#e2e2e2",
+                      "inverse-primary": "#c8c6c5",
+                      "surface-container-highest": "#e5e2e1",
+                      "on-background": "#1c1b1b",
+                      "tertiary-container": "#1d1b1a",
+                      "tertiary-fixed-dim": "#cac6c3",
+                      "tertiary": "#000000",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-fixed": "#1d1b1a",
+                      "primary-fixed-dim": "#c8c6c5"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "base": "8px",
+                      "xl": "48px",
+                      "gutter": "24px",
+                      "xxl": "80px",
+                      "lg": "24px",
+                      "margin-mobile": "16px",
+                      "md": "16px",
+                      "sm": "8px",
+                      "xs": "4px",
+                      "container-max": "1440px"
+              },
+              "fontFamily": {
+                      "headline-lg": [
+                              "Montserrat"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Montserrat"
+                      ],
+                      "display-xl": [
+                              "Montserrat"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Montserrat"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-xl": [
+                              "84px",
+                              {
+                                      "lineHeight": "90px",
+                                      "letterSpacing": "-0.03em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Custom scrollbar for an editorial feel */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e5e2e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c6c6c7;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased overflow-hidden selection:bg-primary-container selection:text-on-primary-container">
+<div class="flex h-screen w-full">
+<!-- Desktop Side Navigation Shell (from JSON) -->
+<aside class="hidden md:flex flex-col h-full py-xl gap-md h-screen w-64 fixed left-0 top-0 border-r border-outline-variant bg-background z-40">
+<div class="px-xl mb-xl">
+<h1 class="font-headline-lg text-headline-lg font-bold tracking-tight text-primary uppercase">H&amp;C JEANS</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mt-sm">Admin Suite</p>
+</div>
+<nav class="flex-1 overflow-y-auto w-full">
+<ul class="flex flex-col w-full gap-sm font-headline-md text-headline-md uppercase">
+<li>
+<a class="flex items-center gap-md text-secondary-fixed-dim pl-5 py-3 hover:text-primary transition-all hover:bg-surface-container-highest scale-100 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-sm text-label-sm tracking-widest mt-0.5">Sales</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md text-secondary-fixed-dim pl-5 py-3 hover:text-primary transition-all hover:bg-surface-container-highest scale-100 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-label-sm text-label-sm tracking-widest mt-0.5">Products</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md text-secondary-fixed-dim pl-5 py-3 hover:text-primary transition-all hover:bg-surface-container-highest scale-100 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+<span class="font-label-sm text-label-sm tracking-widest mt-0.5">Orders</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md text-secondary-fixed-dim pl-5 py-3 hover:text-primary transition-all hover:bg-surface-container-highest scale-100 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-sm text-label-sm tracking-widest mt-0.5">Inventory</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md text-secondary-fixed-dim pl-5 py-3 hover:text-primary transition-all hover:bg-surface-container-highest scale-100 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-sm text-label-sm tracking-widest mt-0.5">Customers</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md text-secondary-fixed-dim pl-5 py-3 hover:text-primary transition-all hover:bg-surface-container-highest scale-100 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="sell">sell</span>
+<span class="font-label-sm text-label-sm tracking-widest mt-0.5">Promotions</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md text-secondary-fixed-dim pl-5 py-3 hover:text-primary transition-all hover:bg-surface-container-highest scale-100 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+<span class="font-label-sm text-label-sm tracking-widest mt-0.5">Knowledge Base</span>
+</a>
+</li>
+<!-- Active State for Loyalty -->
+<li>
+<a class="flex items-center gap-md text-primary font-bold border-l-4 border-primary pl-4 py-3 bg-surface-container-low hover:bg-surface-container-highest transition-colors scale-100 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="loyalty" style="font-variation-settings: 'FILL' 1;">loyalty</span>
+<span class="font-label-sm text-label-sm tracking-widest mt-0.5">Loyalty</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md text-secondary-fixed-dim pl-5 py-3 hover:text-primary transition-all hover:bg-surface-container-highest scale-100 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm tracking-widest mt-0.5">Settings</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="px-xl mt-auto w-full">
+<button class="w-full py-md px-lg bg-primary text-on-primary font-headline-md text-headline-md uppercase tracking-wider rounded border border-primary hover:bg-surface-variant hover:text-primary transition-colors flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                    New Collection
+                </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-64 w-full h-full overflow-hidden bg-background">
+<!-- Mobile TopNavBar (from JSON) -->
+<header class="md:hidden flex justify-between items-center px-lg w-full sticky top-0 z-50 bg-background w-full h-16 border-b border-outline-variant">
+<button class="text-primary p-sm -ml-sm cursor-pointer active:opacity-70 hover:bg-surface-container-low transition-all duration-200 rounded-full">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="font-headline-md text-headline-md font-bold tracking-tighter text-primary">H&amp;C JEANS</div>
+<div class="flex items-center gap-xs">
+<button class="text-primary p-sm cursor-pointer active:opacity-70 hover:bg-surface-container-low transition-all duration-200 rounded-full">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<img alt="Admin Profile" class="w-8 h-8 rounded-full border border-outline-variant object-cover ml-sm cursor-pointer active:opacity-70" data-alt="A small circular avatar placeholder image with a stark white background and a black silhouette of a person, suitable for a high contrast minimalist UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvpVZiB_On7HY0V69FptCMvBigzPUrBx-CDYDtfcD0VFpuBfL_BHUlSh4kNWWl0EYd3JdGrn_JB5R8ScFsfQs8l81BjWtDasN5gQASzh1az5bPbGLAnayO724UzxXa8858KnMhNaLd8wxQSQ31dKT9b1_fUWFS9hYmjLepLPmqKCiPoLdUoYMxsMDf7iecUS_PZTHnJsjy7FHyPkYNiqi6v8-xVgxos3H4hgDTW0nALG5bmLb4i7to"/>
+</div>
+</header>
+<!-- Desktop Header Equivalent (Secondary Shell) -->
+<header class="hidden md:flex justify-between items-center px-xxl py-xl w-full border-b border-outline-variant bg-background shrink-0">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 bg-surface-container-low rounded-full flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-primary" data-icon="loyalty" style="font-variation-settings: 'FILL' 1;">loyalty</span>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-primary tracking-tight">Rewards Fulfillment</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Manage and process physical member redemptions.</p>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<button class="flex items-center justify-center gap-sm px-lg py-md border border-primary bg-transparent text-primary hover:bg-surface-container-low transition-colors rounded uppercase font-headline-md text-label-sm tracking-widest">
+<span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
+                        Export
+                    </button>
+<button class="flex items-center justify-center gap-sm px-lg py-md bg-primary text-on-primary hover:bg-surface-tint transition-colors rounded uppercase font-headline-md text-label-sm tracking-widest shadow-none">
+<span class="material-symbols-outlined text-[18px]" data-icon="local_shipping">local_shipping</span>
+                        Ship Selected
+                    </button>
+</div>
+</header>
+<!-- Scrollable Canvas -->
+<div class="flex-1 overflow-auto flex flex-col lg:flex-row relative">
+<!-- Main Data Column -->
+<div class="flex-1 flex flex-col p-lg md:p-xxl min-w-0">
+<!-- Metrics Row (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg mb-xl shrink-0">
+<div class="p-lg border border-outline-variant rounded bg-surface-container-lowest flex flex-col justify-between group hover:border-primary transition-colors cursor-default">
+<div class="flex justify-between items-start mb-md">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant group-hover:text-primary transition-colors">Pending Shipments</span>
+<span class="material-symbols-outlined text-secondary-fixed-dim" data-icon="hourglass_empty">hourglass_empty</span>
+</div>
+<div class="flex items-baseline gap-sm">
+<span class="font-display-xl text-display-xl text-primary leading-none">42</span>
+<span class="font-body-md text-body-md text-error flex items-center">
+<span class="material-symbols-outlined text-[16px]" data-icon="arrow_upward">arrow_upward</span>
+                                    12%
+                                </span>
+</div>
+</div>
+<div class="p-lg border border-outline-variant rounded bg-surface-container-lowest flex flex-col justify-between group hover:border-primary transition-colors cursor-default">
+<div class="flex justify-between items-start mb-md">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant group-hover:text-primary transition-colors">Processing</span>
+<span class="material-symbols-outlined text-secondary-fixed-dim" data-icon="sync">sync</span>
+</div>
+<div class="flex items-baseline gap-sm">
+<span class="font-display-xl text-display-xl text-primary leading-none">18</span>
+<span class="font-body-md text-body-md text-secondary flex items-center">
+<span class="material-symbols-outlined text-[16px]" data-icon="remove">remove</span>
+                                    0%
+                                </span>
+</div>
+</div>
+<div class="p-lg border border-outline-variant rounded bg-surface-container-lowest flex flex-col justify-between group hover:border-primary transition-colors cursor-default">
+<div class="flex justify-between items-start mb-md">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant group-hover:text-primary transition-colors">Fulfilled Today</span>
+<span class="material-symbols-outlined text-secondary-fixed-dim" data-icon="check_circle">check_circle</span>
+</div>
+<div class="flex items-baseline gap-sm">
+<span class="font-display-xl text-display-xl text-primary leading-none">104</span>
+<span class="font-body-md text-body-md text-primary flex items-center">
+<span class="material-symbols-outlined text-[16px]" data-icon="arrow_upward">arrow_upward</span>
+                                    5%
+                                </span>
+</div>
+</div>
+</div>
+<!-- Search & Filter Bar -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md mb-lg shrink-0">
+<div class="relative w-full md:w-96">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-secondary-fixed-dim" data-icon="search">search</span>
+<input class="w-full pl-xl pr-md py-md bg-transparent border border-outline-variant rounded font-body-md text-body-md text-primary focus:border-primary focus:ring-0 transition-colors placeholder:text-secondary-fixed-dim" placeholder="Search Order ID or Member..." type="text"/>
+</div>
+<div class="flex gap-sm w-full md:w-auto overflow-x-auto pb-xs md:pb-0 hide-scrollbar">
+<select class="pl-md pr-xl py-md bg-transparent border border-outline-variant rounded font-label-sm text-label-sm uppercase tracking-wider text-primary focus:border-primary focus:ring-0 cursor-pointer appearance-none bg-no-repeat bg-[right_12px_center] bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%208l5%205%205-5%22%20stroke%3D%22%231c1b1b%22%20fill%3D%22none%22%20stroke-width%3D%221.5%22%2F%3E%3C%2Fsvg%3E')] min-w-[120px]">
+<option value="">All Status</option>
+<option value="pending">Pending</option>
+<option value="processing">Processing</option>
+<option value="shipped">Shipped</option>
+</select>
+<select class="pl-md pr-xl py-md bg-transparent border border-outline-variant rounded font-label-sm text-label-sm uppercase tracking-wider text-primary focus:border-primary focus:ring-0 cursor-pointer appearance-none bg-no-repeat bg-[right_12px_center] bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%208l5%205%205-5%22%20stroke%3D%22%231c1b1b%22%20fill%3D%22none%22%20stroke-width%3D%221.5%22%2F%3E%3C%2Fsvg%3E')] min-w-[140px]">
+<option value="">All Tiers</option>
+<option value="platinum">Platinum</option>
+<option value="gold">Gold</option>
+<option value="silver">Silver</option>
+</select>
+<button aria-label="More filters" class="flex items-center justify-center p-md border border-outline-variant hover:border-primary hover:bg-surface-container-low transition-colors rounded text-primary shrink-0">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Queue Table -->
+<div class="border border-outline-variant rounded overflow-hidden flex-1 flex flex-col bg-surface-container-lowest relative">
+<div class="overflow-x-auto flex-1">
+<table class="w-full text-left border-collapse min-w-[800px]">
+<thead>
+<tr class="border-b border-outline-variant bg-surface-container-low">
+<th class="p-md w-12 text-center">
+<input class="w-4 h-4 rounded-sm border-outline-variant text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+</th>
+<th class="p-md font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant font-semibold">Order ID</th>
+<th class="p-md font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant font-semibold">Member</th>
+<th class="p-md font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant font-semibold">Reward Item</th>
+<th class="p-md font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant font-semibold">Tier</th>
+<th class="p-md font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant font-semibold">Date Redeemed</th>
+<th class="p-md font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant font-semibold text-right">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant font-body-md text-body-md">
+<!-- Row 1 (Inactive) -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer group">
+<td class="p-md text-center">
+<input class="w-4 h-4 rounded-sm border-outline-variant text-primary focus:ring-primary cursor-pointer" onclick="event.stopPropagation();" type="checkbox"/>
+</td>
+<td class="p-md font-headline-md text-body-md font-semibold text-primary">#RW-0992</td>
+<td class="p-md">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-label-sm font-semibold text-on-surface-variant">EK</div>
+<span class="text-primary">Elara Vance</span>
+</div>
+</td>
+<td class="p-md text-on-surface-variant">Denim Care Kit - Indigo</td>
+<td class="p-md">
+<span class="px-sm py-xs bg-surface-variant text-primary rounded-sm font-label-sm text-[10px] uppercase tracking-widest">Gold</span>
+</td>
+<td class="p-md text-secondary-fixed-dim">Oct 24, 09:15 AM</td>
+<td class="p-md text-right">
+<span class="inline-flex items-center gap-xs text-on-surface-variant font-label-sm text-label-sm uppercase tracking-widest">
+<span class="w-2 h-2 rounded-full bg-outline"></span> Pending
+                                            </span>
+</td>
+</tr>
+<!-- Row 2 (Active state representing selection) -->
+<tr class="bg-primary-fixed bg-opacity-20 transition-colors cursor-pointer relative after:absolute after:inset-y-0 after:right-0 after:w-1 after:bg-primary">
+<td class="p-md text-center">
+<input checked="" class="w-4 h-4 rounded-sm border-outline-variant text-primary focus:ring-primary cursor-pointer" onclick="event.stopPropagation();" type="checkbox"/>
+</td>
+<td class="p-md font-headline-md text-body-md font-bold text-primary">#RW-0993</td>
+<td class="p-md">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-label-sm font-semibold text-on-primary">JT</div>
+<span class="text-primary font-medium">Julian Thorne</span>
+</div>
+</td>
+<td class="p-md text-primary font-medium">Limited Edition Canvas Tote</td>
+<td class="p-md">
+<span class="px-sm py-xs bg-primary text-on-primary rounded-sm font-label-sm text-[10px] uppercase tracking-widest">Platinum</span>
+</td>
+<td class="p-md text-on-surface-variant">Oct 24, 10:30 AM</td>
+<td class="p-md text-right">
+<span class="inline-flex items-center gap-xs text-primary font-label-sm text-label-sm uppercase tracking-widest font-semibold">
+<span class="w-2 h-2 rounded-full bg-primary"></span> Pending
+                                            </span>
+</td>
+</tr>
+<!-- Row 3 (Processing) -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer group">
+<td class="p-md text-center">
+<input class="w-4 h-4 rounded-sm border-outline-variant text-primary focus:ring-primary cursor-pointer" onclick="event.stopPropagation();" type="checkbox"/>
+</td>
+<td class="p-md font-headline-md text-body-md font-semibold text-primary">#RW-0985</td>
+<td class="p-md">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-label-sm font-semibold text-on-surface-variant">SR</div>
+<span class="text-primary">Sienna Ray</span>
+</div>
+</td>
+<td class="p-md text-on-surface-variant">H&amp;C Logo Patch Set</td>
+<td class="p-md">
+<span class="px-sm py-xs bg-surface-variant text-primary rounded-sm font-label-sm text-[10px] uppercase tracking-widest">Silver</span>
+</td>
+<td class="p-md text-secondary-fixed-dim">Oct 23, 14:20 PM</td>
+<td class="p-md text-right">
+<span class="inline-flex items-center gap-xs text-secondary font-label-sm text-label-sm uppercase tracking-widest">
+<span class="material-symbols-outlined text-[14px] animate-spin" data-icon="sync">sync</span> Processing
+                                            </span>
+</td>
+</tr>
+<!-- Row 4 (Shipped) -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer group opacity-70">
+<td class="p-md text-center">
+<input class="w-4 h-4 rounded-sm border-outline-variant text-secondary-fixed-dim bg-surface-variant cursor-not-allowed" disabled="" type="checkbox"/>
+</td>
+<td class="p-md font-headline-md text-body-md font-semibold text-secondary-fixed-dim line-through decoration-1">#RW-0971</td>
+<td class="p-md">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-label-sm font-semibold text-secondary-fixed-dim">MW</div>
+<span class="text-secondary-fixed-dim">Marcus Webb</span>
+</div>
+</td>
+<td class="p-md text-secondary-fixed-dim">Vintage Wash Denim Jacket Pin</td>
+<td class="p-md">
+<span class="px-sm py-xs border border-outline-variant text-secondary-fixed-dim rounded-sm font-label-sm text-[10px] uppercase tracking-widest">Bronze</span>
+</td>
+<td class="p-md text-secondary-fixed-dim">Oct 22, 11:05 AM</td>
+<td class="p-md text-right">
+<span class="inline-flex items-center gap-xs text-secondary-fixed-dim font-label-sm text-label-sm uppercase tracking-widest">
+<span class="material-symbols-outlined text-[14px]" data-icon="done_all">done_all</span> Shipped
+                                            </span>
+</td>
+</tr>
+<!-- Row 5 (Inactive) -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer group">
+<td class="p-md text-center">
+<input class="w-4 h-4 rounded-sm border-outline-variant text-primary focus:ring-primary cursor-pointer" onclick="event.stopPropagation();" type="checkbox"/>
+</td>
+<td class="p-md font-headline-md text-body-md font-semibold text-primary">#RW-0995</td>
+<td class="p-md">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-label-sm font-semibold text-on-surface-variant">AL</div>
+<span class="text-primary">Aiden Locke</span>
+</div>
+</td>
+<td class="p-md text-on-surface-variant">Denim Care Kit - Black</td>
+<td class="p-md">
+<span class="px-sm py-xs bg-surface-variant text-primary rounded-sm font-label-sm text-[10px] uppercase tracking-widest">Gold</span>
+</td>
+<td class="p-md text-secondary-fixed-dim">Oct 24, 11:45 AM</td>
+<td class="p-md text-right">
+<span class="inline-flex items-center gap-xs text-on-surface-variant font-label-sm text-label-sm uppercase tracking-widest">
+<span class="w-2 h-2 rounded-full bg-outline"></span> Pending
+                                            </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Fulfillment Detail Sidebar (Conditional appearance) -->
+<!-- Use standard border to simulate 'overlay shadow' in editorial style -->
+<aside class="w-full lg:w-96 border-t lg:border-t-0 lg:border-l border-outline-variant bg-surface-container-lowest flex flex-col shrink-0 overflow-y-auto">
+<div class="p-lg md:p-xl border-b border-outline-variant sticky top-0 bg-surface-container-lowest z-10 flex justify-between items-start">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant block mb-xs">Redemption Detail</span>
+<h3 class="font-headline-md text-headline-md font-bold text-primary">#RW-0993</h3>
+</div>
+<button aria-label="Close details" class="text-primary hover:bg-surface-container-low p-xs rounded transition-colors">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<div class="p-lg md:p-xl flex-1 flex flex-col gap-xl">
+<!-- Item Summary -->
+<div class="flex gap-md items-start">
+<div class="w-24 h-24 bg-surface-container-low border border-outline-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-outline text-[32px]" data-icon="shopping_bag">shopping_bag</span>
+</div>
+<div>
+<h4 class="font-headline-md text-body-lg font-bold text-primary mb-xs">Limited Edition Canvas Tote</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-sm">SKU: HCT-LTD-001</p>
+<span class="px-sm py-xs border border-primary text-primary rounded-sm font-label-sm text-[10px] uppercase tracking-widest">2,500 Pts Deducted</span>
+</div>
+</div>
+<!-- Shipping Address -->
+<div>
+<div class="flex items-center justify-between mb-md">
+<h4 class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold">Shipping Address</h4>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+</button>
+</div>
+<div class="p-md border border-outline-variant rounded bg-surface-container-low">
+<p class="font-body-md text-body-md text-primary font-medium">Julian Thorne</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">
+                                    1947 Urban Loft Ave, Apt 4B<br/>
+                                    Brooklyn, NY 11211<br/>
+                                    United States
+                                </p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="mail">mail</span> j.thorne@example.com
+                                </p>
+</div>
+</div>
+<!-- Member Notes -->
+<div>
+<h4 class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold mb-md">Member Notes</h4>
+<div class="p-md border-l-2 border-outline text-on-surface-variant font-body-md text-body-md italic bg-surface-variant bg-opacity-30">
+                                "Please leave package with the doorman if I am not home. Thank you!"
+                            </div>
+</div>
+<!-- Fulfillment History Timeline -->
+<div>
+<h4 class="font-label-sm text-label-sm uppercase tracking-widest text-primary font-bold mb-md">Fulfillment History</h4>
+<div class="relative pl-sm border-l border-outline-variant ml-sm flex flex-col gap-md">
+<div class="relative pl-lg">
+<div class="absolute left-[-5px] top-1 w-2.5 h-2.5 rounded-full bg-background border-2 border-primary"></div>
+<p class="font-body-md text-body-md font-medium text-primary">Pending Fulfillment</p>
+<p class="font-label-sm text-label-sm text-secondary-fixed-dim mt-xs uppercase tracking-wider">Oct 24, 10:30 AM</p>
+</div>
+<div class="relative pl-lg opacity-50">
+<div class="absolute left-[-4.5px] top-1 w-2 h-2 rounded-full bg-outline-variant"></div>
+<p class="font-body-md text-body-md text-on-surface-variant">Processing</p>
+</div>
+<div class="relative pl-lg opacity-50">
+<div class="absolute left-[-4.5px] top-1 w-2 h-2 rounded-full bg-outline-variant"></div>
+<p class="font-body-md text-body-md text-on-surface-variant">Label Created</p>
+</div>
+<div class="relative pl-lg opacity-50">
+<div class="absolute left-[-4.5px] top-1 w-2 h-2 rounded-full bg-outline-variant"></div>
+<p class="font-body-md text-body-md text-on-surface-variant">Shipped</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Area sticky bottom -->
+<div class="p-lg md:p-xl border-t border-outline-variant mt-auto sticky bottom-0 bg-surface-container-lowest z-10 flex flex-col gap-sm">
+<button class="w-full py-md bg-primary text-on-primary font-headline-md text-label-sm uppercase tracking-widest rounded border border-primary hover:bg-surface-tint transition-colors flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="local_shipping">local_shipping</span>
+                            Mark as Processing
+                        </button>
+<button class="w-full py-md bg-transparent text-primary font-headline-md text-label-sm uppercase tracking-widest rounded border border-outline-variant hover:border-primary hover:bg-surface-container-low transition-colors">
+                            Generate Label
+                        </button>
+</div>
+</aside>
+</div>
+</main>
+</div>
+</body></html>

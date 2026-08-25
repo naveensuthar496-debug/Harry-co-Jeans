@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Edit Product - H&amp;C Jeans Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Montserrat:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#444748",
+                        "tertiary-fixed": "#e6e1df",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#1d1b1a",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#dfe0e0",
+                        "outline": "#747878",
+                        "surface-container-highest": "#e5e2e1",
+                        "surface-variant": "#e5e2e1",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#fdf8f8",
+                        "on-surface": "#1c1b1b",
+                        "on-tertiary-fixed-variant": "#484645",
+                        "tertiary-container": "#1d1b1a",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#5d5f5f",
+                        "inverse-on-surface": "#f4f0ef",
+                        "background": "#fdf8f8",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#5f5e5e",
+                        "outline-variant": "#c4c7c7",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "surface": "#fdf8f8",
+                        "primary-container": "#1c1b1b",
+                        "primary": "#000000",
+                        "secondary-fixed": "#e2e2e2",
+                        "on-primary-fixed-variant": "#474646",
+                        "inverse-surface": "#313030",
+                        "on-background": "#1c1b1b",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "on-secondary-container": "#616363",
+                        "on-tertiary-container": "#868381",
+                        "on-secondary-fixed-variant": "#454747",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#f1edec",
+                        "on-primary-fixed": "#1c1b1b",
+                        "inverse-primary": "#c8c6c5",
+                        "primary-fixed": "#e5e2e1",
+                        "on-primary-container": "#858383",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "tertiary-fixed-dim": "#cac6c3",
+                        "surface-dim": "#ddd9d8",
+                        "error": "#ba1a1a",
+                        "tertiary": "#000000",
+                        "surface-container-high": "#ebe7e6",
+                        "surface-container-low": "#f7f3f2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "xl": "48px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "gutter": "24px",
+                        "container-max": "1440px",
+                        "md": "16px",
+                        "xxl": "80px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-xl": ["Montserrat"],
+                        "headline-md": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-xl": ["84px", { "lineHeight": "90px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .premium-input {
+            @apply w-full border border-primary rounded px-md py-sm bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:border-[2px] focus:outline-none transition-all duration-200 placeholder:text-on-surface-variant;
+        }
+        .premium-label {
+            @apply block mb-xs font-label-sm text-label-sm text-on-surface uppercase tracking-widest;
+        }
+        .premium-card {
+            @apply bg-surface-container-lowest border border-outline-variant p-lg rounded-lg;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md min-h-screen">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-full z-40 h-screen w-64 flex flex-col border-r border-outline border-r border-on-surface bg-surface text-primary">
+<div class="p-lg border-b border-on-surface">
+<h1 class="font-headline-md text-headline-md font-bold tracking-tighter text-on-surface uppercase">H&amp;C Jeans</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm">Admin Console</p>
+</div>
+<div class="flex-1 overflow-y-auto py-md flex flex-col gap-sm px-sm">
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-secondary-container transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">analytics</span>
+<span class="font-label-sm text-label-sm uppercase">Sales Analytics</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 bg-primary text-on-primary rounded-lg hover:bg-secondary-container transition-colors duration-200 active:scale-[0.99] transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">checkroom</span>
+<span class="font-label-sm text-label-sm uppercase">Product Management</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-secondary-container transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">local_shipping</span>
+<span class="font-label-sm text-label-sm uppercase">Order Management</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-secondary-container transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">inventory_2</span>
+<span class="font-label-sm text-label-sm uppercase">Inventory</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-secondary-container transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">group</span>
+<span class="font-label-sm text-label-sm uppercase">Customers</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-secondary-container transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">sell</span>
+<span class="font-label-sm text-label-sm uppercase">Promotions</span>
+</a>
+</div>
+<div class="p-lg border-t border-on-surface mt-auto">
+<button class="w-full bg-primary text-on-primary font-headline-md text-headline-md uppercase text-sm py-sm rounded-lg hover:opacity-80 transition-opacity flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+                New Product
+            </button>
+</div>
+</nav>
+<!-- TopNavBar -->
+<header class="flex justify-between items-center h-16 px-gutter ml-64 w-[calc(100%-16rem)] border-b border-on-surface border-b border-on-surface bg-surface text-primary fixed top-0 z-30">
+<div class="flex items-center gap-md">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-10 pr-4 py-2 border border-outline rounded-full bg-surface-container-lowest focus:border-primary focus:outline-none text-sm w-64" placeholder="Search..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-6 w-px bg-outline-variant mx-2"></div>
+<img alt="Admin Profile Avatar" class="w-8 h-8 rounded-full border border-outline object-cover" data-alt="A detailed headshot portrait of an administrator profile avatar in a bright, modern office setting. High key lighting, sharp focus, professional appearance, monochrome color grading with high contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCanWt1CaT5CnbpNlafSi1-5Hpcd1-6yMPSxvK7Hu6geL__heUaIBMtC0_2iHDFhsoMrlC5zLChxLILPjA1JPWS8EVyEcm2jT64E1ULuH9k5XB84-1caP_ePFBTvEyH8Ufvxw9mBOvym-_GNzKV-yVpy9YYDyTY5oOWPazerZ-brqnzMtUucycB3zhk9wa-gOl2dMxDWGNCPC_nXsjKvushYR-swdJa1I9WQDazQCtW4o60TrMXBXuU"/>
+<button class="text-on-surface font-label-sm text-label-sm uppercase tracking-wider hover:opacity-80 transition-opacity ml-sm">Logout</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-64 pt-24 pb-32 px-xl min-h-screen">
+<!-- Header -->
+<div class="mb-xl">
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm uppercase tracking-widest mb-md">
+<a class="hover:text-primary transition-colors" href="#">Products</a>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-primary font-bold border-b border-primary">Edit Product</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary uppercase">Edit Product</h1>
+<p class="font-headline-md text-headline-md text-on-surface-variant mt-sm">Raw Selvedge Straight</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-xl">
+<!-- Left Column: Primary Data -->
+<div class="lg:col-span-2 space-y-xl">
+<!-- General Info -->
+<section class="premium-card">
+<h2 class="font-headline-md text-headline-md text-primary uppercase mb-lg border-b border-outline-variant pb-sm">General Information</h2>
+<div class="space-y-lg">
+<div>
+<label class="premium-label">Product Title</label>
+<input class="premium-input" type="text" value="Raw Selvedge Straight"/>
+</div>
+<div>
+<label class="premium-label">SKU</label>
+<input class="premium-input" type="text" value="HC-RSS-001"/>
+</div>
+<div>
+<label class="premium-label flex justify-between">
+                                Internal Description
+                                <span class="text-on-surface-variant font-normal">Internal Use Only</span>
+</label>
+<div class="border border-primary rounded overflow-hidden">
+<div class="bg-surface-container flex gap-2 p-2 border-b border-outline-variant">
+<button class="p-1 hover:bg-secondary-container rounded"><span class="material-symbols-outlined text-[18px]">format_bold</span></button>
+<button class="p-1 hover:bg-secondary-container rounded"><span class="material-symbols-outlined text-[18px]">format_italic</span></button>
+<button class="p-1 hover:bg-secondary-container rounded"><span class="material-symbols-outlined text-[18px]">format_list_bulleted</span></button>
+</div>
+<textarea class="w-full p-md bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:outline-none min-h-[120px] resize-y">Core staple product. 14oz Japanese selvedge denim. Straight fit block. High margin item for Q3 campaign.</textarea>
+</div>
+</div>
+</div>
+</section>
+<!-- Media -->
+<section class="premium-card">
+<div class="flex justify-between items-center mb-lg border-b border-outline-variant pb-sm">
+<h2 class="font-headline-md text-headline-md text-primary uppercase">Media Management</h2>
+<button class="font-label-sm text-label-sm uppercase flex items-center gap-1 hover:text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">add_photo_alternate</span>
+                            Add Media
+                        </button>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md">
+<div class="relative group aspect-[3/4] border border-primary rounded overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A highly detailed product shot of raw selvedge straight leg jeans against a stark white studio background. High contrast, sharp focus on the denim texture, premium editorial fashion aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1sLUqG_Q81fEyCoZ_OTa8dzYxZzhEy2uozrRzGp6Vw5y4NoDjGi03hRjEkUS9H7fYnk-Me-_juaKqoA_tghzEjnXmGD2jD9kn_QQEXNjh5Pz_W8aQmqbnAHcz9krQkiEVabM9_sa5gnkam7-J_LjyvwoeY64_szCN3OF_AZZ02aUR9DHp7VI9rpZ7_FyZ7pFjKUVU6pvBR7tsc-xp4dze1Pg1JJjkv9vEd2qD5ExShKMshRcjh0mb"/>
+<div class="absolute top-2 left-2 bg-primary text-on-primary px-2 py-1 text-[10px] uppercase font-bold tracking-wider rounded-sm">Main</div>
+<div class="absolute inset-0 bg-primary/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+<button class="bg-surface-container-lowest p-2 rounded-full text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[18px]">crop</span></button>
+<button class="bg-surface-container-lowest p-2 rounded-full text-error hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+</div>
+</div>
+<div class="relative group aspect-[3/4] border border-outline-variant rounded overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A detailed close-up shot of the back pocket and leather patch of raw selvedge jeans. Stark lighting, high contrast, minimalist editorial fashion style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwHPVfyrXwRtrDfvfiuAnZnZF4sP3ewhlvMpcTxHbySPhLLHfUNRuJrYf5FmoLeyskn5-PkIV9FokGmdrMxfMJlfg8NNV0dP3wx21mFB-aQwacYz0D7jshnswUxwib0KqBzn-1kJO01yknwTiYNXUccnkLE-OA1oxh7eTiufhYFhWBPEle-ev6Jcbs0Vyhn-mQ0TRcITP8CgGeyctKlPuZdkIWGLXU08CpsuFmO7KEHXZm5KEbhsgg"/>
+<div class="absolute inset-0 bg-primary/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+<button class="bg-surface-container-lowest p-2 rounded-full text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[18px]">star</span></button>
+<button class="bg-surface-container-lowest p-2 rounded-full text-error hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+</div>
+</div>
+<div class="relative group aspect-[3/4] border border-outline-variant rounded overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A detailed shot of the selvedge ID on the turned-up cuff of raw denim jeans with brown leather boots. Studio lighting, high contrast, raw urban aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4vUlZeiU-AApQ9_g6VA5lc7HHjB0f34NRZJffytJoT8RcngAkJ6-YnBfis1x3k_QZOhtBdkv_d2oUq57VS3aXCtOIPeejeDTip-lSTTUuUBjn06MuQSRzaj9KbswKjNcFdnP9MDKzE7mJJeqQK185O8Lw-aR02bCmehxQYeDz5dNau_Wiz_HWKB5EFVMQfxhxX528OZF7FlLDLjENOLQ2zQLLfM54AAjwYJAPIsliaAkVLC53o-EM"/>
+<div class="absolute inset-0 bg-primary/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+<button class="bg-surface-container-lowest p-2 rounded-full text-primary hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[18px]">star</span></button>
+<button class="bg-surface-container-lowest p-2 rounded-full text-error hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+</div>
+</div>
+<button class="aspect-[3/4] border border-dashed border-outline-variant rounded flex flex-col items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-[32px] mb-2">upload</span>
+<span class="font-label-sm text-label-sm uppercase">Upload</span>
+</button>
+</div>
+</section>
+<!-- Variants -->
+<section class="premium-card">
+<h2 class="font-headline-md text-headline-md text-primary uppercase mb-lg border-b border-outline-variant pb-sm">Variants (Size &amp; Wash)</h2>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-primary">
+<th class="p-md font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Variant</th>
+<th class="p-md font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">SKU</th>
+<th class="p-md font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Price</th>
+<th class="p-md font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant">Stock</th>
+<th class="p-md font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant w-16"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-b border-outline-variant hover:bg-surface-container transition-colors group">
+<td class="p-md">
+<div class="font-body-md text-body-md font-bold">28 / Indigo</div>
+</td>
+<td class="p-md"><input class="premium-input py-1 px-2 text-sm" type="text" value="HC-RSS-001-28-IND"/></td>
+<td class="p-md"><input class="premium-input py-1 px-2 text-sm w-24" type="text" value="$185.00"/></td>
+<td class="p-md"><input class="premium-input py-1 px-2 text-sm w-20" type="number" value="45"/></td>
+<td class="p-md text-right">
+<button class="text-outline hover:text-error transition-colors opacity-0 group-hover:opacity-100"><span class="material-symbols-outlined">delete</span></button>
+</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container transition-colors group">
+<td class="p-md">
+<div class="font-body-md text-body-md font-bold">30 / Indigo</div>
+</td>
+<td class="p-md"><input class="premium-input py-1 px-2 text-sm" type="text" value="HC-RSS-001-30-IND"/></td>
+<td class="p-md"><input class="premium-input py-1 px-2 text-sm w-24" type="text" value="$185.00"/></td>
+<td class="p-md"><input class="premium-input py-1 px-2 text-sm w-20" type="number" value="112"/></td>
+<td class="p-md text-right">
+<button class="text-outline hover:text-error transition-colors opacity-0 group-hover:opacity-100"><span class="material-symbols-outlined">delete</span></button>
+</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container transition-colors group">
+<td class="p-md">
+<div class="font-body-md text-body-md font-bold">32 / Indigo</div>
+</td>
+<td class="p-md"><input class="premium-input py-1 px-2 text-sm" type="text" value="HC-RSS-001-32-IND"/></td>
+<td class="p-md"><input class="premium-input py-1 px-2 text-sm w-24" type="text" value="$185.00"/></td>
+<td class="p-md"><input class="premium-input py-1 px-2 text-sm w-20" type="number" value="89"/></td>
+<td class="p-md text-right">
+<button class="text-outline hover:text-error transition-colors opacity-0 group-hover:opacity-100"><span class="material-symbols-outlined">delete</span></button>
+</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container transition-colors group">
+<td class="p-md">
+<div class="font-body-md text-body-md font-bold">30 / Washed Black</div>
+</td>
+<td class="p-md"><input class="premium-input py-1 px-2 text-sm" type="text" value="HC-RSS-001-30-BLK"/></td>
+<td class="p-md"><input class="premium-input py-1 px-2 text-sm w-24" type="text" value="$195.00"/></td>
+<td class="p-md"><input class="premium-input py-1 px-2 text-sm w-20" type="number" value="24"/></td>
+<td class="p-md text-right">
+<button class="text-outline hover:text-error transition-colors opacity-0 group-hover:opacity-100"><span class="material-symbols-outlined">delete</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+<button class="mt-md w-full py-md border border-dashed border-primary text-primary font-label-sm text-label-sm uppercase tracking-widest rounded hover:bg-surface-container transition-colors">
+                            + Add Variant
+                        </button>
+</div>
+</section>
+</div>
+<!-- Right Column: Secondary Data -->
+<div class="space-y-xl">
+<!-- Pricing & Inventory -->
+<section class="premium-card">
+<h2 class="font-headline-md text-headline-md text-primary uppercase mb-lg border-b border-outline-variant pb-sm">Pricing &amp; Inventory</h2>
+<div class="space-y-lg">
+<div>
+<label class="premium-label">Base Price</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant font-bold">$</span>
+<input class="premium-input pl-8" type="text" value="185.00"/>
+</div>
+</div>
+<div>
+<label class="premium-label">Compare-at Price</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant font-bold">$</span>
+<input class="premium-input pl-8" placeholder="0.00" type="text"/>
+</div>
+</div>
+<div class="border-t border-outline-variant pt-lg mt-lg">
+<label class="premium-label">Total Stock Quantity</label>
+<input class="premium-input bg-surface-container-high text-on-surface-variant" disabled="" type="number" value="270"/>
+<p class="text-xs text-on-surface-variant mt-1">Calculated from variants</p>
+</div>
+</div>
+</section>
+<!-- Categorization -->
+<section class="premium-card">
+<h2 class="font-headline-md text-headline-md text-primary uppercase mb-lg border-b border-outline-variant pb-sm">Categorization</h2>
+<div class="space-y-lg">
+<div>
+<label class="premium-label">Product Type</label>
+<select class="premium-input appearance-none">
+<option>Jeans</option>
+<option>Jackets</option>
+<option>Shirts</option>
+<option>Accessories</option>
+</select>
+</div>
+<div>
+<label class="premium-label">Collection</label>
+<select class="premium-input appearance-none">
+<option>Core Classics</option>
+<option>FW24 Outerwear</option>
+<option>Limited Selvedge Run</option>
+</select>
+</div>
+<div>
+<label class="premium-label">Tags</label>
+<div class="border border-outline-variant rounded p-sm flex flex-wrap gap-2 mb-sm bg-surface-container-lowest">
+<span class="bg-surface-container px-2 py-1 rounded text-sm flex items-center gap-1">Raw <button class="hover:text-error"><span class="material-symbols-outlined text-[14px]">close</span></button></span>
+<span class="bg-surface-container px-2 py-1 rounded text-sm flex items-center gap-1">Straight Fit <button class="hover:text-error"><span class="material-symbols-outlined text-[14px]">close</span></button></span>
+<span class="bg-surface-container px-2 py-1 rounded text-sm flex items-center gap-1">Selvedge <button class="hover:text-error"><span class="material-symbols-outlined text-[14px]">close</span></button></span>
+</div>
+<input class="premium-input py-2 text-sm" placeholder="Add a tag..." type="text"/>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Sticky Bottom Action Bar -->
+<div class="fixed bottom-0 left-64 right-0 bg-surface border-t border-on-surface p-md flex justify-between items-center z-30 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+<button class="font-label-sm text-label-sm uppercase tracking-widest text-on-surface-variant hover:text-error transition-colors px-lg py-sm">
+            Discard Changes
+        </button>
+<button class="bg-primary text-on-primary font-headline-md text-headline-md uppercase text-sm px-xxl py-sm rounded-lg hover:opacity-90 transition-opacity">
+            Save Product
+        </button>
+</div>
+</body></html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Checkout Payment — HARRY &amp; CO JEANS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="/assets/tailwind.config.js"></script>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased pt-16 pb-20">
+
+  <!-- Simple Checkout Header -->
+  <header class="bg-white border-b border-outline-variant fixed top-0 w-full z-50">
+    <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="/" class="text-lg font-bold tracking-tighter uppercase text-primary">HARRY &amp; CO</a>
+      <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider">
+        <a href="/checkout-address" class="text-secondary hover:text-primary">1. Address</a>
+        <span class="text-secondary">&rarr;</span>
+        <span class="text-primary border-b-2 border-primary pb-0.5">2. Payment</span>
+        <span class="text-secondary">&rarr;</span>
+        <span class="text-secondary">3. Confirmed</span>
+      </div>
+      <a href="/bag" class="text-xs text-secondary hover:text-primary">Cancel</a>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 pt-8">
+    <div class="mb-6">
+      <span class="text-xs font-bold uppercase tracking-widest text-secondary">STEP 2 OF 2</span>
+      <h1 class="text-2xl font-headline-lg font-bold text-primary">SELECT PAYMENT METHOD</h1>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+      <!-- Payment Methods Column -->
+      <div class="lg:col-span-2 space-y-4">
+        <!-- Shipping Summary Pill -->
+        <div class="bg-white border border-outline-variant rounded-xl p-4 flex justify-between items-center text-xs">
+          <div>
+            <span class="font-bold text-primary">Deliver to:</span>
+            <span id="shipping-preview" class="text-secondary ml-1">Loading address...</span>
+          </div>
+          <a href="/checkout-address" class="font-bold text-primary underline">Change</a>
+        </div>
+
+        <!-- Payment Method Options -->
+        <div class="bg-white border border-outline-variant rounded-2xl p-6 shadow-sm space-y-4">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-primary border-b border-outline-variant/60 pb-3">PAYMENT OPTIONS</h2>
+
+          <!-- UPI Option -->
+          <label class="pay-option flex items-center justify-between p-4 rounded-xl border-2 border-primary bg-surface-container-low cursor-pointer transition">
+            <div class="flex items-center gap-3">
+              <input type="radio" name="paymentMethod" value="upi" checked class="text-primary focus:ring-primary"/>
+              <div>
+                <p class="font-bold text-sm text-primary">UPI / QR Code</p>
+                <p class="text-xs text-secondary">Google Pay, PhonePe, Paytm, BHIM</p>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-[24px] text-primary">qr_code_scanner</span>
+          </label>
+
+          <!-- Card Option -->
+          <label class="pay-option flex items-center justify-between p-4 rounded-xl border-2 border-outline-variant/60 bg-white cursor-pointer transition hover:border-primary">
+            <div class="flex items-center gap-3">
+              <input type="radio" name="paymentMethod" value="card" class="text-primary focus:ring-primary"/>
+              <div>
+                <p class="font-bold text-sm text-primary">Credit / Debit Card</p>
+                <p class="text-xs text-secondary">Visa, Mastercard, RuPay, Amex</p>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-[24px] text-primary">credit_card</span>
+          </label>
+
+          <!-- Netbanking Option -->
+          <label class="pay-option flex items-center justify-between p-4 rounded-xl border-2 border-outline-variant/60 bg-white cursor-pointer transition hover:border-primary">
+            <div class="flex items-center gap-3">
+              <input type="radio" name="paymentMethod" value="netbanking" class="text-primary focus:ring-primary"/>
+              <div>
+                <p class="font-bold text-sm text-primary">Net Banking</p>
+                <p class="text-xs text-secondary">All major Indian banks supported</p>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-[24px] text-primary">account_balance</span>
+          </label>
+
+          <!-- Cash On Delivery Option -->
+          <label class="pay-option flex items-center justify-between p-4 rounded-xl border-2 border-outline-variant/60 bg-white cursor-pointer transition hover:border-primary">
+            <div class="flex items-center gap-3">
+              <input type="radio" name="paymentMethod" value="cod" class="text-primary focus:ring-primary"/>
+              <div>
+                <p class="font-bold text-sm text-primary">Cash on Delivery (COD)</p>
+                <p class="text-xs text-secondary">Pay cash or UPI upon package arrival</p>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-[24px] text-primary">payments</span>
+          </label>
+        </div>
+
+        <!-- Security Badge -->
+        <div class="flex items-center gap-3 bg-surface-container-low rounded-xl p-4 text-xs text-secondary border border-outline-variant/60">
+          <span class="material-symbols-outlined text-[20px] text-emerald-600">lock</span>
+          <span>256-Bit SSL Encrypted &middot; Razorpay Protected Gateway &middot; Zero Fraud Guarantee</span>
+        </div>
+      </div>
+
+      <!-- Order Summary Column -->
+      <div class="lg:col-span-1">
+        <div class="bg-surface-container-low rounded-xl p-6 border border-outline-variant/60 sticky top-24 space-y-4">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-primary border-b border-outline-variant/60 pb-3">ORDER SUMMARY</h2>
+
+          <div id="cart-preview-items" class="space-y-3 max-h-56 overflow-y-auto divide-y divide-outline-variant/40 pr-1"></div>
+
+          <div class="space-y-2 text-sm pt-3 border-t border-outline-variant/40">
+            <div class="flex justify-between text-secondary">
+              <span>Subtotal</span>
+              <span id="subtotal-val" class="font-semibold text-primary">₹0</span>
+            </div>
+            <div class="flex justify-between text-secondary">
+              <span>Shipping</span>
+              <span id="shipping-val" class="font-semibold text-primary">FREE</span>
+            </div>
+            <div class="flex justify-between text-secondary text-xs">
+              <span>Included GST (12%)</span>
+              <span id="tax-val">₹0</span>
+            </div>
+          </div>
+
+          <div class="border-t border-outline-variant pt-3 flex justify-between items-baseline">
+            <span class="text-base font-bold text-primary">Total Payable</span>
+            <span id="total-val" class="text-2xl font-bold text-primary">₹0</span>
+          </div>
+
+          <button id="btn-pay" class="w-full bg-primary text-on-primary text-xs font-bold uppercase tracking-wider py-4 rounded-lg hover:bg-black/80 transition transform active:scale-95 shadow-xl flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">verified_user</span>
+            PAY &amp; COMPLETE ORDER
+          </button>
+
+          <p class="text-[10px] text-center text-secondary leading-tight">By completing order, you agree to HARRY &amp; CO terms of sale and privacy policy.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module">
+    import { api } from '/assets/js/core/api.js';
+    import { money } from '/assets/js/core/format.js';
+    import { toast, busy } from '/assets/js/core/ui.js';
+    import { loadCart } from '/assets/js/core/store.js';
+
+    // Retrieve saved address
+    const addressJson = sessionStorage.getItem('hc_shipping_address');
+    if (!addressJson) {
+      location.href = '/checkout-address';
+    }
+    const shippingAddress = JSON.parse(addressJson);
+
+    document.getElementById('shipping-preview').textContent = `${shippingAddress.fullName}, ${shippingAddress.line1}, ${shippingAddress.city} (${shippingAddress.zip})`;
+
+    let cart = null;
+    let selectedMethod = 'upi';
+
+    // Highlight radio option
+    document.querySelectorAll('.pay-option').forEach(label => {
+      label.addEventListener('click', () => {
+        document.querySelectorAll('.pay-option').forEach(l => {
+          l.className = 'pay-option flex items-center justify-between p-4 rounded-xl border-2 border-outline-variant/60 bg-white cursor-pointer transition hover:border-primary';
+        });
+        label.className = 'pay-option flex items-center justify-between p-4 rounded-xl border-2 border-primary bg-surface-container-low cursor-pointer transition';
+        const radio = label.querySelector('input[type="radio"]');
+        if (radio) {
+          radio.checked = true;
+          selectedMethod = radio.value;
+        }
+      });
+    });
+
+    async function initCheckout() {
+      cart = await loadCart();
+      if (!cart || !cart.items || cart.items.length === 0) {
+        toast('Your cart is empty', 'error');
+        location.href = '/shop';
+        return;
+      }
+
+      // Render mini cart preview
+      const previewEl = document.getElementById('cart-preview-items');
+      previewEl.innerHTML = cart.items.map(it => `
+        <div class="flex gap-3 pt-2 text-xs">
+          <img src="${it.imageUrl || ''}" class="w-12 h-14 object-cover bg-surface-container rounded"/>
+          <div class="flex-1">
+            <p class="font-bold text-primary line-clamp-1">${it.name}</p>
+            <p class="text-secondary">${it.size} &middot; Qty ${it.quantity}</p>
+            <p class="font-semibold text-primary mt-0.5">${money(it.unitPrice * it.quantity)}</p>
+          </div>
+        </div>
+      `).join('');
+
+      const subtotal = cart.items.reduce((s, i) => s + (i.unitPrice * i.quantity), 0);
+      const shipping = subtotal > 0 && subtotal < 2500 ? 150 : 0;
+      const total = subtotal + shipping;
+      const tax = Math.round(subtotal * 0.12);
+
+      document.getElementById('subtotal-val').textContent = money(subtotal);
+      document.getElementById('shipping-val').textContent = shipping === 0 ? 'FREE' : money(shipping);
+      document.getElementById('tax-val').textContent = money(tax);
+      document.getElementById('total-val').textContent = money(total);
+    }
+
+    const payBtn = document.getElementById('btn-pay');
+    payBtn.addEventListener('click', async () => {
+      const restore = busy(payBtn, 'Processing payment...');
+      try {
+        const subtotal = cart.items.reduce((s, i) => s + (i.unitPrice * i.quantity), 0);
+        const shipping = subtotal > 0 && subtotal < 2500 ? 150 : 0;
+        const total = subtotal + shipping;
+
+        let paymentOrderId = null;
+        let paymentId = 'sim_pay_' + Date.now();
+        let signature = 'sim_sig_ok';
+
+        if (selectedMethod !== 'cod') {
+          const pOrder = await api.post('/checkout/create-payment-order', { amount: total });
+          paymentOrderId = pOrder.orderId;
+        }
+
+        const res = await api.post('/checkout/place-order', {
+          shippingAddress,
+          paymentMethod: selectedMethod,
+          paymentOrderId,
+          paymentId,
+          signature,
+          items: cart.items,
+        });
+
+        sessionStorage.removeItem('hc_shipping_address');
+        toast('Order successfully placed!', 'success');
+        location.href = `/order-confirmed?order=${encodeURIComponent(res.orderNumber)}`;
+      } catch (err) {
+        toast(err.message || 'Payment processing failed', 'error');
+        restore();
+      }
+    });
+
+    initCheckout();
+  </script>
+</body>
+</html>

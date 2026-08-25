@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HARRY &amp; CO JEANS - Shop</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error": "#ba1a1a",
+                      "tertiary-fixed-dim": "#cac6c3",
+                      "on-error-container": "#93000a",
+                      "error-container": "#ffdad6",
+                      "on-secondary-container": "#616363",
+                      "surface-tint": "#5f5e5e",
+                      "on-secondary-fixed": "#1a1c1c",
+                      "surface-bright": "#fdf8f8",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#858383",
+                      "on-secondary-fixed-variant": "#454747",
+                      "tertiary-container": "#1d1b1a",
+                      "surface-dim": "#ddd9d8",
+                      "secondary-fixed-dim": "#c6c6c7",
+                      "on-tertiary-container": "#868381",
+                      "on-primary-fixed": "#1c1b1b",
+                      "on-tertiary-fixed": "#1d1b1a",
+                      "on-primary": "#ffffff",
+                      "outline": "#747878",
+                      "background": "#fdf8f8",
+                      "primary-fixed-dim": "#c8c6c5",
+                      "on-surface": "#1c1b1b",
+                      "tertiary-fixed": "#e6e1df",
+                      "surface-variant": "#e5e2e1",
+                      "surface-container": "#f1edec",
+                      "primary": "#000000",
+                      "on-tertiary-fixed-variant": "#484645",
+                      "secondary-container": "#dfe0e0",
+                      "surface-container-highest": "#e5e2e1",
+                      "on-error": "#ffffff",
+                      "on-surface-variant": "#444748",
+                      "surface-container-high": "#ebe7e6",
+                      "tertiary": "#000000",
+                      "outline-variant": "#c4c7c7",
+                      "on-background": "#1c1b1b",
+                      "secondary-fixed": "#e2e2e2",
+                      "surface-container-lowest": "#ffffff",
+                      "surface": "#fdf8f8",
+                      "secondary": "#5d5f5f",
+                      "primary-fixed": "#e5e2e1",
+                      "inverse-primary": "#c8c6c5",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-low": "#f7f3f2",
+                      "primary-container": "#1c1b1b",
+                      "on-primary-fixed-variant": "#474646",
+                      "inverse-surface": "#313030",
+                      "inverse-on-surface": "#f4f0ef"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "base": "8px",
+                      "margin-mobile": "16px",
+                      "sm": "8px",
+                      "container-max": "1440px",
+                      "md": "16px",
+                      "xxl": "80px",
+                      "xl": "48px",
+                      "lg": "24px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "display-xl": [
+                              "Montserrat"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Montserrat"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Montserrat"
+                      ],
+                      "headline-lg": [
+                              "Montserrat"
+                      ]
+              },
+              "fontSize": {
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-xl": [
+                              "84px",
+                              {
+                                      "lineHeight": "90px",
+                                      "letterSpacing": "-0.03em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen flex flex-col pt-20 pb-20">
+<!-- TopAppBar -->
+<header class="bg-background dark:bg-background fixed top-0 w-full z-50 border-b border-primary dark:border-outline-variant transition-opacity duration-200">
+<div class="flex justify-between items-center px-margin-mobile md:px-xl h-20 w-full max-w-container-max mx-auto">
+<button class="text-primary dark:text-on-background hover:opacity-70 transition-opacity duration-200 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+<div class="text-headline-md font-headline-md tracking-tighter text-primary dark:text-on-background font-bold underline">
+                HARRY &amp; CO JEANS
+            </div>
+<button class="text-primary dark:text-on-background hover:opacity-70 transition-opacity duration-200 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[24px]">shopping_bag</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow max-w-container-max mx-auto w-full px-margin-mobile pt-md pb-xxl">
+<!-- Header Section -->
+<section class="mb-lg">
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile text-primary uppercase mb-sm">MEN'S JEANS</h1>
+<!-- Filters & Sort -->
+<div class="flex justify-between items-center border-y border-outline-variant py-sm">
+<button class="flex items-center gap-xs text-label-sm font-label-sm text-primary uppercase border border-primary px-sm py-xs rounded-DEFAULT">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+                    Filters
+                </button>
+<div class="relative">
+<select class="appearance-none bg-transparent border border-primary rounded-DEFAULT text-label-sm font-label-sm text-primary uppercase py-xs pl-sm pr-lg focus:outline-none focus:ring-2 focus:ring-primary">
+<option value="recommended">Recommended</option>
+<option value="newest">Newest</option>
+<option value="price-low-high">Price: Low - High</option>
+<option value="price-high-low">Price: High - Low</option>
+</select>
+<span class="material-symbols-outlined absolute right-xs top-1/2 -translate-y-1/2 pointer-events-none text-[16px]">expand_more</span>
+</div>
+</div>
+</section>
+<!-- Product Grid -->
+<section class="grid grid-cols-2 gap-sm md:gap-gutter mb-xl">
+<!-- Product Card 1 -->
+<article class="group relative flex flex-col">
+<div class="relative aspect-[3/4] w-full bg-surface-container mb-sm overflow-hidden rounded-DEFAULT">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A male model wearing classic black slim-fit jeans in a bright, modern studio setting. The lighting is harsh and high-contrast, emphasizing the deep black texture of the denim against a pure white background. The aesthetic is raw, urban, and premium, consistent with a high-end streetwear editorial." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDTR5csO5iz7iRYPWwp3aqXDQf_nD3d7qGeIeU6gUq9qF7K2TbyS04YenZmIqP31g1aZeUY53Znd1tGiURCQP8WMGbwuJqY3VmiC5fr3RH6A-E-CVZGZzgIy695x4Qz7k-Rgv7uMX4hMPaEkzlxVXVsQqtWQa8oBUtKSAd7k0kemmnVvfi-RZpMSyaj-uU1ej0I_0lalmfqtJVPpfuAy8fPfnel5xZJooi0GhMeTEdowyChRnV4E08"/>
+<button class="absolute top-xs right-xs bg-surface/50 backdrop-blur-sm p-xs rounded-full hover:bg-surface text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+<div class="absolute bottom-xs left-xs bg-surface-container-highest/80 backdrop-blur-sm px-xs py-[2px] rounded-DEFAULT text-label-sm font-label-sm text-primary">
+                        40% OFF
+                    </div>
+</div>
+<div class="flex flex-col gap-[2px]">
+<span class="text-label-sm font-label-sm text-secondary uppercase">H&amp;C</span>
+<h3 class="text-body-md font-body-md text-primary leading-tight truncate">Classic Black Slim Jeans</h3>
+<div class="flex items-center gap-[2px] text-primary mb-xs">
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]">star_half</span>
+<span class="text-label-sm font-label-sm text-secondary ml-xs">(124)</span>
+</div>
+<div class="flex items-baseline gap-sm">
+<span class="text-body-md font-body-md text-primary font-bold">₹1,499</span>
+<span class="text-label-sm font-label-sm text-secondary line-through">₹2,499</span>
+</div>
+</div>
+</article>
+<!-- Product Card 2 -->
+<article class="group relative flex flex-col">
+<div class="relative aspect-[3/4] w-full bg-surface-container mb-sm overflow-hidden rounded-DEFAULT">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A detailed close-up shot of men's distressed blue denim jeans showing raw hem details. The lighting is bright and crisp, highlighting the intricate wash patterns and hardware. The background is a stark, minimal white, creating a high-contrast, premium editorial look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSux1b-nsfHT7kfFmzmj3FXQH2agFPGq1Vetq4bxgxgZqk3BtHNKMuKtFIgwY8quOVb2m_8vChqvnb7hkNT-Gkh7jpA5I5Gi1_TShuAYH5k6j8od9VOji15UcCWpE7T9CvQDyThM5-kmbFHJKIQx7i-_P2vVUVi6CCL8Tx2ArzA6rYoYKIHTEWI6sv7cS9jdI_WOj_I9r8zFeYl-HaLB5Eg1AXAlm4sttlSKGbHPmoyo1hF1BrYyXD"/>
+<button class="absolute top-xs right-xs bg-surface/50 backdrop-blur-sm p-xs rounded-full hover:bg-surface text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+<div class="absolute bottom-xs left-xs bg-surface-container-highest/80 backdrop-blur-sm px-xs py-[2px] rounded-DEFAULT text-label-sm font-label-sm text-primary">
+                        NEW
+                    </div>
+</div>
+<div class="flex flex-col gap-[2px]">
+<span class="text-label-sm font-label-sm text-secondary uppercase">H&amp;C</span>
+<h3 class="text-body-md font-body-md text-primary leading-tight truncate">Vintage Wash Straight</h3>
+<div class="flex items-center gap-[2px] text-primary mb-xs">
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm font-label-sm text-secondary ml-xs">(89)</span>
+</div>
+<div class="flex items-baseline gap-sm">
+<span class="text-body-md font-body-md text-primary font-bold">₹1,899</span>
+</div>
+</div>
+</article>
+<!-- Product Card 3 -->
+<article class="group relative flex flex-col">
+<div class="relative aspect-[3/4] w-full bg-surface-container mb-sm overflow-hidden rounded-DEFAULT">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A male model standing in an urban concrete environment wearing dark indigo raw denim jeans. Strong, directional sunlight creates deep shadows, emphasizing the stiffness and premium quality of the denim. The aesthetic is gritty yet luxurious, using stark contrasts." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeGO2k5juOvm7FEOC2PajRjmyGPPOXd_e-Yx5PGWxHnaKLfdyFs_wz2IWXpKWe4PAVosh_yX7UjiDSMsrxVUi-dYo4d2RVG2udaAMu37i_al-AyU75luCaRiimR9u5TnMeZBcESDgAzk3XZPN_WlTTc29kGvcfuLsgUaJQV_i7lbkhm3elu4CetxCJQqnvaYRyk2Vjjd1fZhjJgTIAmnBGrG6e7bIBms72CEFah3-df8H3DcEQqguM"/>
+<button class="absolute top-xs right-xs bg-surface/50 backdrop-blur-sm p-xs rounded-full hover:bg-surface text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+<div class="absolute bottom-xs left-xs bg-surface-container-highest/80 backdrop-blur-sm px-xs py-[2px] rounded-DEFAULT text-label-sm font-label-sm text-primary">
+                        40% OFF
+                    </div>
+</div>
+<div class="flex flex-col gap-[2px]">
+<span class="text-label-sm font-label-sm text-secondary uppercase">H&amp;C</span>
+<h3 class="text-body-md font-body-md text-primary leading-tight truncate">Raw Indigo Selvedge</h3>
+<div class="flex items-center gap-[2px] text-primary mb-xs">
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]">star</span>
+<span class="material-symbols-outlined text-[14px]">star</span>
+<span class="text-label-sm font-label-sm text-secondary ml-xs">(42)</span>
+</div>
+<div class="flex items-baseline gap-sm">
+<span class="text-body-md font-body-md text-primary font-bold">₹1,999</span>
+<span class="text-label-sm font-label-sm text-secondary line-through">₹3,299</span>
+</div>
+</div>
+</article>
+<!-- Product Card 4 -->
+<article class="group relative flex flex-col">
+<div class="relative aspect-[3/4] w-full bg-surface-container mb-sm overflow-hidden rounded-DEFAULT">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A stylized product shot of light blue faded relaxed-fit jeans lying flat on a textured, pure white background. The lighting is even and bright, giving the image a clean, airy feel typical of a modern high-end fashion e-commerce catalog." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5XMaqYG7S5pdRt96yLjsgURs52SMYHD5zmt7yw0HH-Ks8J1Ek1BNI8qG4PpCIt27x4APzI_F-beDrsIL63TVemKPj_1vwgi8IQPwzc8TrwsYT7X5YxlsNQpatOWjJwB8e82JyxLp-I6Wp_dDos_iLNK8XDnvw8RAkcuCAYjIMVEioos3tJ-9gbvYCe8WfDe30S2sPf16Y1MaNG7KYjhpgIji3zg4dTtgKnJLiqRUhNwcnzEShsTWF"/>
+<button class="absolute top-xs right-xs bg-surface/50 backdrop-blur-sm p-xs rounded-full hover:bg-surface text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">favorite</span>
+</button>
+</div>
+<div class="flex flex-col gap-[2px]">
+<span class="text-label-sm font-label-sm text-secondary uppercase">H&amp;C</span>
+<h3 class="text-body-md font-body-md text-primary leading-tight truncate">Light Wash Relaxed</h3>
+<div class="flex items-center gap-[2px] text-primary mb-xs">
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm font-label-sm text-secondary ml-xs">(210)</span>
+</div>
+<div class="flex items-baseline gap-sm">
+<span class="text-body-md font-body-md text-primary font-bold">₹1,599</span>
+</div>
+</div>
+</article>
+</section>
+<!-- Pagination / Load More -->
+<div class="flex justify-center mt-lg">
+<button class="bg-primary text-on-primary text-label-sm font-label-sm uppercase px-xl py-sm rounded-DEFAULT hover:opacity-90 transition-opacity w-full max-w-[300px]">
+                Load More
+            </button>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="bg-background dark:bg-background fixed bottom-0 w-full z-50 md:hidden border-t border-primary dark:border-outline-variant">
+<div class="flex justify-around items-center h-16 w-full pb-safe">
+<button class="flex flex-col items-center justify-center text-secondary dark:text-on-secondary-container hover:text-primary dark:hover:text-on-background active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[24px]">home</span>
+<span class="text-label-sm font-label-sm mt-xs">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-primary dark:text-on-background font-bold active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[24px]" data-weight="fill" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="text-label-sm font-label-sm mt-xs">Shop</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary dark:text-on-secondary-container hover:text-primary dark:hover:text-on-background active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[24px]">auto_awesome</span>
+<span class="text-label-sm font-label-sm mt-xs">New</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary dark:text-on-secondary-container hover:text-primary dark:hover:text-on-background active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[24px]">person</span>
+<span class="text-label-sm font-label-sm mt-xs">Account</span>
+</button>
+</div>
+</nav>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-surface-container-lowest w-full py-xl px-margin-mobile md:px-xxl border-t border-outline-variant mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto">
+<div class="flex flex-col gap-sm">
+<div class="text-headline-md font-headline-md font-bold text-primary dark:text-on-surface mb-sm">HARRY &amp; CO JEANS</div>
+<p class="text-body-md font-body-md text-on-surface-variant">Elevating everyday denim with premium materials and urban aesthetic.</p>
+</div>
+<div class="flex flex-col gap-sm">
+<a class="text-label-sm font-label-sm uppercase text-on-surface-variant hover:underline transition-all" href="#">Shop</a>
+<a class="text-label-sm font-label-sm uppercase text-on-surface-variant hover:underline transition-all" href="#">Help</a>
+<a class="text-label-sm font-label-sm uppercase text-on-surface-variant hover:underline transition-all" href="#">About</a>
+<a class="text-label-sm font-label-sm uppercase text-on-surface-variant hover:underline transition-all" href="#">Sustainability</a>
+<a class="text-label-sm font-label-sm uppercase text-on-surface-variant hover:underline transition-all" href="#">Careers</a>
+</div>
+<div class="md:col-span-2 flex flex-col gap-sm mt-md md:mt-0 text-center md:text-right text-on-surface-variant">
+<p class="text-body-md font-body-md">© 2024 HARRY &amp; CO JEANS. ALL RIGHTS RESERVED.</p>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>H&amp;C Jeans — Loyalty Analytics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#1c1b1b",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "inverse-on-surface": "#f4f0ef",
+                        "surface-bright": "#fdf8f8",
+                        "background": "#fdf8f8",
+                        "on-primary-fixed-variant": "#474646",
+                        "surface": "#fdf8f8",
+                        "on-primary-fixed": "#1c1b1b",
+                        "tertiary": "#000000",
+                        "on-error": "#ffffff",
+                        "on-background": "#1c1b1b",
+                        "on-primary": "#ffffff",
+                        "outline": "#747878",
+                        "on-primary-container": "#858383",
+                        "inverse-surface": "#313030",
+                        "tertiary-container": "#1d1b1a",
+                        "surface-variant": "#e5e2e1",
+                        "inverse-primary": "#c8c6c5",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "on-tertiary-container": "#868381",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-tertiary-fixed-variant": "#484645",
+                        "on-secondary-fixed-variant": "#454747",
+                        "secondary-container": "#dfe0e0",
+                        "primary-fixed": "#e5e2e1",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#616363",
+                        "surface-container-low": "#f7f3f2",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#f1edec",
+                        "tertiary-fixed": "#e6e1df",
+                        "surface-tint": "#5f5e5e",
+                        "on-surface-variant": "#444748",
+                        "tertiary-fixed-dim": "#cac6c3",
+                        "surface-dim": "#ddd9d8",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "secondary": "#5d5f5f",
+                        "primary": "#000000",
+                        "secondary-fixed": "#e2e2e2",
+                        "surface-container-high": "#ebe7e6",
+                        "outline-variant": "#c4c7c7",
+                        "on-tertiary-fixed": "#1d1b1a",
+                        "on-surface": "#1c1b1b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "xxl": "80px",
+                        "margin-mobile": "16px",
+                        "xl": "48px",
+                        "container-max": "1440px",
+                        "gutter": "24px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Montserrat"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-xl": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-xl": ["84px", { "lineHeight": "90px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #fdf8f8; color: #1c1b1b; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .fill-icon { font-variation-settings: 'FILL' 1; }
+    </style>
+</head>
+<body class="flex bg-background font-body-md text-on-background">
+<!-- SideNavBar -->
+<nav class="h-screen w-64 fixed left-0 top-0 bg-background dark:bg-primary-container border-r border-outline-variant dark:border-outline flex flex-col py-md z-50">
+<div class="px-lg mb-xl">
+<h1 class="font-headline-md text-headline-md font-bold tracking-tighter text-primary dark:text-surface-bright uppercase">DENIM EDITORIAL</h1>
+<p class="font-label-sm text-label-sm text-secondary uppercase mt-xs tracking-widest">Admin Suite</p>
+</div>
+<div class="flex-1 overflow-y-auto space-y-sm">
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-sm text-label-sm uppercase">Sales</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">shopping_bag</span>
+<span class="font-label-sm text-label-sm uppercase">Products</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-sm text-label-sm uppercase">Orders</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-sm text-label-sm uppercase">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-sm text-label-sm uppercase">Customers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">sell</span>
+<span class="font-label-sm text-label-sm uppercase">Promotions</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-sm text-label-sm uppercase">Knowledge Base</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary dark:text-primary-fixed font-bold border-r-2 border-primary dark:border-primary-fixed hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors duration-200 bg-surface-container-low" href="#">
+<span class="material-symbols-outlined fill-icon">star</span>
+<span class="font-label-sm text-label-sm uppercase">Loyalty</span>
+</a>
+</div>
+<div class="px-lg mt-auto space-y-md">
+<button class="w-full bg-primary text-on-primary py-3 rounded-lg font-label-sm text-label-sm uppercase tracking-widest hover:bg-surface-tint transition-colors">
+                New Product
+            </button>
+<div class="border-t border-outline-variant pt-md">
+<a class="flex items-center gap-3 px-4 py-2 text-secondary hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-label-sm uppercase">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-secondary hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-sm text-label-sm uppercase">Support</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-64 w-[calc(100%-16rem)] min-h-screen bg-background">
+<!-- TopNavBar -->
+<header class="docked full-width top-0 sticky bg-background/80 dark:bg-primary-container/80 backdrop-blur-md border-b border-outline-variant dark:border-outline flex justify-between items-center h-16 px-lg z-40">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-secondary">search</span>
+<input class="bg-transparent border-none outline-none font-body-md text-primary placeholder-secondary w-64 focus:ring-0 px-0" placeholder="Search Admin Suite..." type="text"/>
+</div>
+<div class="flex items-center gap-md text-secondary">
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined">settings</span></button>
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined">account_circle</span></button>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-lg max-w-container-max mx-auto space-y-xl">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md border-b border-outline-variant pb-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-primary">Loyalty Analytics</h2>
+<p class="font-body-md text-secondary mt-xs">Comprehensive overview of loyalty program performance and member engagement.</p>
+</div>
+<div class="flex items-center gap-md">
+<select class="bg-transparent border border-primary rounded-lg px-4 py-2 font-label-sm text-label-sm uppercase tracking-widest text-primary focus:ring-primary focus:border-primary">
+<option>Last 30 Days</option>
+<option>Last 90 Days</option>
+<option>Year to Date</option>
+<option>All Time</option>
+</select>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-sm text-label-sm uppercase tracking-widest hover:bg-surface-tint transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">download</span> Export Report
+                    </button>
+</div>
+</div>
+<!-- KPI Cards (Program Overview) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg hover:border-primary transition-colors group">
+<div class="flex justify-between items-start mb-md">
+<h3 class="font-label-sm text-label-sm uppercase text-secondary tracking-widest">Loyalty ROI</h3>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">trending_up</span>
+</div>
+<div class="flex items-end gap-sm mb-sm">
+<span class="font-headline-lg text-headline-lg font-bold text-primary">4.2x</span>
+<span class="font-body-md text-surface-tint mb-1">+0.4x vs prev</span>
+</div>
+<!-- Sparkline Placeholder -->
+<div class="h-10 w-full bg-surface-container-highest rounded flex items-end">
+<div class="h-[30%] w-1/6 bg-surface-tint opacity-50"></div>
+<div class="h-[40%] w-1/6 bg-surface-tint opacity-50"></div>
+<div class="h-[50%] w-1/6 bg-surface-tint opacity-50"></div>
+<div class="h-[70%] w-1/6 bg-surface-tint opacity-50"></div>
+<div class="h-[85%] w-1/6 bg-surface-tint opacity-50"></div>
+<div class="h-[100%] w-1/6 bg-primary"></div>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg hover:border-primary transition-colors group">
+<div class="flex justify-between items-start mb-md">
+<h3 class="font-label-sm text-label-sm uppercase text-secondary tracking-widest">Avg. Spend</h3>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">shopping_cart</span>
+</div>
+<div class="flex items-end gap-sm mb-sm">
+<span class="font-headline-lg text-headline-lg font-bold text-primary">$245</span>
+<span class="font-body-md text-surface-tint mb-1">vs $180 non-member</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full mt-4">
+<div class="bg-primary h-2 rounded-full" style="width: 75%"></div>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg hover:border-primary transition-colors group">
+<div class="flex justify-between items-start mb-md">
+<h3 class="font-label-sm text-label-sm uppercase text-secondary tracking-widest">Points Liability</h3>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">account_balance</span>
+</div>
+<div class="flex items-end gap-sm">
+<span class="font-headline-lg text-headline-lg font-bold text-primary">$12.4k</span>
+<span class="font-body-md text-surface-tint mb-1">Unredeemed</span>
+</div>
+<p class="font-label-sm text-label-sm text-secondary mt-4 uppercase">Watch: High balance segment</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg hover:border-primary transition-colors group">
+<div class="flex justify-between items-start mb-md">
+<h3 class="font-label-sm text-label-sm uppercase text-secondary tracking-widest">Churn Rate</h3>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">person_remove</span>
+</div>
+<div class="flex items-end gap-sm">
+<span class="font-headline-lg text-headline-lg font-bold text-primary">2.1%</span>
+<span class="font-body-md text-surface-tint mb-1">-0.3% vs prev</span>
+</div>
+<p class="font-label-sm text-label-sm text-secondary mt-4 uppercase">Healthy retention</p>
+</div>
+</div>
+<!-- Complex Data Row 1 -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Engagement Trends (Large Chart) -->
+<div class="lg:col-span-2 bg-surface-container-lowest border border-outline-variant rounded-lg p-lg">
+<div class="flex justify-between items-center mb-xl border-b border-outline-variant pb-sm">
+<h3 class="font-headline-md text-headline-md font-bold text-primary">Point Accrual vs Redemption</h3>
+<div class="flex gap-4">
+<div class="flex items-center gap-2"><div class="w-3 h-3 bg-primary rounded-full"></div><span class="font-label-sm text-label-sm uppercase text-secondary">Accrual</span></div>
+<div class="flex items-center gap-2"><div class="w-3 h-3 bg-outline rounded-full"></div><span class="font-label-sm text-label-sm uppercase text-secondary">Redemption</span></div>
+</div>
+</div>
+<!-- Chart Placeholder -->
+<div class="relative h-64 w-full border-b border-l border-outline-variant">
+<div class="absolute bottom-0 left-0 w-full h-[60%] border-t border-outline-variant border-dashed"></div>
+<div class="absolute bottom-0 left-0 w-full h-[30%] border-t border-outline-variant border-dashed"></div>
+<!-- Faux Lines -->
+<svg class="absolute inset-0 h-full w-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<!-- Accrual Line (Black) -->
+<path d="M0,80 L10,70 L20,75 L30,50 L40,60 L50,40 L60,45 L70,20 L80,30 L90,10 L100,15" fill="none" stroke="#000000" stroke-width="2"></path>
+<!-- Redemption Line (Gray) -->
+<path d="M0,90 L10,85 L20,88 L30,70 L40,75 L50,60 L60,65 L70,50 L80,55 L90,40 L100,45" fill="none" stroke="#747878" stroke-dasharray="4,2" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex justify-between mt-2 font-label-sm text-label-sm text-secondary uppercase">
+<span>W1</span><span>W2</span><span>W3</span><span>W4</span>
+</div>
+</div>
+<!-- Tier Distribution -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg flex flex-col">
+<h3 class="font-headline-md text-headline-md font-bold text-primary mb-xl border-b border-outline-variant pb-sm">Tier Distribution</h3>
+<!-- Faux Donut -->
+<div class="flex-1 flex flex-col items-center justify-center relative my-md">
+<div class="w-48 h-48 rounded-full border-[16px] border-surface-container-highest relative flex items-center justify-center">
+<!-- Representing segments with border-t/r/l colors for a quick faux effect -->
+<div class="absolute inset-0 rounded-full border-[16px] border-transparent border-t-primary" style="transform: rotate(45deg);"></div>
+<div class="absolute inset-0 rounded-full border-[16px] border-transparent border-r-surface-tint" style="transform: rotate(45deg);"></div>
+<div class="text-center">
+<span class="block font-headline-lg text-headline-lg font-bold text-primary">8.2k</span>
+<span class="font-label-sm text-label-sm uppercase text-secondary">Total Members</span>
+</div>
+</div>
+</div>
+<div class="space-y-sm mt-auto">
+<div class="flex justify-between items-center text-sm">
+<div class="flex items-center gap-2"><div class="w-3 h-3 bg-surface-container-highest rounded-full border border-outline"></div><span class="font-label-sm text-label-sm uppercase">Bronze (55%)</span></div>
+<span class="font-body-md">4,510</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<div class="flex items-center gap-2"><div class="w-3 h-3 bg-surface-tint rounded-full"></div><span class="font-label-sm text-label-sm uppercase">Silver (25%)</span></div>
+<span class="font-body-md">2,050</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<div class="flex items-center gap-2"><div class="w-3 h-3 bg-outline rounded-full"></div><span class="font-label-sm text-label-sm uppercase">Gold (15%)</span></div>
+<span class="font-body-md">1,230</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<div class="flex items-center gap-2"><div class="w-3 h-3 bg-primary rounded-full"></div><span class="font-label-sm text-label-sm uppercase font-bold">Platinum (5%)</span></div>
+<span class="font-body-md font-bold">410</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Complex Data Row 2 -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+<!-- Retention Metrics (Cohort Table Placeholder) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg">
+<div class="flex justify-between items-center mb-xl border-b border-outline-variant pb-sm">
+<h3 class="font-headline-md text-headline-md font-bold text-primary">Repeat Purchase Rate</h3>
+<span class="font-label-sm text-label-sm uppercase text-secondary px-2 py-1 bg-surface-container rounded">By Tier</span>
+</div>
+<div class="space-y-md">
+<!-- Platinum -->
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-sm text-label-sm uppercase font-bold text-primary">Platinum</span>
+<span class="font-body-md">82%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full">
+<div class="bg-primary h-2 rounded-full" style="width: 82%"></div>
+</div>
+</div>
+<!-- Gold -->
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-sm text-label-sm uppercase text-primary">Gold</span>
+<span class="font-body-md">65%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full">
+<div class="bg-surface-tint h-2 rounded-full" style="width: 65%"></div>
+</div>
+</div>
+<!-- Silver -->
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-sm text-label-sm uppercase text-primary">Silver</span>
+<span class="font-body-md">40%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full">
+<div class="bg-outline h-2 rounded-full" style="width: 40%"></div>
+</div>
+</div>
+<!-- Bronze -->
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="font-label-sm text-label-sm uppercase text-primary">Bronze</span>
+<span class="font-body-md">18%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full">
+<div class="bg-outline-variant h-2 rounded-full" style="width: 18%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent High-Value Actions -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg flex flex-col">
+<div class="flex justify-between items-center mb-xl border-b border-outline-variant pb-sm">
+<h3 class="font-headline-md text-headline-md font-bold text-primary">High-Value Actions</h3>
+<a class="font-label-sm text-label-sm uppercase text-secondary hover:text-primary transition-colors border-b border-transparent hover:border-primary" href="#">View All</a>
+</div>
+<div class="flex-1 space-y-md">
+<!-- Action Item 1 -->
+<div class="flex gap-4 items-start pb-md border-b border-surface-container-highest last:border-0 last:pb-0">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center flex-shrink-0 text-primary">
+<span class="material-symbols-outlined">diamond</span>
+</div>
+<div>
+<p class="font-body-md text-primary"><span class="font-bold">Aria M.</span> upgraded to <span class="font-bold uppercase tracking-widest text-[12px]">Platinum</span></p>
+<p class="font-label-sm text-label-sm text-secondary uppercase mt-1">2 mins ago</p>
+</div>
+</div>
+<!-- Action Item 2 -->
+<div class="flex gap-4 items-start pb-md border-b border-surface-container-highest last:border-0 last:pb-0">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center flex-shrink-0 text-primary">
+<span class="material-symbols-outlined">redeem</span>
+</div>
+<div>
+<p class="font-body-md text-primary"><span class="font-bold">Julian C.</span> redeemed <span class="font-bold">Denim Care Kit</span></p>
+<p class="font-label-sm text-label-sm text-secondary uppercase mt-1">15 mins ago • -500 pts</p>
+</div>
+</div>
+<!-- Action Item 3 -->
+<div class="flex gap-4 items-start pb-md border-b border-surface-container-highest last:border-0 last:pb-0">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center flex-shrink-0 text-primary">
+<span class="material-symbols-outlined">shopping_bag</span>
+</div>
+<div>
+<p class="font-body-md text-primary"><span class="font-bold">Sarah T.</span> made a large purchase</p>
+<p class="font-label-sm text-label-sm text-secondary uppercase mt-1">1 hour ago • +1,200 pts</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

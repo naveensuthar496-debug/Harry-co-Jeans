@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Admin Dashboard — HARRY &amp; CO JEANS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="/assets/tailwind.config.js"></script>
+</head>
+<body class="bg-surface-container-lowest text-on-background font-body-md antialiased flex h-screen overflow-hidden">
+
+  <!-- Main Work Area -->
+  <div class="flex-1 flex flex-col h-full overflow-hidden">
+    <!-- Top Header -->
+    <header class="h-16 border-b border-outline-variant bg-background px-6 flex items-center justify-between shrink-0">
+      <div class="flex items-center gap-3">
+        <button class="md:hidden text-primary p-2 hover:bg-surface-container rounded-lg">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+        <h1 class="text-base font-bold text-primary uppercase tracking-tight">STORE OVERVIEW &middot; DASHBOARD</h1>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="/admin/edit-product" class="bg-primary text-on-primary text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-lg hover:bg-black/80 transition flex items-center gap-1.5 shadow">
+          <span class="material-symbols-outlined text-[16px]">add</span>
+          Add Product
+        </a>
+        <div class="flex items-center gap-2 pl-4 border-l border-outline-variant text-xs font-bold text-primary">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span>Admin Profile</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Scrollable Content -->
+    <main class="flex-1 overflow-y-auto p-6 md:p-8 space-y-8">
+      <!-- KPI Stats Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white border border-outline-variant rounded-2xl p-5 shadow-sm space-y-2">
+          <div class="flex justify-between items-start text-secondary">
+            <span class="text-xs font-bold uppercase tracking-wider">Gross Sales</span>
+            <span class="material-symbols-outlined text-[20px] text-primary">payments</span>
+          </div>
+          <p id="kpi-revenue" class="text-2xl font-bold text-primary">₹0</p>
+          <p class="text-[11px] text-emerald-600 font-semibold">&uarr; Live transactions</p>
+        </div>
+
+        <div class="bg-white border border-outline-variant rounded-2xl p-5 shadow-sm space-y-2">
+          <div class="flex justify-between items-start text-secondary">
+            <span class="text-xs font-bold uppercase tracking-wider">Total Orders</span>
+            <span class="material-symbols-outlined text-[20px] text-primary">shopping_bag</span>
+          </div>
+          <p id="kpi-orders" class="text-2xl font-bold text-primary">0</p>
+          <p class="text-[11px] text-secondary">Fulfilled &amp; in-progress</p>
+        </div>
+
+        <div class="bg-white border border-outline-variant rounded-2xl p-5 shadow-sm space-y-2">
+          <div class="flex justify-between items-start text-secondary">
+            <span class="text-xs font-bold uppercase tracking-wider">Active Products</span>
+            <span class="material-symbols-outlined text-[20px] text-primary">app_registration</span>
+          </div>
+          <p id="kpi-products" class="text-2xl font-bold text-primary">4</p>
+          <p class="text-[11px] text-secondary">Curated Flagships</p>
+        </div>
+
+        <div class="bg-white border border-outline-variant rounded-2xl p-5 shadow-sm space-y-2">
+          <div class="flex justify-between items-start text-secondary">
+            <span class="text-xs font-bold uppercase tracking-wider">Customers</span>
+            <span class="material-symbols-outlined text-[20px] text-primary">group</span>
+          </div>
+          <p id="kpi-customers" class="text-2xl font-bold text-primary">0</p>
+          <p class="text-[11px] text-secondary">Selvedge Guild members</p>
+        </div>
+      </div>
+
+      <!-- Quick Action Center -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <a href="/admin/products" class="bg-primary text-on-primary rounded-2xl p-6 shadow-md hover:bg-black/90 transition flex flex-col justify-between group">
+          <div>
+            <span class="material-symbols-outlined text-[28px] mb-2">inventory</span>
+            <h2 class="text-lg font-bold">Catalog &amp; Products</h2>
+            <p class="text-xs text-white/70 mt-1">View, add new, edit details, or delete products from the live website.</p>
+          </div>
+          <span class="text-xs font-bold uppercase tracking-wider underline mt-6 flex items-center gap-1">
+            Manage 4 Products <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </span>
+        </a>
+
+        <a href="/admin/inventory" class="bg-white border border-outline-variant rounded-2xl p-6 shadow-sm hover:border-primary transition flex flex-col justify-between group">
+          <div>
+            <span class="material-symbols-outlined text-[28px] text-primary mb-2">layers</span>
+            <h2 class="text-lg font-bold text-primary">Inventory Matrix</h2>
+            <p class="text-xs text-secondary mt-1">Real-time stock across waist sizes (28, 30, 32, 34, 36, 38) and quick restock.</p>
+          </div>
+          <span class="text-xs font-bold uppercase tracking-wider text-primary underline mt-6 flex items-center gap-1">
+            Open Inventory <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </span>
+        </a>
+
+        <a href="/admin/orders" class="bg-white border border-outline-variant rounded-2xl p-6 shadow-sm hover:border-primary transition flex flex-col justify-between group">
+          <div>
+            <span class="material-symbols-outlined text-[28px] text-primary mb-2">local_shipping</span>
+            <h2 class="text-lg font-bold text-primary">Order Fulfillment</h2>
+            <p class="text-xs text-secondary mt-1">Inspect incoming orders, update timeline statuses, and courier tracking.</p>
+          </div>
+          <span class="text-xs font-bold uppercase tracking-wider text-primary underline mt-6 flex items-center gap-1">
+            View Orders <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </span>
+        </a>
+      </div>
+
+      <!-- Recent Orders Table -->
+      <div class="bg-white border border-outline-variant rounded-2xl p-6 shadow-sm space-y-4">
+        <div class="flex justify-between items-center border-b border-outline-variant/60 pb-3">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-primary">RECENT ORDERS</h2>
+          <a href="/admin/orders" class="text-xs font-bold text-primary underline">View All Orders &rarr;</a>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs text-left">
+            <thead class="bg-surface-container font-bold text-primary uppercase">
+              <tr>
+                <th class="p-3">Order Number</th>
+                <th class="p-3">Customer</th>
+                <th class="p-3">Total Amount</th>
+                <th class="p-3">Status</th>
+                <th class="p-3">Placed Date</th>
+              </tr>
+            </thead>
+            <tbody id="recent-orders-body" class="divide-y divide-outline-variant/40">
+              <tr><td colspan="5" class="p-4 text-center text-secondary">Loading recent orders...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module">
+    import { api } from '/assets/js/core/api.js';
+    import { money } from '/assets/js/core/format.js';
+    import { initAdminChrome } from '/assets/js/components/admin-nav.js';
+
+    const user = await initAdminChrome('dashboard');
+    if (user) loadAnalytics();
+
+    async function loadAnalytics() {
+      try {
+        const res = await api.get('/admin/analytics/summary');
+
+        document.getElementById('kpi-revenue').textContent = money(res.totalRevenue || 0);
+        document.getElementById('kpi-orders').textContent = String(res.totalOrders || 0);
+        document.getElementById('kpi-products').textContent = String(res.totalProducts || 4);
+        document.getElementById('kpi-customers').textContent = String(res.totalCustomers || 0);
+
+        const recent = res.recentOrders || [];
+        const tbody = document.getElementById('recent-orders-body');
+
+        if (!recent.length) {
+          tbody.innerHTML = '<tr><td colspan="5" class="p-6 text-center text-secondary">No customer orders placed yet.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = recent.map(o => `
+          <tr class="hover:bg-surface-container-low transition">
+            <td class="p-3 font-bold text-primary"><a href="/order-confirmed?order=${encodeURIComponent(o.order_number)}" class="underline">${o.order_number}</a></td>
+            <td class="p-3 font-semibold">${o.customer_name}</td>
+            <td class="p-3 font-bold">${money(o.total)}</td>
+            <td class="p-3"><span class="px-2 py-0.5 rounded font-bold uppercase text-[9px] bg-surface-container-high text-primary">${o.status}</span></td>
+            <td class="p-3 text-secondary">${new Date(o.placed_at).toLocaleDateString()}</td>
+          </tr>
+        `).join('');
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  </script>
+</body>
+</html>

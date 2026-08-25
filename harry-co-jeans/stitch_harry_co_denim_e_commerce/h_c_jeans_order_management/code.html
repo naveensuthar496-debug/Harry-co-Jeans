@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HARRY &amp; CO - Order Management</title>
+<!-- Google Fonts & Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Montserrat:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#474646",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#dfe0e0",
+                        "outline": "#747878",
+                        "inverse-primary": "#c8c6c5",
+                        "secondary-fixed": "#e2e2e2",
+                        "tertiary-container": "#1d1b1a",
+                        "on-tertiary-fixed-variant": "#484645",
+                        "primary-container": "#1c1b1b",
+                        "surface-bright": "#fdf8f8",
+                        "surface-container-highest": "#e5e2e1",
+                        "outline-variant": "#c4c7c7",
+                        "surface-container-low": "#f7f3f2",
+                        "on-background": "#1c1b1b",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#1d1b1a",
+                        "inverse-on-surface": "#f4f0ef",
+                        "on-tertiary-container": "#868381",
+                        "surface": "#fdf8f8",
+                        "primary": "#000000",
+                        "on-primary-fixed": "#1c1b1b",
+                        "tertiary-fixed-dim": "#cac6c3",
+                        "tertiary": "#000000",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "surface-variant": "#e5e2e1",
+                        "on-secondary-fixed-variant": "#454747",
+                        "inverse-surface": "#313030",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "surface-container-high": "#ebe7e6",
+                        "surface-tint": "#5f5e5e",
+                        "tertiary-fixed": "#e6e1df",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#f1edec",
+                        "on-surface-variant": "#444748",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#858383",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#e5e2e1",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#ddd9d8",
+                        "on-secondary-container": "#616363",
+                        "background": "#fdf8f8",
+                        "on-surface": "#1c1b1b",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "secondary": "#5d5f5f",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "gutter": "24px",
+                        "xxl": "80px",
+                        "lg": "24px",
+                        "base": "8px",
+                        "margin-mobile": "16px",
+                        "md": "16px",
+                        "container-max": "1440px",
+                        "xl": "48px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Montserrat"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "display-xl": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "headline-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "display-xl": ["84px", { "lineHeight": "90px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .table-row-hover:hover {
+            background-color: theme('colors.surface-container-low');
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex text-body-md overflow-x-hidden">
+<!-- Side Navigation Shell -->
+<nav class="hidden md:flex flex-col h-screen w-64 border-r border-outline-variant bg-background sticky top-0 z-40">
+<!-- Brand Header -->
+<div class="p-gutter flex items-center gap-md border-b border-outline-variant">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center overflow-hidden shrink-0">
+<img alt="Harry &amp; Co Brand Logo" class="w-full h-full object-cover" data-alt="A minimalist logo for a premium fashion brand, featuring a stark, geometric monogram 'H&amp;C' in pure black against a pristine white background. The design is sleek, modern, and perfectly suited for an urban, high-contrast visual identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0qC7X0EkxDf_uUWCL7hgxw6w1g5CfNmRR3QcKexKJwuy9Qrj4qvgPWZ3L-HCTe0BeqEfWDH0eaHtmePE7FXhcyM__iqUQxTIUO_I51RpDT-ziQxCc-BH7DJnt9aiSOGV6iQLnhmVxBdVYezaVfYPp2cMifeJBd2Nj7WvNjFlw3EXnqph84mqPVMmwuV40BwQ0Ah6EK1fJ0uEOQnsCy8gdfa96a95Iyz9Gt3R5VsEraFBnJhdzIGjC"/>
+</div>
+<div>
+<h1 class="text-headline-md font-headline-md font-bold tracking-tighter text-primary truncate">HARRY &amp; CO</h1>
+<span class="text-label-sm font-label-sm text-on-surface-variant block uppercase">Admin Dashboard</span>
+</div>
+</div>
+<!-- Main Nav Links -->
+<div class="flex-1 overflow-y-auto py-md px-sm flex flex-col gap-xs">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 group scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:fill-current">analytics</span>
+<span class="text-body-md font-body-md">Sales Analytics</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 group scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:fill-current">app_registration</span>
+<span class="text-body-md font-body-md">Product Management</span>
+</a>
+<a aria-current="page" class="flex items-center gap-md px-md py-sm rounded-lg text-primary font-bold border-r-2 border-primary bg-surface-container group scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+<span class="text-body-md font-body-md">Order Management</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 group scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:fill-current">inventory_2</span>
+<span class="text-body-md font-body-md">Inventory</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 group scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:fill-current">group</span>
+<span class="text-body-md font-body-md">Customers</span>
+</a>
+</div>
+<!-- CTA & Footer Nav -->
+<div class="p-gutter border-t border-outline-variant flex flex-col gap-md">
+<button class="w-full bg-primary text-on-primary py-sm px-md rounded-lg text-label-sm font-label-sm uppercase tracking-wider hover:opacity-90 transition-opacity">
+                Add Product
+            </button>
+<div class="flex flex-col gap-xs mt-sm">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="text-body-md font-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span class="text-body-md font-body-md">Support</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0">
+<!-- Top App Bar -->
+<header class="flex justify-between items-center h-16 px-gutter w-full sticky top-0 z-30 bg-background/90 backdrop-blur-md border-b border-outline-variant md:hidden">
+<!-- Mobile Nav Toggle (Visual only for layout) -->
+<button class="md:hidden text-primary p-xs rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="text-headline-md font-headline-md font-bold text-primary truncate">HARRY &amp; CO JEANS</h1>
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant hover:bg-surface-container-low p-xs rounded-full transition-all duration-200 ease-in-out">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden">
+<img alt="Admin Profile" class="w-full h-full object-cover" data-alt="A small, circular avatar portrait of an administrative user for a fashion brand backend. The image features a sharply dressed individual against a clean, white background, maintaining the minimalist, high-contrast aesthetic of the overall design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuARXyTc_R_IRFQwC97bx3a9zHV5Nj6P6qRSD09m0rUXdbPHcuqlBQnWL_Vfzaq-t6dHrjAV8FUJERJBBvrGFjbS_Sr_Jh-dHREOPIazmPzZGK7Uvag9SGY1MyhzbZQDkU_5cMsa4oJyhluxIykOPCwKr-3FoJMBYvLnwKCNLaw-R3PYK_QNOg44Gtwr-IHCr_8i3Lm8CijE5p5C62q5tv-5RCPrUnwzGewLDp58U6y9fzgz4QBKIKFX"/>
+</div>
+</div>
+</header>
+<!-- Desktop Top Bar Search/Actions (Semantic placement) -->
+<div class="hidden md:flex justify-between items-center px-xxl py-md border-b border-outline-variant bg-background z-20 sticky top-0">
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-xl pr-md py-sm border border-primary rounded-lg bg-transparent text-body-md font-body-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary placeholder-on-surface-variant transition-colors" placeholder="Search orders, customers..." type="text"/>
+</div>
+<div class="flex items-center gap-md">
+<button class="text-primary hover:bg-surface-container-low p-sm rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="text-primary hover:bg-surface-container-low p-sm rounded-full transition-colors">
+<span class="material-symbols-outlined">mail</span>
+</button>
+<div class="flex items-center gap-sm ml-md pl-md border-l border-outline-variant cursor-pointer group">
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden border border-outline-variant">
+<img alt="Admin Profile" class="w-full h-full object-cover" data-alt="A small, circular avatar portrait of an administrative user for a fashion brand backend. The image features a sharply dressed individual against a clean, white background, maintaining the minimalist, high-contrast aesthetic of the overall design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB45F3IX4v13NZgcto_GS14Clo68M2SBgYtd2SrMsgc-TfVdbIaXtTVoopTvIV1AocEyRX-dUnVrG7pOipnm_dS6zJwFmJiGHwQw78LHhvW-vDUDs34m-Cd2Ecsk_CZJqdH44RtHX4M7GG7vK3iLByrt6CbM_Ix-pUuSOCjdMOCi7_tMlAqSeCaAH33T5mbPmPMplUbDchleNXKsIfbhPk6Ay1s_XLgpGiv2qb8ViQeNGhu7xCqdhf5"/>
+</div>
+<span class="text-label-sm font-label-sm font-semibold text-primary group-hover:underline uppercase">Admin Profile</span>
+</div>
+</div>
+</div>
+<div class="p-margin-mobile md:p-xxl flex-1 overflow-y-auto">
+<!-- Page Header -->
+<div class="mb-xl flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg font-bold text-primary mb-xs">Orders</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">Manage and track customer purchases.</p>
+</div>
+<div class="flex gap-sm">
+<button class="flex items-center gap-xs px-md py-sm border border-primary rounded-lg text-primary hover:bg-surface-container-low transition-colors text-label-sm font-label-sm uppercase">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                        Export
+                    </button>
+</div>
+</div>
+<!-- Metrics Bento Grid -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-sm md:gap-gutter mb-xl">
+<div class="p-md md:p-lg border border-outline-variant rounded-lg bg-surface-container-lowest flex flex-col gap-sm">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="text-label-sm font-label-sm uppercase">Total Orders</span>
+<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+</div>
+<div class="text-headline-md md:text-headline-lg font-headline-md md:font-headline-lg text-primary">1,248</div>
+<div class="text-label-sm font-label-sm text-on-surface-variant">+12% from last week</div>
+</div>
+<div class="p-md md:p-lg border border-outline-variant rounded-lg bg-surface-container-lowest flex flex-col gap-sm">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="text-label-sm font-label-sm uppercase">Pending</span>
+<span class="material-symbols-outlined text-[20px] text-yellow-600">hourglass_empty</span>
+</div>
+<div class="text-headline-md md:text-headline-lg font-headline-md md:font-headline-lg text-primary">42</div>
+<div class="text-label-sm font-label-sm text-on-surface-variant">Requires attention</div>
+</div>
+<div class="p-md md:p-lg border border-outline-variant rounded-lg bg-surface-container-lowest flex flex-col gap-sm">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="text-label-sm font-label-sm uppercase">Shipped</span>
+<span class="material-symbols-outlined text-[20px] text-blue-600">local_shipping</span>
+</div>
+<div class="text-headline-md md:text-headline-lg font-headline-md md:font-headline-lg text-primary">856</div>
+<div class="text-label-sm font-label-sm text-on-surface-variant">In transit</div>
+</div>
+<div class="p-md md:p-lg border border-outline-variant rounded-lg bg-surface-container-lowest flex flex-col gap-sm">
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="text-label-sm font-label-sm uppercase">Cancelled</span>
+<span class="material-symbols-outlined text-[20px] text-error">cancel</span>
+</div>
+<div class="text-headline-md md:text-headline-lg font-headline-md md:font-headline-lg text-primary">12</div>
+<div class="text-label-sm font-label-sm text-on-surface-variant">-2% from last week</div>
+</div>
+</div>
+<!-- Data Table Section -->
+<div class="border border-outline-variant rounded-lg bg-surface-container-lowest overflow-hidden flex flex-col">
+<!-- Table Toolbar -->
+<div class="p-md border-b border-outline-variant flex flex-col sm:flex-row justify-between items-center gap-md bg-surface">
+<div class="flex gap-sm w-full sm:w-auto overflow-x-auto pb-2 sm:pb-0 hide-scrollbar">
+<button class="px-md py-xs rounded-full bg-primary text-on-primary text-label-sm font-label-sm whitespace-nowrap">All Orders</button>
+<button class="px-md py-xs rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors text-label-sm font-label-sm whitespace-nowrap">Unfulfilled</button>
+<button class="px-md py-xs rounded-full border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors text-label-sm font-label-sm whitespace-nowrap">Unpaid</button>
+</div>
+<div class="flex items-center gap-sm w-full sm:w-auto">
+<button class="flex items-center gap-xs px-sm py-xs border border-outline-variant rounded text-on-surface-variant hover:bg-surface-container-low transition-colors text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[16px]">filter_list</span>
+                            Filter
+                        </button>
+</div>
+</div>
+<!-- Responsive Table Wrapper -->
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left border-collapse min-w-[800px]">
+<thead>
+<tr class="border-b border-outline-variant bg-surface-container-lowest text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">
+<th class="p-md font-semibold">Order ID</th>
+<th class="p-md font-semibold">Date</th>
+<th class="p-md font-semibold">Customer</th>
+<th class="p-md font-semibold">Items</th>
+<th class="p-md font-semibold">Total</th>
+<th class="p-md font-semibold">Payment</th>
+<th class="p-md font-semibold">Status</th>
+<th class="p-md font-semibold text-right">Action</th>
+</tr>
+</thead>
+<tbody class="text-body-md font-body-md divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="table-row-hover transition-colors group">
+<td class="p-md font-semibold text-primary">#ORD-99210</td>
+<td class="p-md text-on-surface-variant">Oct 24, 2023</td>
+<td class="p-md text-primary">Elena Rodriguez</td>
+<td class="p-md text-on-surface-variant">2 items</td>
+<td class="p-md text-primary font-semibold">$345.00</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container text-primary text-[10px] font-bold uppercase tracking-wider">Paid</span>
+</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded bg-green-100 text-green-800 text-[10px] font-bold uppercase tracking-wider border border-green-200">Delivered</span>
+</td>
+<td class="p-md text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-xs rounded hover:bg-surface-container">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="table-row-hover transition-colors group">
+<td class="p-md font-semibold text-primary">#ORD-99209</td>
+<td class="p-md text-on-surface-variant">Oct 24, 2023</td>
+<td class="p-md text-primary">Marcus Chen</td>
+<td class="p-md text-on-surface-variant">1 item</td>
+<td class="p-md text-primary font-semibold">$120.00</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container text-primary text-[10px] font-bold uppercase tracking-wider">Paid</span>
+</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded bg-blue-100 text-blue-800 text-[10px] font-bold uppercase tracking-wider border border-blue-200">Shipped</span>
+</td>
+<td class="p-md text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-xs rounded hover:bg-surface-container">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="table-row-hover transition-colors group">
+<td class="p-md font-semibold text-primary">#ORD-99208</td>
+<td class="p-md text-on-surface-variant">Oct 23, 2023</td>
+<td class="p-md text-primary">Sarah Jenkins</td>
+<td class="p-md text-on-surface-variant">4 items</td>
+<td class="p-md text-primary font-semibold">$890.50</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded bg-yellow-100 text-yellow-800 text-[10px] font-bold uppercase tracking-wider border border-yellow-200">Pending</span>
+</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-wider border border-outline-variant">Processing</span>
+</td>
+<td class="p-md text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-xs rounded hover:bg-surface-container">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="table-row-hover transition-colors group">
+<td class="p-md font-semibold text-primary">#ORD-99207</td>
+<td class="p-md text-on-surface-variant">Oct 23, 2023</td>
+<td class="p-md text-primary">David Okafor</td>
+<td class="p-md text-on-surface-variant">1 item</td>
+<td class="p-md text-primary font-semibold">$85.00</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded bg-red-100 text-red-800 text-[10px] font-bold uppercase tracking-wider border border-red-200">Failed</span>
+</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container text-on-surface-variant text-[10px] font-bold uppercase tracking-wider border border-outline-variant">Cancelled</span>
+</td>
+<td class="p-md text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-xs rounded hover:bg-surface-container">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="table-row-hover transition-colors group">
+<td class="p-md font-semibold text-primary">#ORD-99206</td>
+<td class="p-md text-on-surface-variant">Oct 22, 2023</td>
+<td class="p-md text-primary">Emma Thompson</td>
+<td class="p-md text-on-surface-variant">3 items</td>
+<td class="p-md text-primary font-semibold">$540.00</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container text-primary text-[10px] font-bold uppercase tracking-wider">Paid</span>
+</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded bg-green-100 text-green-800 text-[10px] font-bold uppercase tracking-wider border border-green-200">Delivered</span>
+</td>
+<td class="p-md text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-xs rounded hover:bg-surface-container">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="p-md border-t border-outline-variant flex justify-between items-center bg-surface text-label-sm font-label-sm text-on-surface-variant">
+<span>Showing 1 to 5 of 1,248 orders</span>
+<div class="flex gap-sm">
+<button class="px-sm py-xs border border-outline-variant rounded text-outline-variant cursor-not-allowed" disabled="">Previous</button>
+<button class="px-sm py-xs border border-primary rounded text-primary hover:bg-surface-container-low transition-colors">Next</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

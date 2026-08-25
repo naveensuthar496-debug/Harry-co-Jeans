@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>HARRY &amp; CO JEANS — Handcrafted Denim &amp; Selvedge Atelier</title>
+  <meta name="description" content="Discover premium Japanese and Italian selvedge denim crafted for everyday confidence and generational longevity."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="/assets/tailwind.config.js"></script>
+  <style>
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased overflow-x-hidden pt-20 pb-20 md:pb-0">
+
+  <!-- Top Header -->
+  <header class="bg-background/95 backdrop-blur-md fixed top-0 w-full z-50 border-b border-outline-variant transition-all">
+    <div class="flex justify-between items-center px-4 md:px-8 h-20 w-full max-w-7xl mx-auto">
+      <div class="flex items-center gap-4">
+        <button aria-label="Menu" class="text-primary hover:opacity-70 p-2 rounded-lg hover:bg-surface-container transition">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+        <nav class="hidden md:flex items-center gap-6 ml-4">
+          <a href="/shop" class="text-label-sm font-semibold tracking-wider uppercase hover:text-secondary transition-colors">Shop All</a>
+          <a href="/selvedge" class="text-label-sm font-semibold tracking-wider uppercase hover:text-secondary transition-colors">The Selvedge Series</a>
+          <a href="/help" class="text-label-sm font-semibold tracking-wider uppercase hover:text-secondary transition-colors">Denim Care</a>
+        </nav>
+      </div>
+
+      <a href="/" class="text-headline-md font-headline-md font-bold tracking-tighter text-primary uppercase text-center">
+        HARRY &amp; CO
+      </a>
+
+      <div class="flex items-center gap-2">
+        <a href="/shop" class="hidden sm:flex text-primary hover:opacity-70 p-2 rounded-lg hover:bg-surface-container transition" aria-label="Search">
+          <span class="material-symbols-outlined text-[22px]">search</span>
+        </a>
+        <a href="/account" class="text-primary hover:opacity-70 p-2 rounded-lg hover:bg-surface-container transition" aria-label="Account">
+          <span class="material-symbols-outlined text-[22px]">person</span>
+        </a>
+        <button aria-label="Cart" class="text-primary hover:opacity-70 p-2 rounded-lg hover:bg-surface-container relative transition">
+          <span class="material-symbols-outlined text-[22px]">shopping_bag</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative w-full h-[88vh] flex items-end pb-16 md:pb-24 px-4 md:px-12">
+    <div class="absolute inset-0 z-0">
+      <div class="bg-cover bg-center w-full h-full" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDUpaGt7gyXrPHSofDWiAWHo8epiDMItA3R6Xb8GvR5j5AC9bHPX0RC-Ua9xoOJ6SZX3SNXES4Cr6RmgkFs5kyQfh2t7NGdau34UOe0e5ldAhkOH7zjhG7ckg3bnn7Yhe_WezzKi6NsXDdpCQ-I6LIwyaih1YOiliriZTndnZ1OoYyxBDusHBbMTxvg2L0Om53wTTOFapUTIzAEqV6vEixYU-ODdcj3GafcH1oL9SQpLfob2B3VAmHQ')"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+    </div>
+    <div class="relative z-10 w-full max-w-4xl mx-auto text-center text-white">
+      <span class="inline-block bg-white/20 backdrop-blur-md text-white text-[11px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4 border border-white/30">
+        The 2026 Collection
+      </span>
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-headline-lg font-bold tracking-tight text-white mb-4">
+        DENIM, REDEFINED.
+      </h1>
+      <p class="text-base sm:text-lg md:text-xl font-body-md text-white/90 mb-8 max-w-xl mx-auto">
+        Woven on heritage vintage shuttle looms. Raw Kaihara &amp; Kuroki selvedge built for everyday wear.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
+        <a href="/shop" class="w-full sm:w-auto bg-white text-black text-xs font-bold uppercase tracking-wider px-8 py-3.5 rounded-lg hover:bg-white/90 transition transform active:scale-95 shadow-xl">
+          EXPLORE CATALOG
+        </a>
+        <a href="/selvedge" class="w-full sm:w-auto bg-transparent border-2 border-white text-white text-xs font-bold uppercase tracking-wider px-8 py-3.5 rounded-lg hover:bg-white hover:text-black transition transform active:scale-95">
+          THE SELVEDGE SERIES
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shop by Fit Carousel -->
+  <section class="py-16 md:py-24 max-w-7xl mx-auto px-4 md:px-8">
+    <div class="flex justify-between items-end mb-8">
+      <div>
+        <p class="text-xs uppercase tracking-widest font-bold text-secondary mb-1">CRAFTED SILHOUETTES</p>
+        <h2 class="text-2xl sm:text-3xl font-headline-md font-bold text-primary">SHOP BY FIT</h2>
+      </div>
+      <a href="/shop" class="text-xs font-bold uppercase tracking-wider text-primary border-b border-primary hover:opacity-70 pb-0.5 transition">
+        VIEW ALL
+      </a>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+      <a href="/shop?fit=straight" class="group block overflow-hidden">
+        <div class="w-full aspect-[3/4] mb-3 overflow-hidden bg-surface-container rounded-lg relative">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyv0MsK6_5iXJyxh47vx-thQG48k2BRlciQ4wKZmzc0iZ6EKx0K1dA42y-X-GM9VdUUS7l5YhzVL4bGLG2jCHV9Y10Ktod3y7Kfcde9Cu633lVvHX6-TQkKlLTQhR8EzaTtlXUzdmoGIpJm-XfrWvMC8Vux_tQBjKKIKsSHw33ZnnRg8S17rSStDxmdylxG4DoMeEgrfMAGPB0tDkPFZbmuIjCPVgPbaZTqJn2wiiWZvq-PLuykofz" alt="Straight Fit" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+          <span class="absolute bottom-2 left-2 bg-black/60 backdrop-blur-sm text-white text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded">Iconic</span>
+        </div>
+        <h3 class="text-sm font-bold uppercase tracking-wider text-primary text-center group-hover:underline">STRAIGHT FIT</h3>
+      </a>
+
+      <a href="/shop?fit=slim" class="group block overflow-hidden">
+        <div class="w-full aspect-[3/4] mb-3 overflow-hidden bg-surface-container rounded-lg relative">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-OxMTLyH972c0eUfePzCXoQr7X2ymiQeWNrrINYK1cTQ1wJ6Vsg0ucBfN4Szio8m6y3NK290g_sv2Xbu5wJdhFwfy9IaZodhialwpkK73kBQ7ox25WSOnF80vaJ69N17CWBXIp9LOMtYNtqF1p1o1l0GxZZuLUqrsR2pYHd4G3T4kWAI6Y5e6jVtNPTUgKokcwGk9q7A-1uvgamlj9ROkB66wvJ2iKxviut21Pqf1nbwf2eT0pJbr" alt="Slim Tapered" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+          <span class="absolute bottom-2 left-2 bg-black/60 backdrop-blur-sm text-white text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded">Tailored</span>
+        </div>
+        <h3 class="text-sm font-bold uppercase tracking-wider text-primary text-center group-hover:underline">SLIM TAPERED</h3>
+      </a>
+
+      <a href="/shop?fit=baggy" class="group block overflow-hidden">
+        <div class="w-full aspect-[3/4] mb-3 overflow-hidden bg-surface-container rounded-lg relative">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCieojBTXItY9-zlPsoxBoe_iWR8OZh07MPE79iv1bwRLTay0MqLbDMdi6qsnUdsT23PVska5Rm7Z9LaVdUxM7mxG8GeVSGe2g7MywSByDXJcIK3dXEB0GH3qVz4LVKhyUaDlQaOqRoeQ-a3v3xtld6cvH4Gi5O_oNi-pzbu2fH6RexNxuecgHQEjRNki1dIwtuz73luQq2rAAL8R1hbaAvR4K9JDAhl86tei64upfWr-T22LAfNUI_" alt="Wide Leg Baggy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+          <span class="absolute bottom-2 left-2 bg-black/60 backdrop-blur-sm text-white text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded">Relaxed</span>
+        </div>
+        <h3 class="text-sm font-bold uppercase tracking-wider text-primary text-center group-hover:underline">WIDE-LEG RIGID</h3>
+      </a>
+
+      <a href="/shop?type=Jackets" class="group block overflow-hidden">
+        <div class="w-full aspect-[3/4] mb-3 overflow-hidden bg-surface-container rounded-lg relative">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXZS0Cd_aDLXkEpvhEAOBVQAxOcRW8IYNjUeJXwAGkoAwbWW6DrPNaXIJIOe8N3lUoMrT96x8_t_Eva2VbPv392ddskdbSE84y3RnRFPBaBTF86zQpb-Ek-nT2u5GVwbe5iW2ab2ky_zKCNlMOYjcIAHF8iSWkSnsSvFBwMpUFYS4Df2rWQ6M2iyPFxEfKbOQNjECXUaVWgI0f88HTl-0pBSkWjFYcul7yPVp6vstXLjY39JAKpPfI" alt="Denim Outerwear" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+          <span class="absolute bottom-2 left-2 bg-black/60 backdrop-blur-sm text-white text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded">Atelier</span>
+        </div>
+        <h3 class="text-sm font-bold uppercase tracking-wider text-primary text-center group-hover:underline">OUTERWEAR &amp; JACKETS</h3>
+      </a>
+    </div>
+  </section>
+
+  <!-- Flagship Products Grid -->
+  <section class="py-16 md:py-24 bg-surface-container-low border-y border-outline-variant/40">
+    <div class="max-w-7xl mx-auto px-4 md:px-8">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 mb-10">
+        <div>
+          <span class="text-xs uppercase tracking-widest font-bold text-secondary">CURATED ATELIER PIECES</span>
+          <h2 class="text-2xl sm:text-3xl font-headline-md font-bold text-primary">FEATURED FLAGSHIP DENIM</h2>
+        </div>
+        <p class="text-secondary text-sm">4 Signature mastercraft editions currently available</p>
+      </div>
+
+      <!-- Dynamic Product Container -->
+      <div id="featured-products" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Loaded dynamically via JS -->
+        <div class="animate-pulse aspect-[3/4] bg-surface-container rounded-lg"></div>
+        <div class="animate-pulse aspect-[3/4] bg-surface-container rounded-lg"></div>
+        <div class="animate-pulse aspect-[3/4] bg-surface-container rounded-lg"></div>
+        <div class="animate-pulse aspect-[3/4] bg-surface-container rounded-lg"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brand Craftsmanship Banner -->
+  <section class="py-16 md:py-24 max-w-7xl mx-auto px-4 md:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+      <div class="w-full aspect-[4/3] sm:aspect-square bg-surface-container rounded-lg overflow-hidden">
+        <img class="w-full h-full object-cover grayscale contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0X-X6Lp16fG29EJpIxcv8V8VpIJ4Bz7WG_zXZsKRu4rySG8bJ6_0b-djg_yuEaDuS7u4WgPDgh8ze_0gk0gAin65jYFva6aJzurAOkUmAuggKprwOEw86GiOSyCIb1x1exTr5-nk45SsbeUqYyNb0DgkF6CckyIjNZ2A-j6bKV2ZZA35HJ62zKIAozNIbxztlcK-Eqc3J1pkOnCPnFeTbCVwdqNHK_gQiERj0228z1Uz3pz4nKXC7" alt="Denim Craftsmanship"/>
+      </div>
+      <div class="flex flex-col justify-center">
+        <span class="text-xs uppercase tracking-widest font-bold text-secondary mb-2">HERITAGE LOOMS &middot; ZERO COMPROMISE</span>
+        <h2 class="text-3xl sm:text-4xl font-headline-lg font-bold text-primary mb-4 leading-tight">
+          MADE FOR GENERATIONS, NOT SEASONS.
+        </h2>
+        <p class="text-base text-secondary mb-6 leading-relaxed">
+          Every pair of HARRY &amp; CO jeans is constructed with Japanese red-line selvedge denim, union special chainstitch hems, and solid brass hardware. Designed to mold to your body and develop a patina completely unique to your life.
+        </p>
+        <div class="grid grid-cols-3 gap-4 border-y border-outline-variant py-4 mb-6">
+          <div>
+            <p class="text-lg font-bold text-primary">14-15 oz</p>
+            <p class="text-xs text-secondary">Raw Selvedge</p>
+          </div>
+          <div>
+            <p class="text-lg font-bold text-primary">Kojima</p>
+            <p class="text-xs text-secondary">Okayama, Japan</p>
+          </div>
+          <div>
+            <p class="text-lg font-bold text-primary">Lifetime</p>
+            <p class="text-xs text-secondary">Hem &amp; Repair</p>
+          </div>
+        </div>
+        <a href="/selvedge" class="self-start bg-primary text-on-primary text-xs font-bold uppercase tracking-wider px-8 py-3.5 rounded-lg hover:bg-black/80 transition">
+          READ THE STORY
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Signup -->
+  <section class="py-16 bg-surface-container-low border-t border-outline-variant">
+    <div class="max-w-xl mx-auto px-4 text-center">
+      <span class="material-symbols-outlined text-[36px] text-primary mb-2">mail</span>
+      <h2 class="text-2xl font-headline-md font-bold text-primary mb-2">JOIN THE SELVEDGE GUILD</h2>
+      <p class="text-sm text-secondary mb-6">Receive early access to limited shuttle-loom drops and private archive releases.</p>
+      <form id="newsletter-form" class="flex flex-col sm:flex-row gap-2">
+        <input type="email" name="email" required placeholder="Enter your email address..." class="flex-1 bg-white border border-outline-variant rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-primary"/>
+        <button type="submit" class="bg-primary text-on-primary text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-lg hover:bg-black/80 transition">
+          SUBSCRIBE
+        </button>
+      </form>
+      <p class="text-[11px] text-secondary mt-3">No spam. Unsubscribe at any time with 1 click.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-black text-white pt-16 pb-12">
+    <div class="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+      <div>
+        <h3 class="text-lg font-bold tracking-tighter uppercase mb-3">HARRY &amp; CO JEANS</h3>
+        <p class="text-xs text-white/70 leading-relaxed mb-4">
+          Independent denim atelier dedicated to uncompromising quality, raw selvedge craftsmanship, and timeless cuts.
+        </p>
+        <p class="text-xs text-white/50">&copy; 2026 HARRY &amp; CO. All rights reserved.</p>
+      </div>
+
+      <div>
+        <h4 class="text-xs font-bold uppercase tracking-widest text-white/90 mb-3">COLLECTIONS</h4>
+        <ul class="space-y-2 text-xs text-white/70">
+          <li><a href="/shop" class="hover:text-white transition">Shop All Products</a></li>
+          <li><a href="/shop?fit=straight" class="hover:text-white transition">Vintage Straight Cuts</a></li>
+          <li><a href="/shop?fit=slim" class="hover:text-white transition">Chelsea Slim Tapered</a></li>
+          <li><a href="/shop?fit=baggy" class="hover:text-white transition">Shibuya Wide-Leg Rigid</a></li>
+          <li><a href="/selvedge" class="hover:text-white transition">The Selvedge Series</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-xs font-bold uppercase tracking-widest text-white/90 mb-3">CUSTOMER CARE</h4>
+        <ul class="space-y-2 text-xs text-white/70">
+          <li><a href="/help" class="hover:text-white transition">Sizing &amp; Fit Guide</a></li>
+          <li><a href="/help" class="hover:text-white transition">Raw Denim Care Guide</a></li>
+          <li><a href="/order-history" class="hover:text-white transition">Order History &amp; Tracking</a></li>
+          <li><a href="/account" class="hover:text-white transition">My Account</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-xs font-bold uppercase tracking-widest text-white/90 mb-3">STAFF ACCESS</h4>
+        <p class="text-xs text-white/70 mb-3">Manage products, inventory, and order fulfillment.</p>
+        <a href="/admin/login" class="inline-flex items-center gap-1.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-bold px-4 py-2 rounded-lg transition">
+          <span class="material-symbols-outlined text-[16px]">admin_panel_settings</span>
+          Admin Portal
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Bottom Nav -->
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-background/95 backdrop-blur-md border-t border-outline-variant flex justify-around items-center h-16 px-2">
+    <a href="/" class="flex flex-col items-center justify-center text-primary">
+      <span class="material-symbols-outlined text-[22px]">home</span>
+      <span class="text-[10px] font-bold uppercase tracking-tighter">Home</span>
+    </a>
+    <a href="/shop" class="flex flex-col items-center justify-center text-secondary hover:text-primary">
+      <span class="material-symbols-outlined text-[22px]">grid_view</span>
+      <span class="text-[10px] font-bold uppercase tracking-tighter">Shop</span>
+    </a>
+    <a href="/selvedge" class="flex flex-col items-center justify-center text-secondary hover:text-primary">
+      <span class="material-symbols-outlined text-[22px]">auto_awesome</span>
+      <span class="text-[10px] font-bold uppercase tracking-tighter">Selvedge</span>
+    </a>
+    <a href="/account" class="flex flex-col items-center justify-center text-secondary hover:text-primary">
+      <span class="material-symbols-outlined text-[22px]">person</span>
+      <span class="text-[10px] font-bold uppercase tracking-tighter">Account</span>
+    </a>
+  </nav>
+
+  <!-- Script Modules -->
+  <script type="module">
+    import { api } from '/assets/js/core/api.js';
+    import { money } from '/assets/js/core/format.js';
+    import { toast } from '/assets/js/core/ui.js';
+    import { initChrome } from '/assets/js/components/chrome.js';
+
+    await initChrome();
+
+    // Fetch and render the 4 flagship products
+    async function loadFeaturedProducts() {
+      const container = document.getElementById('featured-products');
+      try {
+        const res = await api.get('/products');
+        const products = res.products || [];
+
+        if (!products.length) {
+          container.innerHTML = '<p class="col-span-full text-center text-secondary py-12">No products currently listed.</p>';
+          return;
+        }
+
+        container.innerHTML = products.map(p => `
+          <div class="group flex flex-col bg-white border border-outline-variant/60 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
+            <a href="/product?slug=${encodeURIComponent(p.slug)}" class="block relative aspect-[3/4] bg-surface-container overflow-hidden">
+              <img src="${p.mainImage || 'https://lh3.googleusercontent.com/aida-public/AB6AXuDdfwemnRapY-vyeAjWEz3r219w81Ab4vPUNY7KyrOw2iNHjkB83Va2Ag99ZUTaGZ9TA3BDtN5IaYBopnZCE08sNwD50gVcutAa6cN9rWQMptFBt9D9Ckf_MtryPuTqxm6_5GRRpNYMKvuBo2dNkFdygGhFMvgNODE1699fIMFv6wpsNDQbhd-J9BKesbicsQhnElFKF9vsZRmR5o2HOEjtIbZ9_M17CIsW6EEh2tUQ7ehOft19sNcN'}"
+                   alt="${p.title}"
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+              ${p.isNew ? '<span class="absolute top-3 left-3 bg-black text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded">New Release</span>' : ''}
+            </a>
+            <div class="p-4 flex flex-col flex-1">
+              <div class="flex justify-between items-start gap-1 mb-1">
+                <span class="text-[11px] font-bold uppercase tracking-wider text-secondary">${p.fit || 'Classic'} &middot; ${p.productType || 'Jeans'}</span>
+                <span class="flex items-center text-[11px] font-semibold text-primary">
+                  <span class="material-symbols-outlined text-[14px] text-amber-500 fill-1">star</span> ${p.rating || '5.0'}
+                </span>
+              </div>
+              <h3 class="font-bold text-sm text-primary mb-2 line-clamp-1 group-hover:underline">
+                <a href="/product?slug=${encodeURIComponent(p.slug)}">${p.title}</a>
+              </h3>
+              <div class="mt-auto pt-2 flex items-center justify-between border-t border-outline-variant/40">
+                <div>
+                  <span class="font-bold text-base text-primary">${money(p.basePrice)}</span>
+                  ${p.compareAtPrice ? `<span class="text-xs text-secondary line-through ml-1.5">${money(p.compareAtPrice)}</span>` : ''}
+                </div>
+                <a href="/product?slug=${encodeURIComponent(p.slug)}" class="text-xs font-bold uppercase tracking-wider text-primary hover:text-black/70 flex items-center gap-0.5">
+                  Details <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {
+        container.innerHTML = '<p class="col-span-full text-center text-error py-12">Failed to load catalog.</p>';
+      }
+    }
+
+    loadFeaturedProducts();
+
+    // Newsletter form
+    document.getElementById('newsletter-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = e.target.email.value;
+      try {
+        await api.post('/newsletter/subscribe', { email });
+        toast('Welcome to the Guild! Check your inbox.', 'success');
+        e.target.reset();
+      } catch (err) {
+        toast(err.message || 'Subscription failed', 'error');
+      }
+    });
+  </script>
+</body>
+</html>

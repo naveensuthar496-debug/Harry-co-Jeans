@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Product Details — HARRY &amp; CO JEANS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="/assets/tailwind.config.js"></script>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased overflow-x-hidden pt-20 pb-20 md:pb-12">
+
+  <!-- Header -->
+  <header class="bg-background/95 backdrop-blur-md fixed top-0 w-full z-50 border-b border-outline-variant">
+    <div class="flex justify-between items-center px-4 md:px-8 h-20 w-full max-w-7xl mx-auto">
+      <div class="flex items-center gap-4">
+        <button aria-label="Menu" class="text-primary hover:opacity-70 p-2 rounded-lg hover:bg-surface-container transition">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+        <nav class="hidden md:flex items-center gap-6 ml-4">
+          <a href="/shop" class="text-label-sm font-semibold tracking-wider uppercase hover:text-secondary transition-colors">Shop All</a>
+          <a href="/selvedge" class="text-label-sm font-semibold tracking-wider uppercase hover:text-secondary transition-colors">The Selvedge Series</a>
+        </nav>
+      </div>
+
+      <a href="/" class="text-headline-md font-headline-md font-bold tracking-tighter text-primary uppercase text-center">
+        HARRY &amp; CO
+      </a>
+
+      <div class="flex items-center gap-2">
+        <a href="/account" class="text-primary hover:opacity-70 p-2 rounded-lg hover:bg-surface-container transition" aria-label="Account">
+          <span class="material-symbols-outlined text-[22px]">person</span>
+        </a>
+        <button aria-label="Cart" class="text-primary hover:opacity-70 p-2 rounded-lg hover:bg-surface-container relative transition">
+          <span class="material-symbols-outlined text-[22px]">shopping_bag</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Product Details Container -->
+  <main id="product-container" class="max-w-7xl mx-auto px-4 md:px-8 pt-8">
+    <div class="animate-pulse flex flex-col md:flex-row gap-12 py-12">
+      <div class="w-full md:w-1/2 aspect-[3/4] bg-surface-container rounded-xl"></div>
+      <div class="w-full md:w-1/2 space-y-4">
+        <div class="h-8 bg-surface-container rounded w-3/4"></div>
+        <div class="h-6 bg-surface-container rounded w-1/4"></div>
+        <div class="h-24 bg-surface-container rounded"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-black text-white py-12 mt-16">
+    <div class="max-w-7xl mx-auto px-4 md:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div>
+        <span class="text-sm font-bold uppercase tracking-tight">HARRY &amp; CO JEANS</span>
+        <p class="text-xs text-white/60">Japanese &amp; Italian Selvedge Atelier</p>
+      </div>
+      <div class="flex gap-6 text-xs text-white/80">
+        <a href="/shop" class="hover:underline">Catalog</a>
+        <a href="/selvedge" class="hover:underline">Selvedge Series</a>
+        <a href="/help" class="hover:underline">Denim Care</a>
+        <a href="/admin/login" class="hover:underline">Admin</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { api } from '/assets/js/core/api.js';
+    import { money, starsHTML } from '/assets/js/core/format.js';
+    import { params, toast, busy } from '/assets/js/core/ui.js';
+    import { addToCart } from '/assets/js/core/store.js';
+    import { openCart } from '/assets/js/components/cart-drawer.js';
+    import { currentUser } from '/assets/js/core/auth.js';
+    import { initChrome } from '/assets/js/components/chrome.js';
+
+    await initChrome();
+
+    const { slug, id } = params();
+    const identifier = slug || id || '1968-vintage-straight-selvedge';
+
+    const container = document.getElementById('product-container');
+    let currentProduct = null;
+    let selectedVariantId = null;
+    let quantity = 1;
+
+    async function loadProduct() {
+      try {
+        const res = await api.get(`/products/${encodeURIComponent(identifier)}`);
+        currentProduct = res.product;
+        if (!currentProduct) {
+          container.innerHTML = '<div class="py-24 text-center text-error font-bold">Product not found. <a href="/shop" class="underline ml-2">Back to shop</a></div>';
+          return;
+        }
+
+        document.title = `${currentProduct.title} — HARRY & CO JEANS`;
+        renderProductUI(currentProduct);
+        loadReviews(currentProduct.id);
+      } catch (err) {
+        container.innerHTML = `<div class="py-24 text-center text-error font-bold">${err.message || 'Product failed to load.'} <a href="/shop" class="underline ml-2">Back to shop</a></div>`;
+      }
+    }
+
+    function renderProductUI(p) {
+      const variants = p.variants || [];
+      const defaultVariant = variants.find(v => v.stock > 0) || variants[0];
+      selectedVariantId = defaultVariant ? defaultVariant.id : null;
+
+      const images = p.images && p.images.length > 0 ? p.images : [{ url: p.mainImage || '', alt: p.title }];
+
+      container.innerHTML = `
+        <!-- Breadcrumb -->
+        <nav class="flex items-center gap-2 text-xs text-secondary mb-6">
+          <a href="/" class="hover:text-primary">Home</a>
+          <span>/</span>
+          <a href="/shop" class="hover:text-primary">Shop</a>
+          <span>/</span>
+          <span class="text-primary font-bold">${p.title}</span>
+        </nav>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start pb-16">
+          <!-- Image Gallery Column -->
+          <div class="space-y-4">
+            <div class="w-full aspect-[3/4] bg-surface-container rounded-2xl overflow-hidden shadow-sm relative">
+              <img id="main-product-image" src="${images[0]?.url}" alt="${images[0]?.alt || p.title}" class="w-full h-full object-cover"/>
+              ${p.isNew ? '<span class="absolute top-4 left-4 bg-black text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-md">New Atelier Release</span>' : ''}
+            </div>
+
+            <!-- Thumbnail Selector -->
+            ${images.length > 1 ? `
+              <div class="flex gap-3 overflow-x-auto pb-2">
+                ${images.map((img, idx) => `
+                  <button class="thumb-btn flex-shrink-0 w-20 aspect-[3/4] rounded-lg overflow-hidden border-2 transition ${idx === 0 ? 'border-primary' : 'border-transparent opacity-70 hover:opacity-100'}" data-src="${img.url}">
+                    <img src="${img.url}" alt="Thumbnail ${idx + 1}" class="w-full h-full object-cover"/>
+                  </button>
+                `).join('')}
+              </div>
+            ` : ''}
+          </div>
+
+          <!-- Product Details & Actions Column -->
+          <div class="flex flex-col">
+            <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-secondary mb-1">
+              <span>${p.brand || 'HARRY & CO'}</span>
+              <span>&middot;</span>
+              <span>${p.fit || 'Straight'} Fit</span>
+              <span>&middot;</span>
+              <span class="capitalize">${p.gender || 'Unisex'}</span>
+            </div>
+
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-headline-lg font-bold text-primary mb-3">
+              ${p.title}
+            </h1>
+
+            <!-- Ratings Summary -->
+            <div class="flex items-center gap-2 mb-4">
+              <div class="flex text-amber-500">${starsHTML(p.rating, 16)}</div>
+              <span class="text-xs font-bold text-primary">${p.rating || '5.0'}</span>
+              <a href="#reviews-section" class="text-xs text-secondary hover:underline">(${p.reviewCount || 0} reviews)</a>
+            </div>
+
+            <!-- Price -->
+            <div class="flex items-baseline gap-3 mb-6">
+              <span class="text-2xl sm:text-3xl font-bold text-primary">${money(p.basePrice)}</span>
+              ${p.compareAtPrice ? `
+                <span class="text-base text-secondary line-through">${money(p.compareAtPrice)}</span>
+                <span class="bg-error-container text-on-error-container text-[11px] font-bold px-2 py-0.5 rounded">
+                  Save ${money(p.compareAtPrice - p.basePrice)}
+                </span>
+              ` : ''}
+            </div>
+
+            <p class="text-sm sm:text-base text-on-surface-variant leading-relaxed mb-6 border-b border-outline-variant/60 pb-6">
+              ${p.description}
+            </p>
+
+            <!-- Size Selector -->
+            <div class="mb-6">
+              <div class="flex justify-between items-center mb-3">
+                <span class="text-xs font-bold uppercase tracking-wider text-primary">SELECT SIZE</span>
+                <a href="/help" class="text-xs text-secondary hover:underline flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[16px]">straighten</span> Sizing Guide
+                </a>
+              </div>
+
+              <div class="flex flex-wrap gap-2.5" id="size-selector">
+                ${variants.map(v => {
+                  const isSelected = v.id === selectedVariantId;
+                  const isOutOfStock = v.stock <= 0;
+                  return `
+                    <button class="size-btn px-4 py-2.5 rounded-lg text-xs font-bold border transition ${
+                      isSelected
+                        ? 'border-primary bg-primary text-on-primary shadow-sm'
+                        : isOutOfStock
+                        ? 'border-outline-variant/40 bg-surface-container text-secondary/50 cursor-not-allowed line-through'
+                        : 'border-outline-variant bg-white text-primary hover:border-primary'
+                    }" data-variant-id="${v.id}" ${isOutOfStock ? 'disabled' : ''}>
+                      ${v.size}
+                    </button>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+
+            <!-- Quantity & Actions -->
+            <div class="flex flex-col sm:flex-row gap-3 mb-8">
+              <!-- Qty Stepper -->
+              <div class="flex items-center border border-outline-variant rounded-lg bg-white self-start sm:self-auto">
+                <button id="qty-minus" class="w-10 h-12 flex items-center justify-center hover:bg-surface-container transition">
+                  <span class="material-symbols-outlined text-[18px]">remove</span>
+                </button>
+                <span id="qty-val" class="w-10 text-center font-bold text-sm">1</span>
+                <button id="qty-plus" class="w-10 h-12 flex items-center justify-center hover:bg-surface-container transition">
+                  <span class="material-symbols-outlined text-[18px]">add</span>
+                </button>
+              </div>
+
+              <!-- Add to Bag Button -->
+              <button id="btn-add-bag" class="flex-1 bg-primary text-on-primary text-xs font-bold uppercase tracking-wider py-3.5 px-6 rounded-lg hover:bg-black/80 transition transform active:scale-95 flex items-center justify-center gap-2 shadow-lg">
+                <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+                Add to Bag
+              </button>
+
+              <!-- Buy Now Button -->
+              <button id="btn-buy-now" class="bg-surface-container-high text-primary border border-outline-variant text-xs font-bold uppercase tracking-wider py-3.5 px-6 rounded-lg hover:bg-surface-container-highest transition active:scale-95">
+                Buy Now
+              </button>
+            </div>
+
+            <!-- Value Props Checklist -->
+            <div class="bg-surface-container-low rounded-xl p-4 border border-outline-variant/60 space-y-2 mb-8 text-xs text-secondary">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-primary">local_shipping</span>
+                <span>Free express delivery across India on orders above ₹2,500</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-primary">verified</span>
+                <span>100% Genuine Japanese/Italian shuttle loom selvedge</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px] text-primary">published_with_changes</span>
+                <span>7-Day hassle-free returns &amp; exchanges</span>
+              </div>
+            </div>
+
+            <!-- Accordion / Specifications -->
+            <div class="divide-y divide-outline-variant/60 border-t border-outline-variant/60">
+              ${p.fitStyling && p.fitStyling.length ? `
+                <div class="py-4">
+                  <h4 class="text-xs font-bold uppercase tracking-wider text-primary mb-2">FIT &amp; STYLING</h4>
+                  <ul class="list-disc list-inside space-y-1 text-xs text-secondary leading-relaxed">
+                    ${p.fitStyling.map(b => `<li>${b}</li>`).join('')}
+                  </ul>
+                </div>
+              ` : ''}
+
+              ${p.fabricCare ? `
+                <div class="py-4">
+                  <h4 class="text-xs font-bold uppercase tracking-wider text-primary mb-2">FABRIC &amp; CARE</h4>
+                  <p class="text-xs text-secondary leading-relaxed">${p.fabricCare}</p>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        </div>
+
+        <!-- Customer Reviews Section -->
+        <section id="reviews-section" class="border-t border-outline-variant pt-12 pb-16">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8">
+            <div>
+              <p class="text-xs uppercase tracking-widest font-bold text-secondary mb-1">COMMUNITY FEEDBACK</p>
+              <h2 class="text-2xl font-headline-md font-bold text-primary">CUSTOMER REVIEWS</h2>
+            </div>
+            <button id="btn-toggle-review-form" class="bg-primary text-on-primary text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-lg hover:bg-black/80 transition">
+              Write a Review
+            </button>
+          </div>
+
+          <!-- Add Review Form (Hidden by default) -->
+          <div id="review-form-wrap" class="hidden bg-surface-container-low border border-outline-variant rounded-xl p-6 mb-8 max-w-xl">
+            <h3 class="text-base font-bold text-primary mb-4">Write Your Review</h3>
+            <form id="review-form" class="space-y-4">
+              <div>
+                <label class="block text-xs font-bold uppercase text-secondary mb-1">Rating</label>
+                <select name="rating" class="w-full bg-white border border-outline-variant rounded-lg p-2.5 text-sm focus:outline-none focus:border-primary">
+                  <option value="5">⭐⭐⭐⭐⭐ (5 - Exceptional)</option>
+                  <option value="4">⭐⭐⭐⭐ (4 - Very Good)</option>
+                  <option value="3">⭐⭐⭐ (3 - Average)</option>
+                  <option value="2">⭐⭐ (2 - Below Expectations)</option>
+                  <option value="1">⭐ (1 - Poor)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-secondary mb-1">Review Title</label>
+                <input type="text" name="title" required placeholder="e.g. Best pair of selvedge I own" class="w-full bg-white border border-outline-variant rounded-lg p-2.5 text-sm focus:outline-none focus:border-primary"/>
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase text-secondary mb-1">Your Review</label>
+                <textarea name="body" required rows="3" placeholder="Describe the fit, denim hand-feel, and craftsmanship..." class="w-full bg-white border border-outline-variant rounded-lg p-2.5 text-sm focus:outline-none focus:border-primary"></textarea>
+              </div>
+              <div class="flex gap-2">
+                <button type="submit" class="bg-primary text-on-primary text-xs font-bold uppercase px-6 py-2.5 rounded-lg">Submit Review</button>
+                <button type="button" id="btn-cancel-review" class="bg-surface-container text-primary text-xs font-bold uppercase px-4 py-2.5 rounded-lg">Cancel</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Reviews List -->
+          <div id="reviews-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-6 bg-surface-container-low rounded-xl border border-outline-variant/60 animate-pulse h-32"></div>
+            <div class="p-6 bg-surface-container-low rounded-xl border border-outline-variant/60 animate-pulse h-32"></div>
+          </div>
+        </section>
+      `;
+
+      // Wire Thumbnail Buttons
+      document.querySelectorAll('.thumb-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.thumb-btn').forEach(b => {
+            b.classList.remove('border-primary');
+            b.classList.add('border-transparent', 'opacity-70');
+          });
+          btn.classList.remove('border-transparent', 'opacity-70');
+          btn.classList.add('border-primary');
+          document.getElementById('main-product-image').src = btn.dataset.src;
+        });
+      });
+
+      // Wire Size Selector
+      document.querySelectorAll('.size-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (btn.disabled) return;
+          document.querySelectorAll('.size-btn').forEach(b => {
+            b.className = 'size-btn px-4 py-2.5 rounded-lg text-xs font-bold border border-outline-variant bg-white text-primary hover:border-primary transition';
+          });
+          btn.className = 'size-btn px-4 py-2.5 rounded-lg text-xs font-bold border border-primary bg-primary text-on-primary shadow-sm transition';
+          selectedVariantId = Number(btn.dataset.variantId);
+        });
+      });
+
+      // Wire Quantity
+      const minus = document.getElementById('qty-minus');
+      const plus = document.getElementById('qty-plus');
+      const val = document.getElementById('qty-val');
+
+      minus.addEventListener('click', () => {
+        if (quantity > 1) {
+          quantity--;
+          val.textContent = String(quantity);
+        }
+      });
+      plus.addEventListener('click', () => {
+        quantity++;
+        val.textContent = String(quantity);
+      });
+
+      // Wire Add to Bag
+      const addBtn = document.getElementById('btn-add-bag');
+      addBtn.addEventListener('click', async () => {
+        if (!selectedVariantId) {
+          toast('Please select a size first', 'error');
+          return;
+        }
+        const user = await currentUser();
+        if (!user) {
+          toast('Please sign in to add to your bag', 'info');
+          location.href = `/login?next=${encodeURIComponent(location.pathname + location.search)}`;
+          return;
+        }
+
+        const restore = busy(addBtn, 'Adding...');
+        try {
+          await addToCart(selectedVariantId, quantity);
+          toast(`Added ${p.title} to bag!`, 'success');
+          openCart();
+        } catch (err) {
+          toast(err.message || 'Failed to add to bag', 'error');
+        } finally {
+          restore();
+        }
+      });
+
+      // Wire Buy Now
+      const buyBtn = document.getElementById('btn-buy-now');
+      buyBtn.addEventListener('click', async () => {
+        if (!selectedVariantId) {
+          toast('Please select a size first', 'error');
+          return;
+        }
+        const user = await currentUser();
+        if (!user) {
+          location.href = `/login?next=/checkout-address`;
+          return;
+        }
+        try {
+          await addToCart(selectedVariantId, quantity);
+          location.href = '/checkout-address';
+        } catch (err) {
+          toast(err.message || 'Failed to proceed', 'error');
+        }
+      });
+
+      // Wire Review Form Toggle
+      const toggleRevBtn = document.getElementById('btn-toggle-review-form');
+      const revWrap = document.getElementById('review-form-wrap');
+      const cancelRevBtn = document.getElementById('btn-cancel-review');
+
+      toggleRevBtn.addEventListener('click', () => revWrap.classList.toggle('hidden'));
+      cancelRevBtn.addEventListener('click', () => revWrap.classList.add('hidden'));
+
+      // Submit Review
+      document.getElementById('review-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const rating = Number(e.target.rating.value);
+        const title = e.target.title.value;
+        const body = e.target.body.value;
+
+        try {
+          await api.post('/reviews', { productId: p.id, rating, title, body });
+          toast('Thank you for your review!', 'success');
+          revWrap.classList.add('hidden');
+          e.target.reset();
+          loadReviews(p.id);
+        } catch (err) {
+          toast(err.message || 'Failed to submit review', 'error');
+        }
+      });
+    }
+
+    async function loadReviews(productId) {
+      const listEl = document.getElementById('reviews-list');
+      try {
+        const res = await api.get(`/reviews?productId=${productId}`);
+        const reviews = res.reviews || [];
+
+        if (!reviews.length) {
+          listEl.innerHTML = '<p class="col-span-full text-secondary text-sm">No reviews yet. Be the first to share your thoughts!</p>';
+          return;
+        }
+
+        listEl.innerHTML = reviews.map(r => `
+          <div class="p-5 bg-surface-container-low rounded-xl border border-outline-variant/60 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex text-amber-500">${starsHTML(r.rating, 14)}</div>
+                <span class="text-[11px] text-secondary">${new Date(r.createdAt).toLocaleDateString()}</span>
+              </div>
+              <h4 class="font-bold text-sm text-primary mb-1">${r.title || 'Review'}</h4>
+              <p class="text-xs text-secondary leading-relaxed">${r.body}</p>
+            </div>
+            <p class="text-[11px] font-bold text-primary mt-4 uppercase tracking-wider">&mdash; ${r.author || 'Verified Buyer'}</p>
+          </div>
+        `).join('');
+      } catch {
+        listEl.innerHTML = '<p class="col-span-full text-secondary text-sm">Reviews unavailable.</p>';
+      }
+    }
+
+    loadProduct();
+  </script>
+</body>
+</html>

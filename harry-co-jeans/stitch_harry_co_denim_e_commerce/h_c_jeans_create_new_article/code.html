@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>H&amp;C Admin - New Knowledge Base Article</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Montserrat:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#e6e1df",
+                        "surface-container-low": "#f7f3f2",
+                        "on-tertiary-container": "#868381",
+                        "secondary-fixed": "#e2e2e2",
+                        "inverse-primary": "#c8c6c5",
+                        "surface-container": "#f1edec",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#ddd9d8",
+                        "primary": "#000000",
+                        "surface-bright": "#fdf8f8",
+                        "surface-tint": "#5f5e5e",
+                        "tertiary": "#000000",
+                        "on-tertiary-fixed": "#1d1b1a",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "surface-container-highest": "#e5e2e1",
+                        "inverse-on-surface": "#f4f0ef",
+                        "on-background": "#1c1b1b",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#1c1b1b",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#444748",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#e5e2e1",
+                        "on-primary-container": "#858383",
+                        "inverse-surface": "#313030",
+                        "on-secondary-fixed-variant": "#454747",
+                        "on-tertiary-fixed-variant": "#484645",
+                        "outline": "#747878",
+                        "surface-variant": "#e5e2e1",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "on-primary-fixed": "#1c1b1b",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#474646",
+                        "secondary": "#5d5f5f",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#dfe0e0",
+                        "tertiary-container": "#1d1b1a",
+                        "surface-container-high": "#ebe7e6",
+                        "background": "#fdf8f8",
+                        "on-error-container": "#93000a",
+                        "surface": "#fdf8f8",
+                        "on-secondary-container": "#616363",
+                        "primary-container": "#1c1b1b",
+                        "outline-variant": "#c4c7c7",
+                        "tertiary-fixed-dim": "#cac6c3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xxl": "80px",
+                        "gutter": "24px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "container-max": "1440px",
+                        "base": "8px",
+                        "xl": "48px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Montserrat"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-xl": ["Montserrat"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "headline-md": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-xl": ["84px", { "lineHeight": "90px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for editorial feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e5e2e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c4c7c7;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased overflow-hidden flex h-screen">
+<!-- SideNavBar (Shared Component) -->
+<aside class="bg-surface h-screen w-64 fixed left-0 top-0 border-r border-outline-variant flex flex-col py-xl px-md z-20">
+<div class="mb-xxl px-sm">
+<h1 class="font-headline-md text-headline-md text-primary font-bold tracking-tighter uppercase">H&amp;C Admin</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mt-xs">Editorial Suite</p>
+</div>
+<nav class="flex-1 space-y-md">
+<a class="flex items-center gap-md px-sm py-xs text-on-surface-variant font-medium hover:text-primary transition-colors scale-98 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="payments">payments</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Sales</span>
+</a>
+<a class="flex items-center gap-md px-sm py-xs text-on-surface-variant font-medium hover:text-primary transition-colors scale-98 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Products</span>
+</a>
+<a class="flex items-center gap-md px-sm py-xs text-on-surface-variant font-medium hover:text-primary transition-colors scale-98 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="local_shipping">local_shipping</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Orders</span>
+</a>
+<a class="flex items-center gap-md px-sm py-xs text-on-surface-variant font-medium hover:text-primary transition-colors scale-98 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Inventory</span>
+</a>
+<a class="flex items-center gap-md px-sm py-xs text-on-surface-variant font-medium hover:text-primary transition-colors scale-98 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="group">group</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Customers</span>
+</a>
+<a class="flex items-center gap-md px-sm py-xs text-on-surface-variant font-medium hover:text-primary transition-colors scale-98 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="sell">sell</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Promotions</span>
+</a>
+<!-- Active State -->
+<a class="flex items-center gap-md px-sm py-xs text-primary font-bold border-b-2 border-primary pb-1 hover:text-primary transition-colors scale-98 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="auto_stories">auto_stories</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Knowledge Base</span>
+</a>
+</nav>
+<div class="mt-auto space-y-md border-t border-outline-variant pt-lg">
+<a class="flex items-center gap-md px-sm py-xs text-on-surface-variant font-medium hover:text-primary transition-colors scale-98 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="help_outline">help_outline</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Support</span>
+</a>
+<a class="flex items-center gap-md px-sm py-xs text-on-surface-variant font-medium hover:text-primary transition-colors scale-98 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="logout">logout</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="flex-1 ml-64 flex flex-col bg-background">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface w-full h-16 border-b border-outline-variant flex justify-between items-center px-lg z-10 shrink-0">
+<div class="flex items-center">
+<span class="font-headline-md text-headline-md font-bold tracking-tighter text-primary">H&amp;C JEANS</span>
+</div>
+<div class="flex items-center gap-lg">
+<button class="text-primary hover:opacity-70 transition-opacity duration-200 ease-in-out">
+<span class="material-symbols-outlined text-[24px]" data-icon="notifications">notifications</span>
+</button>
+<button class="text-primary hover:opacity-70 transition-opacity duration-200 ease-in-out">
+<span class="material-symbols-outlined text-[24px]" data-icon="settings">settings</span>
+</button>
+<button class="text-primary hover:opacity-70 transition-opacity duration-200 ease-in-out">
+<span class="material-symbols-outlined text-[24px]" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Scrollable Canvas -->
+<main class="flex-1 overflow-y-auto flex flex-col">
+<div class="flex-1 w-full max-w-container-max mx-auto px-xl py-xl flex flex-col">
+<!-- Breadcrumbs & Header -->
+<div class="mb-xl">
+<nav class="flex items-center gap-sm text-on-surface-variant font-label-sm text-label-sm uppercase tracking-widest mb-md">
+<a class="hover:text-primary transition-colors" href="#">Knowledge Base</a>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-primary font-bold">New Article</span>
+</nav>
+<h2 class="font-headline-lg text-headline-lg text-primary">Create New Article</h2>
+</div>
+<!-- Form Layout -->
+<div class="flex gap-gutter flex-col lg:flex-row pb-xxl">
+<!-- Left Column: Primary Content Form -->
+<div class="flex-1 flex flex-col gap-lg">
+<!-- Article Title -->
+<div class="flex flex-col gap-sm">
+<label class="font-label-sm text-label-sm uppercase tracking-widest text-primary" for="article-title">Article Title</label>
+<input class="w-full bg-surface border border-primary rounded-xl px-md py-md font-body-lg text-body-lg text-primary placeholder:text-on-surface-variant focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-colors rounded-xl" id="article-title" placeholder="e.g. Caring for Raw Denim" type="text"/>
+</div>
+<!-- Slug & Category Row -->
+<div class="flex flex-col md:flex-row gap-gutter">
+<div class="flex-1 flex flex-col gap-sm">
+<label class="font-label-sm text-label-sm uppercase tracking-widest text-primary" for="url-slug">URL Slug</label>
+<div class="relative flex items-center">
+<span class="absolute left-md text-on-surface-variant font-body-md">/kb/</span>
+<input class="w-full bg-surface border border-outline rounded-xl pl-[52px] pr-md py-md font-body-md text-body-md text-primary placeholder:text-on-surface-variant focus:outline-none focus:border-primary transition-colors rounded-xl" id="url-slug" placeholder="caring-for-raw-denim" type="text"/>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-sm">
+<label class="font-label-sm text-label-sm uppercase tracking-widest text-primary" for="category">Category</label>
+<div class="relative">
+<select class="w-full bg-surface border border-outline rounded-xl px-md py-md font-body-md text-body-md text-primary appearance-none focus:outline-none focus:border-primary transition-colors rounded-xl cursor-pointer" id="category">
+<option disabled="" selected="" value="">Select a category</option>
+<option value="product-care">Product Care</option>
+<option value="shipping">Shipping &amp; Returns</option>
+<option value="sizing">Sizing Guide</option>
+<option value="materials">Materials</option>
+</select>
+<span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 text-primary pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Rich Text Editor -->
+<div class="flex flex-col gap-sm mt-md flex-1">
+<label class="font-label-sm text-label-sm uppercase tracking-widest text-primary">Article Content</label>
+<div class="border border-outline flex flex-col bg-surface overflow-hidden min-h-[400px] rounded-xl flex-1">
+<!-- Fake Toolbar -->
+<div class="flex items-center border-b border-outline bg-surface-container-low px-md py-sm gap-md">
+<div class="flex gap-xs border-r border-outline pr-md">
+<select class="bg-transparent font-body-md text-body-md text-primary focus:outline-none cursor-pointer">
+<option>Paragraph</option>
+<option>Heading 1</option>
+<option>Heading 2</option>
+<option>Quote</option>
+</select>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant">
+<button class="p-xs hover:text-primary hover:bg-surface-variant rounded transition-colors"><span class="material-symbols-outlined text-[20px]" data-icon="format_bold">format_bold</span></button>
+<button class="p-xs hover:text-primary hover:bg-surface-variant rounded transition-colors"><span class="material-symbols-outlined text-[20px]" data-icon="format_italic">format_italic</span></button>
+<button class="p-xs hover:text-primary hover:bg-surface-variant rounded transition-colors"><span class="material-symbols-outlined text-[20px]" data-icon="format_underlined">format_underlined</span></button>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant border-l border-outline pl-md">
+<button class="p-xs hover:text-primary hover:bg-surface-variant rounded transition-colors"><span class="material-symbols-outlined text-[20px]" data-icon="format_list_bulleted">format_list_bulleted</span></button>
+<button class="p-xs hover:text-primary hover:bg-surface-variant rounded transition-colors"><span class="material-symbols-outlined text-[20px]" data-icon="format_list_numbered">format_list_numbered</span></button>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant border-l border-outline pl-md ml-auto">
+<button class="p-xs hover:text-primary hover:bg-surface-variant rounded transition-colors"><span class="material-symbols-outlined text-[20px]" data-icon="link">link</span></button>
+<button class="p-xs hover:text-primary hover:bg-surface-variant rounded transition-colors"><span class="material-symbols-outlined text-[20px]" data-icon="image">image</span></button>
+</div>
+</div>
+<!-- Editor Area -->
+<textarea class="w-full flex-1 p-lg font-body-md text-body-md text-primary resize-none focus:outline-none placeholder:text-on-surface-variant bg-transparent" placeholder="Start writing the article content here..."></textarea>
+</div>
+</div>
+</div>
+<!-- Right Column: Publishing Settings Sidebar -->
+<div class="w-full lg:w-80 flex flex-col gap-lg shrink-0">
+<!-- Status & Visibility Card -->
+<div class="border border-outline bg-surface p-lg rounded-xl flex flex-col gap-md">
+<h3 class="font-headline-md text-headline-md text-primary text-[18px]">Publishing</h3>
+<hr class="border-outline-variant"/>
+<div class="flex justify-between items-center mt-sm">
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary">Status</span>
+<div class="flex items-center gap-sm">
+<span class="font-body-md text-body-md text-on-surface-variant">Draft</span>
+<!-- Custom Toggle Switch -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-outline after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+<div class="flex flex-col gap-sm mt-sm">
+<label class="font-label-sm text-label-sm uppercase tracking-widest text-primary">Visibility</label>
+<div class="relative">
+<select class="w-full bg-transparent border border-outline rounded-xl px-md py-sm font-body-md text-body-md text-primary appearance-none focus:outline-none focus:border-primary transition-colors cursor-pointer">
+<option selected="" value="public">Public (All Users)</option>
+<option value="internal">Internal (Staff Only)</option>
+</select>
+<span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 text-primary pointer-events-none text-[20px]">expand_more</span>
+</div>
+</div>
+</div>
+<!-- SEO Metadata Card -->
+<div class="border border-outline bg-surface p-lg rounded-xl flex flex-col gap-md">
+<h3 class="font-headline-md text-headline-md text-primary text-[18px]">Search Engine Listing</h3>
+<hr class="border-outline-variant"/>
+<div class="flex flex-col gap-sm mt-sm">
+<label class="font-label-sm text-label-sm uppercase tracking-widest text-primary" for="meta-title">Meta Title</label>
+<input class="w-full bg-transparent border border-outline rounded-xl px-md py-sm font-body-md text-body-md text-primary placeholder:text-on-surface-variant focus:outline-none focus:border-primary transition-colors" id="meta-title" placeholder="Max 60 characters" type="text"/>
+</div>
+<div class="flex flex-col gap-sm">
+<label class="font-label-sm text-label-sm uppercase tracking-widest text-primary" for="meta-desc">Meta Description</label>
+<textarea class="w-full bg-transparent border border-outline rounded-xl px-md py-sm font-body-md text-body-md text-primary placeholder:text-on-surface-variant focus:outline-none focus:border-primary transition-colors resize-none" id="meta-desc" placeholder="Brief summary of the article..." rows="3"></textarea>
+</div>
+</div>
+<!-- Tags Card -->
+<div class="border border-outline bg-surface p-lg rounded-xl flex flex-col gap-md">
+<h3 class="font-headline-md text-headline-md text-primary text-[18px]">Organization</h3>
+<hr class="border-outline-variant"/>
+<div class="flex flex-col gap-sm mt-sm">
+<label class="font-label-sm text-label-sm uppercase tracking-widest text-primary" for="tags">Tags</label>
+<input class="w-full bg-transparent border border-outline rounded-xl px-md py-sm font-body-md text-body-md text-primary placeholder:text-on-surface-variant focus:outline-none focus:border-primary transition-colors" id="tags" placeholder="Press enter to add tags" type="text"/>
+<!-- Dummy Tag Chips -->
+<div class="flex flex-wrap gap-sm mt-sm">
+<span class="inline-flex items-center gap-xs px-sm py-xs bg-surface-container border border-outline-variant rounded font-body-md text-[14px] text-primary">
+                                        denim <button class="hover:text-error transition-colors"><span class="material-symbols-outlined text-[16px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-xs px-sm py-xs bg-surface-container border border-outline-variant rounded font-body-md text-[14px] text-primary">
+                                        care <button class="hover:text-error transition-colors"><span class="material-symbols-outlined text-[16px]">close</span></button>
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Persistent Footer Actions -->
+<footer class="sticky bottom-0 bg-surface border-t border-outline-variant py-md px-xl flex justify-end gap-md shrink-0 z-10 shadow-[0_-4px_20px_rgba(0,0,0,0.02)]">
+<button class="px-xl py-sm bg-transparent border-2 border-primary text-primary font-headline-md text-[14px] uppercase tracking-widest hover:bg-surface-container-highest transition-colors rounded-xl font-bold">
+                    Save Draft
+                </button>
+<button class="px-xl py-sm bg-primary border-2 border-primary text-on-primary font-headline-md text-[14px] uppercase tracking-widest hover:bg-inverse-surface transition-colors rounded-xl font-bold">
+                    Publish Article
+                </button>
+</footer>
+</main>
+</div>
+</body></html>

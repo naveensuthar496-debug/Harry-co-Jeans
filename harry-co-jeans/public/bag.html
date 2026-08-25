@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Shopping Bag — HARRY &amp; CO JEANS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="/assets/tailwind.config.js"></script>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased overflow-x-hidden pt-20 pb-20 md:pb-12">
+
+  <!-- Header -->
+  <header class="bg-background/95 backdrop-blur-md fixed top-0 w-full z-50 border-b border-outline-variant">
+    <div class="flex justify-between items-center px-4 md:px-8 h-20 w-full max-w-7xl mx-auto">
+      <div class="flex items-center gap-4">
+        <button aria-label="Menu" class="text-primary hover:opacity-70 p-2 rounded-lg hover:bg-surface-container transition">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+        <a href="/shop" class="text-label-sm font-semibold tracking-wider uppercase hover:text-secondary transition-colors hidden sm:inline">Shop All</a>
+      </div>
+
+      <a href="/" class="text-headline-md font-headline-md font-bold tracking-tighter text-primary uppercase text-center">
+        HARRY &amp; CO
+      </a>
+
+      <div class="flex items-center gap-2">
+        <a href="/account" class="text-primary hover:opacity-70 p-2 rounded-lg hover:bg-surface-container transition" aria-label="Account">
+          <span class="material-symbols-outlined text-[22px]">person</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Bag Main -->
+  <main class="max-w-7xl mx-auto px-4 md:px-8 pt-8">
+    <h1 class="text-2xl sm:text-3xl font-headline-lg font-bold text-primary mb-8">YOUR SHOPPING BAG</h1>
+
+    <div id="bag-loading" class="py-16 text-center text-secondary">
+      <span class="material-symbols-outlined text-[36px] animate-spin mb-2">progress_activity</span>
+      <p class="text-sm">Loading your cart items...</p>
+    </div>
+
+    <!-- Empty State -->
+    <div id="bag-empty" class="hidden py-16 text-center max-w-md mx-auto">
+      <span class="material-symbols-outlined text-[64px] text-secondary mb-3">shopping_bag</span>
+      <h2 class="text-xl font-bold text-primary mb-2">Your Bag is Empty</h2>
+      <p class="text-sm text-secondary mb-6">Discover our flagship Japanese and Italian selvedge denim collection.</p>
+      <a href="/shop" class="inline-block bg-primary text-on-primary text-xs font-bold uppercase tracking-wider px-8 py-3.5 rounded-lg hover:bg-black/80 transition">
+        EXPLORE COLLECTION
+      </a>
+    </div>
+
+    <!-- Filled Bag Grid -->
+    <div id="bag-content" class="hidden grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 pb-16">
+      <!-- Items List -->
+      <div class="lg:col-span-2 space-y-4" id="bag-items-list">
+        <!-- Dynamically rendered items -->
+      </div>
+
+      <!-- Order Summary Card -->
+      <div class="lg:col-span-1">
+        <div class="bg-surface-container-low rounded-xl p-6 border border-outline-variant/60 sticky top-28 space-y-4">
+          <h2 class="text-base font-bold text-primary uppercase tracking-wider border-b border-outline-variant/60 pb-3">ORDER SUMMARY</h2>
+
+          <!-- Coupon code input -->
+          <div>
+            <label class="block text-xs font-bold uppercase text-secondary mb-1.5">PROMO CODE</label>
+            <div class="flex gap-2">
+              <input id="coupon-input" type="text" placeholder="e.g. WELCOME10" class="w-full bg-white border border-outline-variant rounded-lg px-3 py-2 text-sm uppercase focus:outline-none focus:border-primary"/>
+              <button id="btn-apply-coupon" class="bg-primary text-on-primary text-xs font-bold uppercase px-4 py-2 rounded-lg hover:bg-black/80 transition">Apply</button>
+            </div>
+            <p id="coupon-msg" class="text-xs mt-1.5 hidden"></p>
+          </div>
+
+          <!-- Cost Breakdown -->
+          <div class="space-y-2 text-sm pt-2 border-t border-outline-variant/40">
+            <div class="flex justify-between text-secondary">
+              <span>Subtotal</span>
+              <span id="summary-subtotal" class="font-semibold text-primary">₹0</span>
+            </div>
+            <div id="summary-discount-row" class="hidden flex justify-between text-emerald-600 font-semibold">
+              <span id="summary-discount-label">Discount</span>
+              <span id="summary-discount">-₹0</span>
+            </div>
+            <div class="flex justify-between text-secondary">
+              <span>Estimated Shipping</span>
+              <span id="summary-shipping" class="font-semibold text-primary">₹0</span>
+            </div>
+            <div class="flex justify-between text-secondary text-xs">
+              <span>Included GST (12%)</span>
+              <span id="summary-tax">₹0</span>
+            </div>
+          </div>
+
+          <div class="border-t border-outline-variant pt-3 flex justify-between items-baseline">
+            <span class="text-base font-bold text-primary">Estimated Total</span>
+            <span id="summary-total" class="text-2xl font-bold text-primary">₹0</span>
+          </div>
+
+          <a id="btn-checkout" href="/checkout-address" class="block w-full bg-primary text-on-primary text-center text-xs font-bold uppercase tracking-wider py-4 rounded-lg hover:bg-black/80 transition shadow-lg">
+            PROCEED TO CHECKOUT
+          </a>
+
+          <p class="text-[11px] text-center text-secondary">Taxes and official delivery details confirmed at next step.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module">
+    import { api } from '/assets/js/core/api.js';
+    import { money } from '/assets/js/core/format.js';
+    import { toast } from '/assets/js/core/ui.js';
+    import { loadCart, updateCartItem, removeCartItem } from '/assets/js/core/store.js';
+    import { currentUser } from '/assets/js/core/auth.js';
+    import { initChrome } from '/assets/js/components/chrome.js';
+
+    await initChrome();
+
+    const loadingEl = document.getElementById('bag-loading');
+    const emptyEl = document.getElementById('bag-empty');
+    const contentEl = document.getElementById('bag-content');
+    const itemsListEl = document.getElementById('bag-items-list');
+
+    let currentCart = null;
+    let appliedDiscount = 0;
+    let appliedCode = '';
+
+    async function refreshBag() {
+      const user = await currentUser();
+      if (!user) {
+        loadingEl.classList.add('hidden');
+        emptyEl.classList.remove('hidden');
+        return;
+      }
+
+      try {
+        currentCart = await loadCart();
+        loadingEl.classList.add('hidden');
+
+        if (!currentCart || !currentCart.items || currentCart.items.length === 0) {
+          emptyEl.classList.remove('hidden');
+          contentEl.classList.add('hidden');
+          return;
+        }
+
+        emptyEl.classList.add('hidden');
+        contentEl.classList.remove('hidden');
+        renderBagItems(currentCart.items);
+        updateSummary();
+      } catch (err) {
+        loadingEl.innerHTML = `<p class="text-error">${err.message || 'Failed to load bag.'}</p>`;
+      }
+    }
+
+    function renderBagItems(items) {
+      itemsListEl.innerHTML = items.map(it => `
+        <div class="flex flex-col sm:flex-row gap-4 p-4 bg-white border border-outline-variant/60 rounded-xl shadow-sm">
+          <img src="${it.imageUrl || ''}" alt="${it.name}" class="w-24 h-32 object-cover bg-surface-container rounded-lg flex-shrink-0"/>
+          <div class="flex-1 flex flex-col justify-between">
+            <div class="flex justify-between items-start">
+              <div>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-secondary">${it.brand || 'HARRY & CO'}</span>
+                <h3 class="font-bold text-base text-primary">${it.name}</h3>
+                <p class="text-xs text-secondary mt-0.5">Size: <span class="font-semibold text-primary">${it.size}</span> &middot; Color: <span class="font-semibold text-primary">${it.color}</span></p>
+              </div>
+              <button class="btn-remove text-secondary hover:text-error transition p-1" data-id="${it.id}" aria-label="Remove item">
+                <span class="material-symbols-outlined text-[20px]">delete</span>
+              </button>
+            </div>
+
+            <div class="flex justify-between items-end mt-4">
+              <!-- Stepper -->
+              <div class="flex items-center border border-outline-variant rounded-lg bg-surface-container-lowest">
+                <button class="btn-qty-minus w-8 h-8 flex items-center justify-center hover:bg-surface-container transition" data-id="${it.id}" data-qty="${it.quantity}">
+                  <span class="material-symbols-outlined text-[16px]">remove</span>
+                </button>
+                <span class="w-8 text-center text-xs font-bold">${it.quantity}</span>
+                <button class="btn-qty-plus w-8 h-8 flex items-center justify-center hover:bg-surface-container transition" data-id="${it.id}" data-qty="${it.quantity}">
+                  <span class="material-symbols-outlined text-[16px]">add</span>
+                </button>
+              </div>
+
+              <div class="text-right">
+                <span class="text-xs text-secondary mr-1">${it.quantity} &times; ${money(it.unitPrice)}</span>
+                <span class="text-base font-bold text-primary">${money(it.unitPrice * it.quantity)}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // Wire Steppers and Removes
+      document.querySelectorAll('.btn-remove').forEach(b => {
+        b.addEventListener('click', async () => {
+          await removeCartItem(Number(b.dataset.id));
+          toast('Item removed', 'info');
+          refreshBag();
+        });
+      });
+
+      document.querySelectorAll('.btn-qty-minus').forEach(b => {
+        b.addEventListener('click', async () => {
+          const qty = Number(b.dataset.qty);
+          if (qty > 1) {
+            await updateCartItem(Number(b.dataset.id), qty - 1);
+            refreshBag();
+          }
+        });
+      });
+
+      document.querySelectorAll('.btn-qty-plus').forEach(b => {
+        b.addEventListener('click', async () => {
+          const qty = Number(b.dataset.qty);
+          await updateCartItem(Number(b.dataset.id), qty + 1);
+          refreshBag();
+        });
+      });
+    }
+
+    function updateSummary() {
+      if (!currentCart || !currentCart.items) return;
+      const subtotal = currentCart.items.reduce((s, i) => s + (i.unitPrice * i.quantity), 0);
+      const shipping = subtotal > 0 && subtotal < 2500 ? 150 : 0;
+      const total = Math.max(0, subtotal - appliedDiscount + shipping);
+      const tax = Math.round(subtotal * 0.12);
+
+      document.getElementById('summary-subtotal').textContent = money(subtotal);
+      document.getElementById('summary-shipping').textContent = shipping === 0 ? 'FREE' : money(shipping);
+      document.getElementById('summary-tax').textContent = money(tax);
+      document.getElementById('summary-total').textContent = money(total);
+
+      const discRow = document.getElementById('summary-discount-row');
+      if (appliedDiscount > 0) {
+        discRow.classList.remove('hidden');
+        document.getElementById('summary-discount-label').textContent = `Discount (${appliedCode})`;
+        document.getElementById('summary-discount').textContent = `-${money(appliedDiscount)}`;
+      } else {
+        discRow.classList.add('hidden');
+      }
+    }
+
+    // Coupon Application
+    document.getElementById('btn-apply-coupon').addEventListener('click', async () => {
+      const code = document.getElementById('coupon-input').value.trim();
+      const msgEl = document.getElementById('coupon-msg');
+      if (!code) return;
+
+      const subtotal = currentCart.items.reduce((s, i) => s + (i.unitPrice * i.quantity), 0);
+      try {
+        const res = await api.post('/coupons/apply', { code, subtotal });
+        appliedDiscount = res.discountAmount;
+        appliedCode = res.code;
+        msgEl.className = 'text-xs mt-1.5 text-emerald-600 font-semibold';
+        msgEl.textContent = `Coupon '${res.code}' applied successfully (-${money(appliedDiscount)})`;
+        msgEl.classList.remove('hidden');
+        updateSummary();
+        toast('Coupon applied!', 'success');
+      } catch (err) {
+        appliedDiscount = 0;
+        appliedCode = '';
+        msgEl.className = 'text-xs mt-1.5 text-error font-semibold';
+        msgEl.textContent = err.message || 'Invalid coupon code';
+        msgEl.classList.remove('hidden');
+        updateSummary();
+      }
+    });
+
+    refreshBag();
+  </script>
+</body>
+</html>

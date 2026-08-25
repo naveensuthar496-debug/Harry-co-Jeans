@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>H&amp;C Jeans - Create New Promotion</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Montserrat:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#c8c6c5",
+                        "on-secondary-fixed-variant": "#454747",
+                        "on-surface-variant": "#444748",
+                        "on-tertiary-container": "#868381",
+                        "on-secondary-container": "#616363",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "tertiary": "#000000",
+                        "tertiary-fixed": "#e6e1df",
+                        "surface-container-low": "#f7f3f2",
+                        "outline-variant": "#c4c7c7",
+                        "surface-bright": "#fdf8f8",
+                        "inverse-on-surface": "#f4f0ef",
+                        "on-tertiary-fixed": "#1d1b1a",
+                        "surface": "#fdf8f8",
+                        "tertiary-container": "#1d1b1a",
+                        "surface-container": "#f1edec",
+                        "on-primary-fixed": "#1c1b1b",
+                        "tertiary-fixed-dim": "#cac6c3",
+                        "surface-tint": "#5f5e5e",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#5d5f5f",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#ddd9d8",
+                        "primary-container": "#1c1b1b",
+                        "on-surface": "#1c1b1b",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e5e2e1",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed": "#e2e2e2",
+                        "primary-fixed": "#e5e2e1",
+                        "background": "#fdf8f8",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#dfe0e0",
+                        "on-error": "#ffffff",
+                        "on-background": "#1c1b1b",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "primary": "#000000",
+                        "on-tertiary-fixed-variant": "#484645",
+                        "on-primary-container": "#858383",
+                        "inverse-surface": "#313030",
+                        "surface-container-high": "#ebe7e6",
+                        "on-primary-fixed-variant": "#474646",
+                        "outline": "#747878"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1440px",
+                        "md": "16px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "sm": "8px",
+                        "xxl": "80px",
+                        "lg": "24px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "xl": "48px"
+                    },
+                    "fontFamily": {
+                        "display-xl": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Montserrat"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "headline-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "display-xl": ["84px", {"lineHeight": "90px", "letterSpacing": "-0.03em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill-icon {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="hidden md:flex fixed left-0 top-0 h-screen w-64 flex-col border-r border-outline-variant bg-surface z-40 overflow-y-auto">
+<div class="p-6 border-b border-outline-variant">
+<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tighter uppercase">H&amp;C Jeans</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Admin Console</p>
+</div>
+<div class="p-4">
+<button class="w-full bg-primary text-on-primary font-label-sm text-label-sm py-3 px-4 rounded-lg uppercase tracking-wider font-bold mb-6 hover:opacity-90 transition-opacity">
+                New Collection
+            </button>
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-lg scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-sm text-label-sm uppercase">Sales Analytics</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-lg scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard_customize">dashboard_customize</span>
+<span class="font-label-sm text-label-sm uppercase">Product Management</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-lg scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-label-sm text-label-sm uppercase">Order Management</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-lg scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-sm text-label-sm uppercase">Inventory</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-lg scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-sm text-label-sm uppercase">Customers</span>
+</a>
+</li>
+<!-- Implicitly active section for Promotions, not in original JSON but contextually appropriate if it existed, we will leave as inactive for strict adherence to JSON tabs -->
+<li>
+<a class="flex items-center gap-4 px-4 py-3 text-primary font-bold border-l-4 border-primary bg-surface-container-high rounded-r-lg scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="campaign">campaign</span>
+<span class="font-label-sm text-label-sm uppercase">Promotions</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="mt-auto p-4 border-t border-outline-variant">
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-lg scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm uppercase">Settings</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-lg scale-95 active:scale-100 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-sm text-label-sm uppercase">Logout</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="sticky top-0 right-0 z-30 flex items-center justify-between px-gutter h-16 w-full border-b border-outline-variant bg-surface">
+<div class="flex items-center gap-4 md:hidden">
+<span class="material-symbols-outlined text-primary cursor-pointer" data-icon="menu">menu</span>
+<span class="font-headline-md text-headline-md font-extrabold tracking-tight text-primary uppercase">H&amp;C Jeans</span>
+</div>
+<div class="hidden md:flex items-center flex-1">
+<!-- Empty left area for TopNavBar as search is requested on left but we have a title context -->
+</div>
+<div class="flex items-center gap-4">
+<div class="relative focus-within:ring-2 focus-within:ring-primary rounded-full hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full font-body-md text-body-md focus:outline-none w-64" placeholder="Search..." type="text"/>
+</div>
+<button class="text-secondary hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-secondary hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-surface-variant overflow-hidden border border-outline-variant">
+<img alt="Admin User" class="w-full h-full object-cover" data-alt="A small profile avatar placeholder for an admin user in a monochromatic UI, simple geometric shapes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBK4WEEwU3UBbwYy-2SF2MaTPWmbS-iRNcH6cEa9Pn_IeZdXyefqX2Wj_7L0Xnu9PuePJXAls8sRwAAGUgR7fySOPUN1OfJ3F1k3pnbvwwxWIWV_1ncyHLOj-eyPlMi0uZvSaHmcfWjuqmArnMCST24BPPO3MzpzgUcBI9Tlfu73v72syelspEGoIiO_ZfzAWX3oZa5G56YdDbQyufGxA6SIqqhbjklUdUxGeFv4NSGRMw1TmwpHNUg"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 p-gutter md:p-xl max-w-4xl mx-auto w-full">
+<!-- Header -->
+<div class="mb-xl">
+<div class="flex items-center gap-2 text-on-surface-variant mb-4">
+<a class="font-label-sm text-label-sm uppercase hover:text-primary transition-colors" href="#">Promotions</a>
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+<span class="font-label-sm text-label-sm uppercase text-primary">Create New</span>
+</div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary uppercase">Create Promotion</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Configure discount rules, eligibility, and usage limits.</p>
+</div>
+<!-- Form -->
+<form class="space-y-xl">
+<!-- General Information -->
+<section class="space-y-6">
+<h3 class="font-headline-md text-headline-md text-primary border-b border-outline-variant pb-2 uppercase tracking-tight">1. General Information</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="space-y-2">
+<label class="block font-label-sm text-label-sm text-primary uppercase">Promotion Name</label>
+<input class="w-full border border-primary rounded-lg p-4 font-body-md text-body-md bg-transparent focus:ring-2 focus:ring-primary focus:outline-none transition-all" placeholder="e.g. Summer Sale 2024" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="block font-label-sm text-label-sm text-primary uppercase">Discount Code</label>
+<div class="flex gap-2">
+<input class="flex-1 border border-primary rounded-lg p-4 font-body-md text-body-md bg-transparent uppercase focus:ring-2 focus:ring-primary focus:outline-none transition-all" placeholder="e.g. SUMMER20" type="text"/>
+<button class="bg-transparent border-2 border-primary text-primary font-label-sm text-label-sm uppercase px-6 rounded-lg hover:bg-surface-container-low transition-colors" type="button">
+                                    Generate
+                                </button>
+</div>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block font-label-sm text-label-sm text-primary uppercase">Description (Internal)</label>
+<textarea class="w-full border border-primary rounded-lg p-4 font-body-md text-body-md bg-transparent focus:ring-2 focus:ring-primary focus:outline-none transition-all" placeholder="Notes about this promotion..." rows="3"></textarea>
+</div>
+</section>
+<!-- Discount Logic -->
+<section class="space-y-6">
+<h3 class="font-headline-md text-headline-md text-primary border-b border-outline-variant pb-2 uppercase tracking-tight">2. Discount Logic</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<label class="relative flex cursor-pointer rounded-lg border border-outline-variant p-4 hover:border-primary focus-within:ring-2 focus-within:ring-primary transition-colors">
+<input checked="" class="sr-only" name="discount_type" type="radio" value="percentage"/>
+<div class="flex items-center gap-3">
+<div class="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+</div>
+<span class="font-body-md text-body-md text-primary font-semibold">Percentage Off</span>
+</div>
+</label>
+<label class="relative flex cursor-pointer rounded-lg border border-outline-variant p-4 hover:border-primary focus-within:ring-2 focus-within:ring-primary transition-colors bg-surface-container-lowest">
+<input class="sr-only" name="discount_type" type="radio" value="fixed"/>
+<div class="flex items-center gap-3">
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-transparent"></div>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant">Fixed Amount</span>
+</div>
+</label>
+<label class="relative flex cursor-pointer rounded-lg border border-outline-variant p-4 hover:border-primary focus-within:ring-2 focus-within:ring-primary transition-colors bg-surface-container-lowest">
+<input class="sr-only" name="discount_type" type="radio" value="shipping"/>
+<div class="flex items-center gap-3">
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-transparent"></div>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant">Free Shipping</span>
+</div>
+</label>
+</div>
+<div class="space-y-2 w-full md:w-1/2">
+<label class="block font-label-sm text-label-sm text-primary uppercase">Discount Value (%)</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant font-body-md">%</span>
+<input class="w-full border border-primary rounded-lg py-4 pl-10 pr-4 font-body-md text-body-md bg-transparent focus:ring-2 focus:ring-primary focus:outline-none transition-all" placeholder="20" type="number"/>
+</div>
+</div>
+</section>
+<!-- Applies To -->
+<section class="space-y-6">
+<h3 class="font-headline-md text-headline-md text-primary border-b border-outline-variant pb-2 uppercase tracking-tight">3. Applies To</h3>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-5 h-5 rounded-full border-2 border-primary flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+</div>
+<span class="font-body-md text-body-md text-primary group-hover:opacity-80 transition-opacity">Entire Order</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-transparent"></div>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-primary transition-colors">Specific Collections</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-transparent"></div>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-primary transition-colors">Specific Products</span>
+</label>
+</div>
+</section>
+<!-- Active Dates -->
+<section class="space-y-6">
+<h3 class="font-headline-md text-headline-md text-primary border-b border-outline-variant pb-2 uppercase tracking-tight">4. Active Dates</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="space-y-2">
+<label class="block font-label-sm text-label-sm text-primary uppercase">Start Date</label>
+<input class="w-full border border-primary rounded-lg p-4 font-body-md text-body-md bg-transparent focus:ring-2 focus:ring-primary focus:outline-none transition-all" type="date"/>
+</div>
+<div class="space-y-2">
+<label class="block font-label-sm text-label-sm text-primary uppercase">End Date</label>
+<input class="w-full border border-outline-variant rounded-lg p-4 font-body-md text-body-md bg-transparent focus:ring-2 focus:ring-primary focus:border-primary focus:outline-none transition-all text-on-surface-variant" type="date"/>
+</div>
+</div>
+<label class="flex items-center gap-3 cursor-pointer mt-4">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-5 h-5 border-2 border-outline-variant rounded peer-checked:border-primary peer-checked:bg-primary flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-on-primary text-[16px] opacity-0 peer-checked:opacity-100" data-icon="check">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant peer-checked:text-primary">No expiry date</span>
+</label>
+</section>
+<!-- Usage Limits -->
+<section class="space-y-6">
+<h3 class="font-headline-md text-headline-md text-primary border-b border-outline-variant pb-2 uppercase tracking-tight">5. Usage Limits</h3>
+<div class="space-y-4">
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-5 h-5 border-2 border-outline-variant rounded peer-checked:border-primary peer-checked:bg-primary flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-on-primary text-[16px] opacity-0 peer-checked:opacity-100" data-icon="check">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant peer-checked:text-primary">Limit number of times this discount can be used in total</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-5 h-5 border-2 border-outline-variant rounded peer-checked:border-primary peer-checked:bg-primary flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-on-primary text-[16px] opacity-0 peer-checked:opacity-100" data-icon="check">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant peer-checked:text-primary">Limit to one use per customer</span>
+</label>
+</div>
+</section>
+<!-- Actions -->
+<div class="pt-xl flex flex-col-reverse md:flex-row justify-end gap-4 border-t border-outline-variant mt-xxl">
+<button class="bg-transparent border-0 text-primary font-label-sm text-label-sm uppercase px-8 py-4 rounded-lg hover:underline transition-all" type="button">
+                        Cancel
+                    </button>
+<button class="bg-primary text-on-primary font-label-sm text-label-sm uppercase px-12 py-4 rounded-lg font-bold tracking-wider hover:opacity-90 transition-opacity" type="submit">
+                        Launch Promotion
+                    </button>
+</div>
+</form>
+</main>
+</div>
+</body></html>

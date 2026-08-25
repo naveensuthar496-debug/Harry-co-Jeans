@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>H&amp;C Jeans - Member Segmentation</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Montserrat:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "on-surface": "#1c1b1b",
+                            "secondary-container": "#dfe0e0",
+                            "on-tertiary-fixed-variant": "#484645",
+                            "on-secondary-container": "#616363",
+                            "primary-fixed": "#e5e2e1",
+                            "inverse-surface": "#313030",
+                            "on-primary-container": "#858383",
+                            "error": "#ba1a1a",
+                            "on-background": "#1c1b1b",
+                            "surface-container": "#f1edec",
+                            "surface-dim": "#ddd9d8",
+                            "primary-fixed-dim": "#c8c6c5",
+                            "on-primary-fixed-variant": "#474646",
+                            "secondary-fixed-dim": "#c6c6c7",
+                            "on-secondary": "#ffffff",
+                            "on-tertiary": "#ffffff",
+                            "on-secondary-fixed-variant": "#454747",
+                            "on-primary-fixed": "#1c1b1b",
+                            "error-container": "#ffdad6",
+                            "primary": "#000000",
+                            "on-error-container": "#93000a",
+                            "on-tertiary-container": "#868381",
+                            "surface-container-lowest": "#ffffff",
+                            "tertiary-container": "#1d1b1a",
+                            "surface-bright": "#fdf8f8",
+                            "tertiary-fixed": "#e6e1df",
+                            "surface-tint": "#5f5e5e",
+                            "surface-container-highest": "#e5e2e1",
+                            "on-secondary-fixed": "#1a1c1c",
+                            "on-error": "#ffffff",
+                            "surface-container-low": "#f7f3f2",
+                            "inverse-primary": "#c8c6c5",
+                            "on-tertiary-fixed": "#1d1b1a",
+                            "primary-container": "#1c1b1b",
+                            "outline": "#747878",
+                            "tertiary": "#000000",
+                            "background": "#fdf8f8",
+                            "surface-variant": "#e5e2e1",
+                            "tertiary-fixed-dim": "#cac6c3",
+                            "inverse-on-surface": "#f4f0ef",
+                            "on-primary": "#ffffff",
+                            "surface-container-high": "#ebe7e6",
+                            "surface": "#fdf8f8",
+                            "secondary": "#5d5f5f",
+                            "outline-variant": "#c4c7c7",
+                            "secondary-fixed": "#e2e2e2",
+                            "on-surface-variant": "#444748"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.125rem",
+                            "lg": "0.25rem",
+                            "xl": "0.5rem",
+                            "full": "0.75rem"
+                    },
+                    "spacing": {
+                            "lg": "24px",
+                            "xs": "4px",
+                            "xl": "48px",
+                            "xxl": "80px",
+                            "margin-mobile": "16px",
+                            "sm": "8px",
+                            "md": "16px",
+                            "base": "8px",
+                            "gutter": "24px",
+                            "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                            "headline-md": [
+                                    "Montserrat"
+                            ],
+                            "headline-lg-mobile": [
+                                    "Montserrat"
+                            ],
+                            "headline-lg": [
+                                    "Montserrat"
+                            ],
+                            "display-xl": [
+                                    "Montserrat"
+                            ],
+                            "body-lg": [
+                                    "Inter"
+                            ],
+                            "body-md": [
+                                    "Inter"
+                            ],
+                            "label-sm": [
+                                    "Inter"
+                            ]
+                    },
+                    "fontSize": {
+                            "headline-md": [
+                                    "24px",
+                                    {
+                                            "lineHeight": "32px",
+                                            "fontWeight": "600"
+                                    }
+                            ],
+                            "headline-lg-mobile": [
+                                    "32px",
+                                    {
+                                            "lineHeight": "40px",
+                                            "letterSpacing": "-0.01em",
+                                            "fontWeight": "700"
+                                    }
+                            ],
+                            "headline-lg": [
+                                    "48px",
+                                    {
+                                            "lineHeight": "56px",
+                                            "letterSpacing": "-0.02em",
+                                            "fontWeight": "700"
+                                    }
+                            ],
+                            "display-xl": [
+                                    "84px",
+                                    {
+                                            "lineHeight": "90px",
+                                            "letterSpacing": "-0.03em",
+                                            "fontWeight": "800"
+                                    }
+                            ],
+                            "body-lg": [
+                                    "18px",
+                                    {
+                                            "lineHeight": "28px",
+                                            "fontWeight": "400"
+                                    }
+                            ],
+                            "body-md": [
+                                    "16px",
+                                    {
+                                            "lineHeight": "24px",
+                                            "fontWeight": "400"
+                                    }
+                            ],
+                            "label-sm": [
+                                    "12px",
+                                    {
+                                            "lineHeight": "16px",
+                                            "letterSpacing": "0.1em",
+                                            "fontWeight": "600"
+                                    }
+                            ]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.surface');
+            color: theme('colors.on-surface');
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.outline-variant');
+            border-radius: theme('borderRadius.full');
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.outline');
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden bg-surface dark:bg-surface-container-lowest antialiased">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-full py-lg px-md w-64 fixed left-0 top-0 border-r border-outline-variant dark:border-outline bg-surface dark:bg-surface-container-lowest z-50">
+<!-- Brand Header -->
+<div class="mb-xl px-sm">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-on-surface uppercase tracking-tight">H&amp;C Jeans</h1>
+<p class="font-label-sm text-label-sm text-secondary dark:text-on-secondary-container mt-1 uppercase tracking-widest">Admin Suite</p>
+</div>
+<!-- Navigation Links -->
+<ul class="flex flex-col gap-2 flex-grow">
+<li>
+<a class="flex items-center gap-3 px-sm py-2 rounded-lg text-secondary dark:text-on-secondary-container font-medium hover:bg-surface-container-high dark:hover:bg-tertiary-container transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:scale-95 transition-transform duration-150" data-icon="payments">payments</span>
+<span class="font-body-md text-body-md">Sales</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-sm py-2 rounded-lg text-secondary dark:text-on-secondary-container font-medium hover:bg-surface-container-high dark:hover:bg-tertiary-container transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:scale-95 transition-transform duration-150" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-body-md text-body-md">Products</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-sm py-2 rounded-lg text-secondary dark:text-on-secondary-container font-medium hover:bg-surface-container-high dark:hover:bg-tertiary-container transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:scale-95 transition-transform duration-150" data-icon="local_shipping">local_shipping</span>
+<span class="font-body-md text-body-md">Orders</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-sm py-2 rounded-lg text-secondary dark:text-on-secondary-container font-medium hover:bg-surface-container-high dark:hover:bg-tertiary-container transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:scale-95 transition-transform duration-150" data-icon="inventory_2">inventory_2</span>
+<span class="font-body-md text-body-md">Inventory</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-sm py-2 rounded-lg text-primary dark:text-on-surface font-bold border-r-2 border-primary dark:border-on-surface bg-surface-container-low dark:bg-tertiary-container group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:scale-95 transition-transform duration-150" data-icon="group" data-weight="fill" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-body-md text-body-md">Customers</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-sm py-2 rounded-lg text-secondary dark:text-on-secondary-container font-medium hover:bg-surface-container-high dark:hover:bg-tertiary-container transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:scale-95 transition-transform duration-150" data-icon="sell">sell</span>
+<span class="font-body-md text-body-md">Promotions</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-sm py-2 rounded-lg text-secondary dark:text-on-secondary-container font-medium hover:bg-surface-container-high dark:hover:bg-tertiary-container transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:scale-95 transition-transform duration-150" data-icon="auto_stories">auto_stories</span>
+<span class="font-body-md text-body-md">Knowledge Base</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-sm py-2 rounded-lg text-secondary dark:text-on-secondary-container font-medium hover:bg-surface-container-high dark:hover:bg-tertiary-container transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:scale-95 transition-transform duration-150" data-icon="loyalty">loyalty</span>
+<span class="font-body-md text-body-md">Loyalty</span>
+</a>
+</li>
+</ul>
+<!-- Admin Profile Snippet -->
+<div class="mt-auto pt-lg border-t border-outline-variant dark:border-outline px-sm flex items-center gap-3">
+<img alt="Admin User Avatar" class="w-10 h-10 rounded-full object-cover grayscale" data-alt="A small, high-contrast black and white studio portrait of a confident fashion administrator, minimal styling, stark lighting, premium editorial aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZxjybPMnygLYO2ZYp_ArxFGMhOslRlQXxehRdkPWYkY95UwZyoxdUSXgbD2vO8T2av3rLYXAYCMpPANd9OTy1c5sEt03lj_tYtlyvRRUMqPVAJfGUXgsMQmd45T47WdwS3Na__tGhZroHkq8mvE6RC4y5R4RdozKaLmJu36GMaK7gSg30lGnf6tRlikpfgNGn7irMBraucyFD2J2zaXWGuyU8kM6GPIcIcS8aJEL3UrFR682XZHyO"/>
+<div>
+<p class="font-label-sm text-label-sm font-bold text-primary dark:text-on-surface">J. Doe</p>
+<p class="font-label-sm text-[10px] text-secondary">Super Admin</p>
+</div>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 ml-0 md:ml-64 flex flex-col h-full bg-background relative">
+<!-- TopNavBar (Mobile Only for Navigation, Desktop just actions) -->
+<header class="sticky top-0 w-full z-40 bg-surface dark:bg-surface-container-lowest border-b border-outline-variant dark:border-outline flex justify-between items-center px-lg md:px-xl h-20">
+<!-- Mobile Brand -->
+<div class="md:hidden flex items-center">
+<button class="mr-4 text-primary p-2">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-on-surface uppercase tracking-tighter">H&amp;C Jeans</h1>
+</div>
+<!-- Search Bar (Desktop Right aligned) -->
+<div class="hidden md:flex flex-1 justify-end mr-lg">
+<div class="relative w-64 group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors" data-icon="search">search</span>
+<input class="w-full h-10 pl-10 pr-4 bg-surface-container-low border border-outline-variant rounded-lg font-body-md text-body-md text-primary placeholder-outline focus:border-primary focus:ring-0 transition-all" placeholder="Search segments..." type="text"/>
+</div>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-4">
+<button class="text-secondary hover:text-primary hover:opacity-70 transition-opacity p-2">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-secondary hover:text-primary hover:opacity-70 transition-opacity p-2">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<button class="hidden md:block text-secondary hover:text-primary hover:opacity-70 transition-opacity p-2">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<img alt="Admin profile" class="w-8 h-8 rounded-full object-cover grayscale md:hidden" data-alt="A small, high-contrast black and white studio portrait of a confident fashion administrator, minimal styling, stark lighting, premium editorial aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjmx7LZiUSGI5hXUT66CDiqUWZ76gkUmHjWwtb8z8zhF0X1JCSh7sCBI5hEyqzKgdK6xBbwQnl91dp-9t-U8N59VHOUYcbB0Lx7u-NjZoaHB8PYIdfB4axUpugOOtMcZxRvQypsRXCmJh7E8JJPQj_P1OzgTEIos0JU14ChRZPRTr_soKajKuNDMsq3GK5j0zHCxVEyfROsANJXkE51332hkCckUG05xkjm5EjPrcuhKTa1q3XdZEQ"/>
+</div>
+</header>
+<!-- Main Scrollable Canvas -->
+<main class="flex-1 overflow-y-auto p-margin-mobile md:p-xl flex flex-col xl:flex-row gap-xl">
+<!-- Left Column: Segments List -->
+<div class="flex-1 flex flex-col max-w-5xl">
+<!-- Page Header -->
+<div class="flex flex-col sm:flex-row sm:items-end justify-between mb-lg gap-4">
+<div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold text-primary uppercase tracking-tight mb-2">Member Segmentation</h2>
+<p class="font-body-md text-body-md text-secondary">Manage and target your audience cohorts.</p>
+</div>
+<button class="bg-primary text-on-primary font-headline-md text-[14px] uppercase tracking-wider px-6 py-3 rounded-lg hover:bg-inverse-surface transition-colors whitespace-nowrap flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+                        Create New Segment
+                    </button>
+</div>
+<!-- Segments Table/List (Editorial Style) -->
+<div class="bg-surface border border-outline-variant rounded-xl overflow-hidden flex-1 flex flex-col">
+<!-- Table Header -->
+<div class="grid grid-cols-12 gap-4 p-md border-b border-outline-variant bg-surface-container-low text-label-sm font-label-sm text-secondary uppercase tracking-widest">
+<div class="col-span-5">Segment Name</div>
+<div class="col-span-3 text-right">Member Count</div>
+<div class="col-span-2 text-right">Avg. LTV</div>
+<div class="col-span-2 text-right">Last Used</div>
+</div>
+<!-- List Items -->
+<div class="flex flex-col divide-y divide-outline-variant overflow-y-auto">
+<!-- Item 1 -->
+<div class="grid grid-cols-12 gap-4 p-md items-center hover:bg-surface-container-lowest transition-colors cursor-pointer group">
+<div class="col-span-5">
+<h3 class="font-headline-md text-[16px] font-bold text-primary mb-1 group-hover:underline decoration-1 underline-offset-4">High-Spenders (Top 10%)</h3>
+<p class="font-body-md text-[13px] text-secondary truncate">Total spend &gt; $2,500 over lifetime</p>
+</div>
+<div class="col-span-3 text-right">
+<span class="font-headline-md text-[16px] font-semibold text-primary">4,205</span>
+</div>
+<div class="col-span-2 text-right">
+<span class="font-body-md text-body-md text-primary">$3,140</span>
+</div>
+<div class="col-span-2 text-right">
+<span class="font-body-md text-[13px] text-secondary">Today</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="grid grid-cols-12 gap-4 p-md items-center hover:bg-surface-container-lowest transition-colors cursor-pointer group">
+<div class="col-span-5">
+<h3 class="font-headline-md text-[16px] font-bold text-primary mb-1 group-hover:underline decoration-1 underline-offset-4">At-Risk Gold Members</h3>
+<p class="font-body-md text-[13px] text-secondary truncate">Tier: Gold, No purchase in 6+ months</p>
+</div>
+<div class="col-span-3 text-right">
+<span class="font-headline-md text-[16px] font-semibold text-primary">1,892</span>
+</div>
+<div class="col-span-2 text-right">
+<span class="font-body-md text-body-md text-primary">$850</span>
+</div>
+<div class="col-span-2 text-right">
+<span class="font-body-md text-[13px] text-secondary">3 days ago</span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="grid grid-cols-12 gap-4 p-md items-center hover:bg-surface-container-lowest transition-colors cursor-pointer group">
+<div class="col-span-5">
+<h3 class="font-headline-md text-[16px] font-bold text-primary mb-1 group-hover:underline decoration-1 underline-offset-4">New Brand Enthusiasts</h3>
+<p class="font-body-md text-[13px] text-secondary truncate">Joined &lt; 30 days, Email Open &gt; 50%</p>
+</div>
+<div class="col-span-3 text-right">
+<span class="font-headline-md text-[16px] font-semibold text-primary">8,450</span>
+</div>
+<div class="col-span-2 text-right">
+<span class="font-body-md text-body-md text-primary">$120</span>
+</div>
+<div class="col-span-2 text-right">
+<span class="font-body-md text-[13px] text-secondary">1 week ago</span>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="grid grid-cols-12 gap-4 p-md items-center hover:bg-surface-container-lowest transition-colors cursor-pointer group">
+<div class="col-span-5">
+<h3 class="font-headline-md text-[16px] font-bold text-primary mb-1 group-hover:underline decoration-1 underline-offset-4">Frequent Returners</h3>
+<p class="font-body-md text-[13px] text-secondary truncate">Return rate &gt; 40% on 3+ orders</p>
+</div>
+<div class="col-span-3 text-right">
+<span class="font-headline-md text-[16px] font-semibold text-primary">630</span>
+</div>
+<div class="col-span-2 text-right">
+<span class="font-body-md text-body-md text-primary">$450</span>
+</div>
+<div class="col-span-2 text-right">
+<span class="font-body-md text-[13px] text-secondary">1 month ago</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Filter Builder Visualization -->
+<aside class="w-full xl:w-80 flex flex-col shrink-0 border border-outline-variant bg-surface rounded-xl overflow-hidden mt-8 xl:mt-0">
+<div class="p-md border-b border-outline-variant bg-primary text-on-primary">
+<h3 class="font-headline-md text-[18px] font-bold uppercase tracking-tight flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]" data-icon="filter_alt">filter_alt</span>
+                        Segment Builder
+                    </h3>
+<p class="font-body-md text-[12px] opacity-80 mt-1">Define criteria to isolate audiences.</p>
+</div>
+<div class="p-md flex-1 overflow-y-auto bg-surface flex flex-col gap-lg">
+<!-- Section: Attributes -->
+<div>
+<h4 class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-3 border-b border-outline-variant pb-1">Attributes</h4>
+<div class="space-y-4">
+<!-- Criterion 1 -->
+<div>
+<label class="font-body-md text-[14px] font-semibold text-primary block mb-1">Loyalty Tier</label>
+<select class="w-full h-10 px-3 bg-surface border border-outline-variant rounded-lg font-body-md text-[14px] text-primary focus:border-primary focus:ring-0">
+<option>Any Tier</option>
+<option>Silver</option>
+<option>Gold</option>
+<option>Platinum</option>
+<option>Black (Invite Only)</option>
+</select>
+</div>
+<!-- Criterion 2 -->
+<div>
+<label class="font-body-md text-[14px] font-semibold text-primary block mb-1">Total Spend</label>
+<div class="flex items-center gap-2">
+<select class="h-10 px-2 bg-surface border border-outline-variant rounded-lg font-body-md text-[14px] text-primary focus:border-primary focus:ring-0 w-24">
+<option>Greater than</option>
+<option>Less than</option>
+<option>Between</option>
+</select>
+<input class="flex-1 h-10 px-3 bg-surface border border-outline-variant rounded-lg font-body-md text-[14px] text-primary placeholder-outline focus:border-primary focus:ring-0" placeholder="$0.00" type="text"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Section: Behavior -->
+<div>
+<h4 class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-3 border-b border-outline-variant pb-1">Behavior</h4>
+<div class="space-y-4">
+<!-- Criterion 3 -->
+<div>
+<label class="font-body-md text-[14px] font-semibold text-primary block mb-1">Last Purchase</label>
+<select class="w-full h-10 px-3 bg-surface border border-outline-variant rounded-lg font-body-md text-[14px] text-primary focus:border-primary focus:ring-0">
+<option>Any Time</option>
+<option>In the last 30 days</option>
+<option>In the last 90 days</option>
+<option>Over 6 months ago</option>
+</select>
+</div>
+<!-- Criterion 4 -->
+<div>
+<label class="font-body-md text-[14px] font-semibold text-primary block mb-1">Return Rate</label>
+<div class="flex items-center gap-2">
+<select class="h-10 px-2 bg-surface border border-outline-variant rounded-lg font-body-md text-[14px] text-primary focus:border-primary focus:ring-0 w-24">
+<option>Less than</option>
+<option>Greater than</option>
+</select>
+<div class="relative flex-1">
+<input class="w-full h-10 px-3 pr-8 bg-surface border border-outline-variant rounded-lg font-body-md text-[14px] text-primary placeholder-outline focus:border-primary focus:ring-0" placeholder="0" type="text"/>
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-secondary font-body-md text-[14px]">%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Add Rule Button -->
+<button class="w-full py-2 border-2 border-dashed border-outline-variant rounded-lg text-secondary font-headline-md text-[12px] uppercase tracking-wider hover:border-primary hover:text-primary transition-colors flex items-center justify-center gap-2 mt-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="add_circle">add_circle</span>
+                        Add Rule
+                    </button>
+</div>
+<!-- Sidebar Footer Actions -->
+<div class="p-md border-t border-outline-variant bg-surface-container-low flex flex-col gap-2">
+<button class="w-full bg-primary text-on-primary font-headline-md text-[14px] uppercase tracking-wider px-4 py-3 rounded-lg hover:bg-inverse-surface transition-colors">
+                        Preview Audience
+                    </button>
+<button class="w-full bg-transparent text-primary font-headline-md text-[14px] uppercase tracking-wider px-4 py-3 border border-primary rounded-lg hover:bg-surface-container-high transition-colors">
+                        Save Segment
+                    </button>
+</div>
+</aside>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Customer Management — HARRY &amp; CO Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="/assets/tailwind.config.js"></script>
+</head>
+<body class="bg-surface-container-lowest text-on-background font-body-md antialiased flex h-screen overflow-hidden">
+
+  <div class="flex-1 flex flex-col h-full overflow-hidden">
+    <header class="h-16 border-b border-outline-variant bg-background px-6 flex items-center justify-between shrink-0">
+      <div class="flex items-center gap-3">
+        <button class="md:hidden text-primary p-2 hover:bg-surface-container rounded-lg">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+        <h1 class="text-base font-bold text-primary uppercase tracking-tight">COMMUNITY &middot; CUSTOMER DIRECTORY</h1>
+      </div>
+      <a href="/admin/dashboard" class="text-xs font-bold uppercase tracking-wider text-primary underline">&larr; Dashboard</a>
+    </header>
+
+    <main class="flex-1 overflow-y-auto p-6 md:p-8 space-y-6">
+      <div>
+        <h2 class="text-2xl font-headline-lg font-bold text-primary">REGISTERED USERS &amp; GUILD MEMBERS</h2>
+        <p class="text-xs text-secondary">Customer accounts, lifetime value, and loyalty balances.</p>
+      </div>
+
+      <div class="bg-white border border-outline-variant rounded-2xl shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs text-left">
+            <thead class="bg-surface-container font-bold text-primary uppercase border-b border-outline-variant">
+              <tr>
+                <th class="p-4">Customer Name</th>
+                <th class="p-4">Email</th>
+                <th class="p-4">Phone</th>
+                <th class="p-4">Role</th>
+                <th class="p-4">Loyalty Points</th>
+                <th class="p-4">Orders Placed</th>
+                <th class="p-4">Total Spent</th>
+              </tr>
+            </thead>
+            <tbody id="customers-tbody" class="divide-y divide-outline-variant/40">
+              <tr><td colspan="7" class="p-8 text-center text-secondary">Loading customer records...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module">
+    import { api } from '/assets/js/core/api.js';
+    import { money } from '/assets/js/core/format.js';
+    import { initAdminChrome } from '/assets/js/components/admin-nav.js';
+
+    const user = await initAdminChrome('customers');
+    if (user) loadCustomers();
+
+    async function loadCustomers() {
+      const tbody = document.getElementById('customers-tbody');
+      try {
+        const res = await api.get('/admin/customers');
+        const list = res.customers || [];
+
+        if (!list.length) {
+          tbody.innerHTML = '<tr><td colspan="7" class="p-8 text-center text-secondary">No registered customers.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = list.map(c => `
+          <tr class="hover:bg-surface-container-low transition">
+            <td class="p-4 font-bold text-primary">${c.fullName || 'Anonymous'}</td>
+            <td class="p-4">${c.email}</td>
+            <td class="p-4 text-secondary">${c.phone || 'N/A'}</td>
+            <td class="p-4"><span class="px-2 py-0.5 rounded text-[9px] font-bold uppercase ${c.role === 'admin' ? 'bg-black text-white' : 'bg-surface-container-high text-primary'}">${c.role}</span></td>
+            <td class="p-4 font-bold text-primary">${c.loyaltyPoints || 0} pts</td>
+            <td class="p-4 font-semibold">${c.orderCount || 0} orders</td>
+            <td class="p-4 font-bold text-primary">${money(c.totalSpent || 0)}</td>
+          </tr>
+        `).join('');
+      } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="7" class="p-8 text-center text-error">${err.message || 'Failed to load customers.'}</td></tr>`;
+      }
+    }
+  </script>
+</body>
+</html>

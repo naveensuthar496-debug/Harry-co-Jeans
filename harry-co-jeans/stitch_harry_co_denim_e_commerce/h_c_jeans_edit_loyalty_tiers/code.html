@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>H&amp;C Jeans - Tier Editing</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Design System Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#e5e2e1",
+                    "surface-container-low": "#f7f3f2",
+                    "primary": "#000000",
+                    "on-secondary": "#ffffff",
+                    "on-surface-variant": "#444748",
+                    "outline-variant": "#c4c7c7",
+                    "on-background": "#1c1b1b",
+                    "on-primary-fixed-variant": "#474646",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-container": "#616363",
+                    "on-secondary-fixed-variant": "#454747",
+                    "primary-fixed-dim": "#c8c6c5",
+                    "tertiary-fixed": "#e6e1df",
+                    "tertiary-container": "#1d1b1a",
+                    "surface-bright": "#fdf8f8",
+                    "primary-fixed": "#e5e2e1",
+                    "secondary-fixed": "#e2e2e2",
+                    "inverse-primary": "#c8c6c5",
+                    "on-tertiary-fixed": "#1d1b1a",
+                    "error": "#ba1a1a",
+                    "surface-container-high": "#ebe7e6",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-container": "#868381",
+                    "inverse-on-surface": "#f4f0ef",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "secondary-fixed-dim": "#c6c6c7",
+                    "on-tertiary-fixed-variant": "#484645",
+                    "outline": "#747878",
+                    "on-primary": "#ffffff",
+                    "surface-container-highest": "#e5e2e1",
+                    "inverse-surface": "#313030",
+                    "surface": "#fdf8f8",
+                    "secondary-container": "#dfe0e0",
+                    "tertiary-fixed-dim": "#cac6c3",
+                    "secondary": "#5d5f5f",
+                    "on-surface": "#1c1b1b",
+                    "on-primary-fixed": "#1c1b1b",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#f1edec",
+                    "background": "#fdf8f8",
+                    "primary-container": "#1c1b1b",
+                    "tertiary": "#000000",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-container": "#858383",
+                    "surface-tint": "#5f5e5e",
+                    "surface-dim": "#ddd9d8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "xxl": "80px",
+                    "base": "8px",
+                    "gutter": "24px",
+                    "xs": "4px",
+                    "md": "16px",
+                    "sm": "8px",
+                    "lg": "24px",
+                    "xl": "48px",
+                    "container-max": "1440px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter", "sans-serif"],
+                    "headline-md": ["Montserrat", "sans-serif"],
+                    "headline-lg": ["Montserrat", "sans-serif"],
+                    "display-xl": ["Montserrat", "sans-serif"],
+                    "label-sm": ["Inter", "sans-serif"],
+                    "body-md": ["Inter", "sans-serif"],
+                    "headline-lg-mobile": ["Montserrat", "sans-serif"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-xl": ["84px", {"lineHeight": "90px", "letterSpacing": "-0.03em", "fontWeight": "800"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Montserrat:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for an editorial feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fdf8f8;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c4c7c7;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #747878;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased selection:bg-primary selection:text-on-primary">
+<!-- Shared Component: SideNavBar -->
+<aside class="bg-surface fixed h-full w-64 left-0 top-0 border-r border-primary flex flex-col py-lg px-md z-40">
+<!-- Brand / Header -->
+<div class="mb-xxl px-sm">
+<h1 class="font-headline-md text-headline-md font-bold text-primary uppercase tracking-tighter">H&amp;C Jeans</h1>
+<p class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mt-xs">Editorial Admin</p>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex-1 space-y-sm overflow-y-auto">
+<!-- Inactive Tab -->
+<a class="flex items-center px-sm py-md text-secondary font-medium hover:bg-surface-container-high transition-colors duration-200 scale-98 active:opacity-80 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined mr-md">payments</span>
+<span class="font-body-md text-body-md">Sales</span>
+</a>
+<!-- Inactive Tab -->
+<a class="flex items-center px-sm py-md text-secondary font-medium hover:bg-surface-container-high transition-colors duration-200 scale-98 active:opacity-80 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined mr-md">shopping_bag</span>
+<span class="font-body-md text-body-md">Products</span>
+</a>
+<!-- Inactive Tab -->
+<a class="flex items-center px-sm py-md text-secondary font-medium hover:bg-surface-container-high transition-colors duration-200 scale-98 active:opacity-80 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined mr-md">local_shipping</span>
+<span class="font-body-md text-body-md">Orders</span>
+</a>
+<!-- Inactive Tab -->
+<a class="flex items-center px-sm py-md text-secondary font-medium hover:bg-surface-container-high transition-colors duration-200 scale-98 active:opacity-80 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined mr-md">inventory_2</span>
+<span class="font-body-md text-body-md">Inventory</span>
+</a>
+<!-- Inactive Tab -->
+<a class="flex items-center px-sm py-md text-secondary font-medium hover:bg-surface-container-high transition-colors duration-200 scale-98 active:opacity-80 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined mr-md">group</span>
+<span class="font-body-md text-body-md">Customers</span>
+</a>
+<!-- Inactive Tab -->
+<a class="flex items-center px-sm py-md text-secondary font-medium hover:bg-surface-container-high transition-colors duration-200 scale-98 active:opacity-80 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined mr-md">sell</span>
+<span class="font-body-md text-body-md">Promotions</span>
+</a>
+<!-- Inactive Tab -->
+<a class="flex items-center px-sm py-md text-secondary font-medium hover:bg-surface-container-high transition-colors duration-200 scale-98 active:opacity-80 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined mr-md">menu_book</span>
+<span class="font-body-md text-body-md">Knowledge Base</span>
+</a>
+<!-- ACTIVE Tab: Loyalty (based on screen context) -->
+<a class="flex items-center px-sm py-md text-primary font-bold border-l-4 border-primary bg-secondary-container transition-all scale-98 active:opacity-80 rounded-r-lg" href="#">
+<span class="material-symbols-outlined mr-md" style="font-variation-settings: 'FILL' 1;">loyalty</span>
+<span class="font-body-md text-body-md">Loyalty</span>
+</a>
+</nav>
+<!-- User Profile (Bottom) -->
+<div class="mt-auto pt-lg border-t border-outline-variant flex items-center px-sm">
+<img alt="Admin Portrait" class="w-10 h-10 rounded-full object-cover grayscale border border-primary" data-alt="A stark, high-contrast black and white portrait of a fashionable young professional with striking features, wearing a dark minimal turtleneck, set against a pure white background in a studio setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjxxjlYqCqvSdK60Ud4NC5-UH7pmBRfclPg4bHCFIWTqmfYrl8GhcU3axN4SCzQqbxSFglbkTHD7Nm036JcnqwqQR8SgnI0d1tvT4yeQXsHagK1Ck6nXUiV7vSF69jH1UjMx5VbEG1aLsgL2q9B6P7p-EeETUyFEcl_KzwunYcDsoi5q6DV8DV7buzw7GdI6Iy7Xa4NeP9GJeH1_6st7nXEc5tEHSDRMH0JGtBpYelcbuWdUKheyTD"/>
+<div class="ml-sm">
+<p class="font-label-sm text-label-sm font-bold text-primary">System Admin</p>
+<p class="font-label-sm text-label-sm text-secondary">Logged in</p>
+</div>
+</div>
+</aside>
+<!-- Shared Component: TopNavBar -->
+<header class="bg-surface fixed top-0 right-0 w-[calc(100%-16rem)] h-16 border-b border-primary flex justify-between items-center px-lg z-30 ml-64">
+<!-- Search Bar Area -->
+<div class="flex-1 flex justify-end items-center mr-lg">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-sm top-1/2 transform -translate-y-1/2 text-secondary">search</span>
+<input class="w-full bg-transparent border-b border-outline-variant py-sm pl-xl pr-sm font-body-md text-body-md focus:outline-none focus:border-primary transition-colors placeholder-secondary" placeholder="Search..." type="text"/>
+</div>
+</div>
+<!-- Trailing Icons -->
+<div class="flex items-center space-x-md">
+<button class="text-secondary hover:text-primary transition-opacity duration-200 active:opacity-70">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-secondary hover:text-primary transition-opacity duration-200 active:opacity-70">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-px h-6 bg-outline-variant mx-sm"></div>
+<img alt="Admin User Profile" class="w-8 h-8 rounded-full object-cover grayscale border border-primary" data-alt="A close-up, high-fashion editorial style portrait of a model's eye and brow, shot in stark black and white lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA930Orq3kGqvrV9QyXT2ueJa296IEYna5nE8R-6Fa6iqQLZj1AEm_CR7PPe0iJ8WaJ-7FZnDE-fsznhfl8HoBnKcWGfdbnuQOsW0FIgDuVgqaZIYMpEuFb1bvCwldbpWmHoDWZQZB-A_XYFI6z7uUFKuQ7n36Yshmp_WrUcUEhMkLp_ACmphd5UzQDHkQWGWj-sYC7w-2VraF831p5r5-5KdGcY9e-74s4nTSV4MpLq1ve-6MOYZoC"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 mt-16 p-lg md:p-xxl bg-background min-h-screen pb-32">
+<div class="max-w-container-max mx-auto">
+<!-- Header Section -->
+<div class="mb-xxl">
+<a class="inline-flex items-center text-secondary hover:text-primary font-label-sm text-label-sm uppercase tracking-widest mb-md transition-colors" href="#">
+<span class="material-symbols-outlined text-sm mr-xs">arrow_back</span>
+                    Back to Loyalty Hub
+                </a>
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary uppercase tracking-tighter">Edit Loyalty Tiers</h1>
+<p class="font-body-lg text-body-lg text-secondary mt-sm max-w-2xl">Configure the thresholds, visual identifiers, and exclusive benefits for each tier in your customer loyalty program. Changes apply immediately to active accounts.</p>
+</div>
+<!-- Layout Grid: 8 col / 4 col -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Tier Cards -->
+<div class="lg:col-span-8 space-y-xl">
+<!-- TIER 1: BRONZE -->
+<section class="bg-surface border border-primary p-lg md:p-xl relative group">
+<!-- Decorative Anchor -->
+<div class="absolute top-0 left-0 w-2 h-full bg-surface-variant border-r border-primary"></div>
+<header class="flex justify-between items-center mb-lg pl-sm">
+<h2 class="font-headline-md text-headline-md font-bold text-primary uppercase">Tier 1: Base</h2>
+<span class="px-sm py-xs border border-primary rounded-lg font-label-sm text-label-sm uppercase tracking-widest bg-background">Active</span>
+</header>
+<div class="space-y-lg pl-sm">
+<!-- Basic Info Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm uppercase tracking-widest text-secondary block">Tier Name</label>
+<input class="w-full bg-background border border-primary rounded-lg px-md py-sm font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-primary transition-shadow" type="text" value="Bronze"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm uppercase tracking-widest text-secondary block">Min. Points Threshold</label>
+<input class="w-full bg-surface-variant border border-primary rounded-lg px-md py-sm font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-primary transition-shadow text-secondary cursor-not-allowed" readonly="" type="number" value="0"/>
+<p class="font-label-sm text-label-sm text-outline mt-1">Base tier always starts at 0.</p>
+</div>
+</div>
+<hr class="border-outline-variant"/>
+<!-- Benefits Section -->
+<div class="space-y-md">
+<label class="font-label-sm text-label-sm uppercase tracking-widest text-primary block">Included Benefits</label>
+<div class="space-y-sm">
+<!-- Benefit Item -->
+<div class="flex items-center gap-sm">
+<input class="flex-1 bg-background border border-outline-variant rounded-lg px-md py-sm font-body-md text-body-md focus:border-primary focus:outline-none transition-colors" type="text" value="Access to seasonal sales"/>
+<button class="p-sm text-secondary hover:text-error transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Benefit Item -->
+<div class="flex items-center gap-sm">
+<input class="flex-1 bg-background border border-outline-variant rounded-lg px-md py-sm font-body-md text-body-md focus:border-primary focus:outline-none transition-colors" type="text" value="1 Point per $1 spent"/>
+<button class="p-sm text-secondary hover:text-error transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+<button class="font-label-sm text-label-sm uppercase tracking-widest text-primary hover:text-secondary inline-flex items-center mt-sm transition-colors border-b border-transparent hover:border-primary pb-xs">
+<span class="material-symbols-outlined text-sm mr-xs">add</span>
+                                    Add Benefit
+                                </button>
+</div>
+</div>
+</section>
+<!-- TIER 2: SILVER -->
+<section class="bg-surface border border-primary p-lg md:p-xl relative group">
+<div class="absolute top-0 left-0 w-2 h-full bg-secondary-fixed border-r border-primary"></div>
+<header class="flex justify-between items-center mb-lg pl-sm">
+<h2 class="font-headline-md text-headline-md font-bold text-primary uppercase">Tier 2: Mid</h2>
+<span class="px-sm py-xs border border-primary rounded-lg font-label-sm text-label-sm uppercase tracking-widest bg-background">Active</span>
+</header>
+<div class="space-y-lg pl-sm">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm uppercase tracking-widest text-secondary block">Tier Name</label>
+<input class="w-full bg-background border border-primary rounded-lg px-md py-sm font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-primary transition-shadow" type="text" value="Silver"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm uppercase tracking-widest text-secondary block">Min. Points Threshold</label>
+<input class="w-full bg-background border border-primary rounded-lg px-md py-sm font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-primary transition-shadow" type="number" value="1500"/>
+</div>
+</div>
+<hr class="border-outline-variant"/>
+<div class="space-y-md">
+<label class="font-label-sm text-label-sm uppercase tracking-widest text-primary block">Included Benefits</label>
+<div class="space-y-sm">
+<div class="flex items-center gap-sm">
+<input class="flex-1 bg-background border border-outline-variant rounded-lg px-md py-sm font-body-md text-body-md focus:border-primary focus:outline-none transition-colors" type="text" value="Early access to seasonal sales (24hrs)"/>
+<button class="p-sm text-secondary hover:text-error transition-colors"><span class="material-symbols-outlined">close</span></button>
+</div>
+<div class="flex items-center gap-sm">
+<input class="flex-1 bg-background border border-outline-variant rounded-lg px-md py-sm font-body-md text-body-md focus:border-primary focus:outline-none transition-colors" type="text" value="1.5 Points per $1 spent"/>
+<button class="p-sm text-secondary hover:text-error transition-colors"><span class="material-symbols-outlined">close</span></button>
+</div>
+<div class="flex items-center gap-sm">
+<input class="flex-1 bg-background border border-outline-variant rounded-lg px-md py-sm font-body-md text-body-md focus:border-primary focus:outline-none transition-colors" type="text" value="Free Standard Shipping"/>
+<button class="p-sm text-secondary hover:text-error transition-colors"><span class="material-symbols-outlined">close</span></button>
+</div>
+</div>
+<button class="font-label-sm text-label-sm uppercase tracking-widest text-primary hover:text-secondary inline-flex items-center mt-sm transition-colors border-b border-transparent hover:border-primary pb-xs">
+<span class="material-symbols-outlined text-sm mr-xs">add</span> Add Benefit
+                                </button>
+</div>
+</div>
+</section>
+<!-- Add New Tier Button -->
+<button class="w-full border-2 border-dashed border-outline-variant hover:border-primary bg-transparent py-xl flex flex-col items-center justify-center text-secondary hover:text-primary transition-colors group">
+<div class="w-12 h-12 rounded-full border border-current flex items-center justify-center mb-sm group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</div>
+<span class="font-label-sm text-label-sm uppercase tracking-widest">Create New Tier</span>
+</button>
+</div>
+<!-- Right Column: Settings Sidebar -->
+<div class="lg:col-span-4">
+<div class="sticky top-24 border border-primary bg-surface p-lg">
+<h3 class="font-headline-md text-headline-md font-bold text-primary uppercase mb-lg border-b border-primary pb-md">Global Rules</h3>
+<div class="space-y-lg">
+<!-- Rule 1 -->
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm uppercase tracking-widest text-secondary block">Calculation Period</label>
+<select class="w-full bg-background border border-primary rounded-lg px-md py-sm font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-primary appearance-none cursor-pointer">
+<option>Rolling 12 Months</option>
+<option>Calendar Year</option>
+<option>Lifetime (No Reset)</option>
+</select>
+</div>
+<!-- Rule 2 -->
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm uppercase tracking-widest text-secondary block">Downgrade Buffer</label>
+<div class="flex items-center">
+<input class="w-20 bg-background border border-primary border-r-0 rounded-l-lg px-md py-sm font-body-md text-body-md focus:outline-none text-center" type="number" value="30"/>
+<div class="bg-surface-variant border border-primary px-md py-sm rounded-r-lg font-body-md text-body-md text-secondary select-none">Days</div>
+</div>
+<p class="font-label-sm text-label-sm text-outline mt-1 leading-tight">Grace period before a customer loses their tier status after dropping below the threshold.</p>
+</div>
+<hr class="border-outline-variant"/>
+<!-- Visuals -->
+<div class="space-y-sm">
+<label class="font-label-sm text-label-sm uppercase tracking-widest text-secondary block">Brand Identifier Palette</label>
+<p class="font-label-sm text-label-sm text-outline mb-sm leading-tight">Colors used to represent tiers on the customer-facing dashboard.</p>
+<div class="flex gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-variant border border-primary cursor-pointer hover:scale-110 transition-transform"></div>
+<div class="w-8 h-8 rounded-full bg-secondary-fixed border border-primary cursor-pointer hover:scale-110 transition-transform flex items-center justify-center"><span class="material-symbols-outlined text-white text-xs">check</span></div>
+<div class="w-8 h-8 rounded-full bg-primary border border-primary cursor-pointer hover:scale-110 transition-transform"></div>
+<div class="w-8 h-8 rounded-full bg-outline-variant border border-primary cursor-pointer hover:scale-110 transition-transform"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Persistent Action Footer -->
+<div class="fixed bottom-0 left-64 right-0 h-20 bg-surface border-t border-primary flex items-center justify-end px-lg md:px-xxl space-x-md z-40 drop-shadow-md">
+<button class="px-lg py-sm font-label-sm text-label-sm uppercase tracking-widest text-primary border border-transparent hover:border-primary transition-colors rounded-lg">
+            Discard Changes
+        </button>
+<button class="px-xl py-sm bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-widest rounded-lg hover:opacity-90 active:scale-95 transition-all shadow-sm">
+            Save Configuration
+        </button>
+</div>
+</body></html>

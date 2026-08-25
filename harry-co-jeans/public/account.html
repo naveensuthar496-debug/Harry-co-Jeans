@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>My Account — HARRY &amp; CO JEANS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="/assets/tailwind.config.js"></script>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased pt-20 pb-20 md:pb-12">
+
+  <!-- Header -->
+  <header class="bg-background/95 backdrop-blur-md fixed top-0 w-full z-50 border-b border-outline-variant">
+    <div class="flex justify-between items-center px-4 md:px-8 h-20 w-full max-w-7xl mx-auto">
+      <div class="flex items-center gap-4">
+        <button aria-label="Menu" class="text-primary hover:opacity-70 p-2 rounded-lg hover:bg-surface-container transition">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+        <a href="/shop" class="text-label-sm font-semibold tracking-wider uppercase hover:text-secondary hidden sm:inline">Shop All</a>
+      </div>
+
+      <a href="/" class="text-headline-md font-headline-md font-bold tracking-tighter text-primary uppercase text-center">
+        HARRY &amp; CO
+      </a>
+
+      <div class="flex items-center gap-2">
+        <button id="btn-logout-header" class="text-xs font-bold text-secondary hover:text-error uppercase">Log Out</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 pt-8">
+    <div class="flex justify-between items-end mb-8 border-b border-outline-variant pb-4">
+      <div>
+        <p class="text-xs uppercase tracking-widest font-bold text-secondary mb-1">MEMBER ATELIER</p>
+        <h1 class="text-2xl sm:text-3xl font-headline-lg font-bold text-primary">MY ACCOUNT</h1>
+      </div>
+      <a href="/shop" class="text-xs font-bold uppercase tracking-wider text-primary underline">Browse Denim &rarr;</a>
+    </div>
+
+    <!-- Account Details & Loyalty Banner -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <!-- Profile Card -->
+      <div class="bg-white border border-outline-variant rounded-2xl p-6 shadow-sm space-y-2">
+        <span class="text-xs font-bold uppercase tracking-wider text-secondary">MEMBER PROFILE</span>
+        <h2 id="user-name" class="text-lg font-bold text-primary">Loading...</h2>
+        <p id="user-email" class="text-xs text-secondary"></p>
+        <p id="user-phone" class="text-xs text-secondary"></p>
+        <div class="pt-4">
+          <span id="user-role-badge" class="inline-block text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-surface-container-high text-primary">Customer</span>
+        </div>
+      </div>
+
+      <!-- Loyalty Guild Card -->
+      <div class="bg-black text-white rounded-2xl p-6 shadow-md space-y-2 flex flex-col justify-between">
+        <div>
+          <span class="text-[10px] uppercase tracking-widest font-bold text-white/70">SELVEDGE GUILD TIER</span>
+          <h2 id="loyalty-tier" class="text-lg font-bold text-white mt-1">Indigo Member</h2>
+          <p class="text-xs text-white/70 mt-1">Earn points on every pair for custom hemming &amp; drops.</p>
+        </div>
+        <div class="pt-4 border-t border-white/20 flex justify-between items-baseline">
+          <span class="text-xs text-white/70">Balance</span>
+          <span id="loyalty-points" class="text-2xl font-bold text-white">0 pts</span>
+        </div>
+      </div>
+
+      <!-- Quick Shortcuts Card -->
+      <div class="bg-surface-container-low border border-outline-variant rounded-2xl p-6 space-y-3 flex flex-col justify-between">
+        <span class="text-xs font-bold uppercase tracking-wider text-secondary">QUICK ACTIONS</span>
+        <div class="space-y-2 text-xs font-bold">
+          <a href="/order-history" class="flex items-center justify-between p-2.5 bg-white rounded-lg border border-outline-variant/60 hover:border-primary transition">
+            <span>Order History</span>
+            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </a>
+          <a href="/addresses" class="flex items-center justify-between p-2.5 bg-white rounded-lg border border-outline-variant/60 hover:border-primary transition">
+            <span>Saved Addresses</span>
+            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </a>
+          <a id="admin-link" href="/admin/dashboard" class="hidden flex items-center justify-between p-2.5 bg-primary text-on-primary rounded-lg shadow transition">
+            <span>Admin Console</span>
+            <span class="material-symbols-outlined text-[16px]">admin_panel_settings</span>
+          </a>
+        </div>
+        <button id="btn-logout-card" class="w-full text-left text-xs font-bold text-error hover:underline pt-2">
+          Log Out of Account
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <script type="module">
+    import { api } from '/assets/js/core/api.js';
+    import { requireCustomer, logout, isStaff } from '/assets/js/core/auth.js';
+    import { initChrome } from '/assets/js/components/chrome.js';
+
+    await initChrome();
+    const user = await requireCustomer();
+    if (user) {
+      document.getElementById('user-name').textContent = user.fullName || 'Valued Member';
+      document.getElementById('user-email').textContent = user.email;
+      document.getElementById('user-phone').textContent = user.phone ? `Phone: ${user.phone}` : 'No phone linked';
+      document.getElementById('loyalty-points').textContent = `${user.loyaltyPoints || 0} pts`;
+      document.getElementById('user-role-badge').textContent = `Role: ${user.role}`;
+
+      if (isStaff(user)) {
+        document.getElementById('admin-link').classList.remove('hidden');
+      }
+
+      // Logout buttons
+      const doLogout = async () => {
+        await logout();
+        location.href = '/login';
+      };
+      document.getElementById('btn-logout-header').addEventListener('click', doLogout);
+      document.getElementById('btn-logout-card').addEventListener('click', doLogout);
+    }
+  </script>
+</body>
+</html>
