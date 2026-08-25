@@ -38,6 +38,12 @@ server/data/*.db
 */.vscode/
 .idea/
 
+# Local Notes & Diagrams (Private / Local only)
+ARCHITECTURE_DIAGRAM.md
+SUMMARY_NOTE.md
+SHORTNOTE.md
+*.local.md
+
 # OS files
 .DS_Store
 Thumbs.db
