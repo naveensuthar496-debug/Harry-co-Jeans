@@ -30,6 +30,14 @@ yarn-error.log*
 *.sqlite
 server/data/*.db
 
+# Tool configs & IDE
+.claude/
+*/.claude/
+.claude.json
+.vscode/
+*/.vscode/
+.idea/
+
 # OS files
 .DS_Store
 Thumbs.db
