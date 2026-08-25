@@ -1,14 +1,31 @@
 {
-  "name": "harry-co-jeans-root",
+  "name": "harry-co-jeans",
   "version": "1.0.0",
   "private": true,
-  "description": "Root workspace proxy for HARRY & CO JEANS",
+  "description": "HARRY & CO JEANS — artisanal denim e-commerce (storefront + admin) built on React, Next.js, Tailwind CSS, and MongoDB Atlas.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
-    "start": "npm --prefix harry-co-jeans start",
-    "dev": "npm --prefix harry-co-jeans run dev",
-    "build": "npm --prefix harry-co-jeans run build",
-    "seed": "npm --prefix harry-co-jeans run seed",
-    "reset": "npm --prefix harry-co-jeans run reset",
-    "test": "npm --prefix harry-co-jeans test"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "autoprefixer": "^10.5.4",
+    "bcryptjs": "^2.4.3",
+    "clsx": "^2.1.1",
+    "dotenv": "^16.4.7",
+    "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^1.34.0",
+    "mongodb": "^7.6.0",
+    "next": "^16.3.3",
+    "postcss": "^8.5.26",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "tailwind-merge": "^3.6.0",
+    "tailwindcss": "^4.3.3"
   }
 }
