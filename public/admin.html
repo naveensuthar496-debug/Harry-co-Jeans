@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HARRY & CO | Operations Console</title>
+  <link rel="stylesheet" href="/css/admin.css">
+  <script>
+    if (!localStorage.getItem('hc_admin_token')) {
+      window.location.replace('/login?tab=admin');
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Admin Login Screen (Shown when unauthenticated) -->
+  <div id="admin-login-view" class="admin-login-screen">
+    <div class="login-card">
+      <div class="login-card-header">
+        <div class="login-logo">HARRY & CO <span>ATELIER</span></div>
+        <div class="login-subtitle">Master Tailor & Operations Console</div>
+      </div>
+
+      <form onsubmit="handleAdminLogin(event)">
+        <div class="admin-form-group">
+          <label class="admin-form-label">Administrative Username</label>
+          <input type="text" id="admin-username-input" required class="admin-input" placeholder="admin" value="admin">
+        </div>
+
+        <div class="admin-form-group">
+          <label class="admin-form-label">Security Password</label>
+          <input type="password" id="admin-password-input" required class="admin-input" placeholder="••••••••" value="admin123">
+        </div>
+
+        <button type="submit" id="admin-login-submit-btn" class="btn-admin btn-admin-primary" style="width:100%; justify-content:center; padding:0.85rem; margin-top:1rem; font-size:0.9rem;">
+          Authenticate & Enter Atelier &rarr;
+        </button>
+
+        <div style="text-align:center; margin-top:1.5rem; font-size:0.75rem; color:var(--admin-text-muted);">
+          Default credentials: <code>admin</code> / <code>admin123</code>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Authenticated Administrative Layout -->
+  <div id="admin-app-layout" class="admin-layout" style="display:none;">
+    <!-- Collapsible Responsive Sidebar -->
+    <aside id="admin-sidebar" class="admin-sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-brand">HARRY &amp; CO <span>ATELIER</span></div>
+        <button class="mobile-sidebar-toggle" style="color:#fff;" onclick="toggleMobileSidebar()">&times;</button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="sidebar-link active" data-tab="dashboard" onclick="switchTab('dashboard')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          Dashboard &amp; KPIs
+        </a>
+
+        <a class="sidebar-link" data-tab="products" onclick="switchTab('products')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          Denim Products &amp; Stock
+        </a>
+
+        <a class="sidebar-link" data-tab="orders" onclick="switchTab('orders')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+          Customer Orders
+        </a>
+
+        <a class="sidebar-link" data-tab="payments" onclick="switchTab('payments')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+          Payment Settings (COD)
+        </a>
+
+        <a class="sidebar-link" data-tab="homepage" onclick="switchTab('homepage')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></polygon></svg>
+          Homepage Builder (CMS)
+        </a>
+
+        <a class="sidebar-link" data-tab="navigation" onclick="switchTab('navigation')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+          Navigation Menu
+        </a>
+
+        <a class="sidebar-link" data-tab="settings" onclick="switchTab('settings')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          Store Settings
+        </a>
+
+        <a class="sidebar-link" data-tab="reviews" onclick="switchTab('reviews')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          Patron Reviews
+        </a>
+
+        <a class="sidebar-link" data-tab="coupons" onclick="switchTab('coupons')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="5" x2="5" y2="19"></line><circle cx="6.5" cy="6.5" r="2.5"></circle><circle cx="17.5" cy="17.5" r="2.5"></circle></svg>
+          Coupons
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="admin-user-info">
+          <span class="admin-user-name" id="admin-profile-name">Master Tailor</span>
+          <span class="admin-user-role">Super Administrator</span>
+        </div>
+        <button onclick="handleAdminLogout()" class="btn-admin btn-admin-secondary" style="padding:0.4rem 0.6rem; color:#f87171;" title="Logout">
+          ⏻
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="admin-main">
+      <!-- Top Navigation Header -->
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button class="mobile-sidebar-toggle" onclick="toggleMobileSidebar()" aria-label="Toggle Navigation">☰</button>
+          <h2 class="page-title" id="admin-page-title">Store Dashboard</h2>
+        </div>
+
+        <div class="topbar-right">
+          <a href="/" target="_blank" class="btn-admin btn-admin-secondary">
+            ↗ Open Storefront
+          </a>
+        </div>
+      </header>
+
+      <!-- Dynamic Tab Container -->
+      <div class="admin-content" id="admin-main-container">
+        <!-- Rendered by admin.js -->
+      </div>
+    </main>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" aria-live="polite"></div>
+
+  <!-- ES Module Script -->
+  <script type="module" src="/js/admin.js"></script>
+</body>
+</html>

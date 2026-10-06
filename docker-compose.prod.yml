@@ -1,0 +1,87 @@
+version: '3.8'
+
+services:
+  # ----------------------------------------------------------------------------
+  # TIER 1: Edge Reverse Proxy (Public Facing - Ports 80 & 443 ONLY)
+  # ----------------------------------------------------------------------------
+  proxy:
+    image: nginx:alpine
+    container_name: harryandco-reverse-proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./reverse-proxy/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./reverse-proxy/conf.d:/etc/nginx/conf.d:ro
+      - ./reverse-proxy/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - backend
+    networks:
+      - edge-net
+      - backend-net
+    healthcheck:
+      test: ["CMD", "nginx", "-t"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ----------------------------------------------------------------------------
+  # TIER 2: Private Backend Server (Origin IP Masked - No published host ports)
+  # ----------------------------------------------------------------------------
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: harryandco-api-backend
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - REQUIRE_EDGE_PROXY=true
+      - ORIGIN_VERIFY_SECRET=${ORIGIN_VERIFY_SECRET:-harryandco-edge-secret-key-2026}
+      - JWT_SECRET=${JWT_SECRET:-harry-and-co-luxury-atelier-jwt-secret-key-2026}
+      - CORS_ALLOWED_ORIGINS=https://harryandcojeans.com,https://www.harryandcojeans.com
+      - PGHOST=database
+      - PGPORT=5432
+      - PGDATABASE=harryandco_production
+      - PGUSER=harryandco_app
+      - PGPASSWORD=${DB_PASSWORD:-secure_production_password_2026}
+    networks:
+      - backend-net
+      - db-net
+    depends_on:
+      - database
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+
+  # ----------------------------------------------------------------------------
+  # TIER 3: Private Database Server (Zero public network access)
+  # ----------------------------------------------------------------------------
+  database:
+    image: postgres:15-alpine
+    container_name: harryandco-private-db
+    restart: always
+    environment:
+      - POSTGRES_DB=harryandco_production
+      - POSTGRES_USER=harryandco_app
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-secure_production_password_2026}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - db-net
+    # Note: NO "ports:" block is defined. Port 5432 is strictly private within db-net!
+
+networks:
+  edge-net:
+    driver: bridge
+  backend-net:
+    internal: false
+  db-net:
+    internal: true # Strictly internal, cannot communicate with outside internet!
+
+volumes:
+  pgdata:

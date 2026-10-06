@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>HARRY & CO | Artisanal Selvedge Denim Heritage</title>
+  <meta name="description" content="Handcrafted Japanese selvedge denim, bespoke fits, raw cuts, and lifetime quality loomed for denim purists.">
+  <meta name="theme-color" content="#070d19">
+  <link rel="stylesheet" href="/css/storefront.css">
+</head>
+<body>
+
+  <!-- Dynamic Announcement Bar -->
+  <aside id="announcement-bar-container" class="announcement-bar" role="region" aria-label="Announcement">
+    <span>COMPLIMENTARY EXPRESS NATIONWIDE SHIPPING ON ORDERS OVER ₹2,499</span>
+    <a href="#shop" class="cta-link">EXPLORE ARCHIVE</a>
+  </aside>
+
+  <!-- Sticky Site Header -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <!-- Mobile Menu Button -->
+      <button class="icon-btn mobile-menu-btn" onclick="openMobileNav()" aria-label="Open Navigation Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Brand Logo -->
+      <a href="#home" class="brand-logo" aria-label="Harry and Co Home">
+        <span class="logo-title brand-name-target">HARRY & CO</span>
+      </a>
+
+      <!-- Dynamic Desktop Navigation (Populated by /api/v1/content/navigation) -->
+      <nav class="desktop-nav" id="desktop-nav-container" role="navigation" aria-label="Main Navigation">
+        <!-- Dynamically injected via store.js -->
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+        <!-- Order Tracking Shortcut -->
+        <a href="/track" class="icon-btn" title="Track Order Status" aria-label="Track Order">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="1" y="3" width="15" height="13"></rect>
+            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+          </svg>
+        </a>
+
+        <!-- Customer Account & Sign In -->
+        <a href="/login" class="icon-btn" title="Account &amp; Sign In" aria-label="Account Login">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </a>
+
+        <!-- Cart Trigger Button -->
+        <button id="cart-drawer-toggle" class="icon-btn" aria-label="Shopping Cart">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="cart-badge cart-badge-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div id="mobile-nav-drawer" class="mobile-nav-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+    <div class="mobile-nav-content">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span class="logo-title brand-name-target" style="font-size:1.2rem;">HARRY & CO</span>
+        <button onclick="closeMobileNav()" style="font-size:1.8rem; color:var(--color-text-muted);">&times;</button>
+      </div>
+      <nav id="mobile-nav-links" class="mobile-nav-links">
+        <!-- Dynamically injected -->
+      </nav>
+      <div style="margin-top:auto; padding-top:2rem; border-top:1px solid var(--color-border); font-size:0.8rem; color:var(--color-text-muted);">
+        <a href="/track" style="display:block; margin-bottom:0.75rem; font-weight:700;">Track My Order</a>
+        <a href="/privacy-policy" style="display:block; margin-bottom:0.5rem;">Privacy Policy</a>
+        <a href="/refund-policy" style="display:block; margin-bottom:0.5rem;">Refund Policy</a>
+        <a href="/return-policy" style="display:block; margin-bottom:0.5rem;">Return Policy</a>
+        <a href="/disclaimer" style="display:block; margin-bottom:0.75rem;">Disclaimer</a>
+        <a href="/login" style="color:var(--color-copper); font-weight:700;">Sign In / Account &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Dynamic Viewport (No hardcoded content — completely driven by backend APIs) -->
+  <main id="main-dynamic-view" role="main">
+    <div style="text-align:center; padding:6rem 2rem;">
+      <div class="spinner" style="width:40px; height:40px; border:3px solid #e2e8f0; border-top-color:var(--color-copper); border-radius:50%; animation:spin 0.8s linear infinite; margin:0 auto 1.5rem auto;"></div>
+      <p style="color:var(--color-text-muted); font-size:0.95rem; letter-spacing:0.05em;">Connecting to Atelier Backend...</p>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer" id="footer-dynamic-content" role="contentinfo" style="
+    background: #04080f;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 4rem 1.5rem 2rem;
+    margin-top: 4rem;
+    font-family: 'Outfit', sans-serif;
+  ">
+    <div style="max-width:1200px; margin:0 auto;">
+
+      <!-- Footer Top Grid -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:2.5rem; margin-bottom:3rem;">
+
+        <!-- Brand Column -->
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:700; color:#DAA520; letter-spacing:0.1em; margin-bottom:0.75rem;">HARRY &amp; CO</div>
+          <p style="font-size:0.85rem; color:#7a8fa8; line-height:1.7; margin-bottom:1.5rem; max-width:280px;">
+            Handcrafted Japanese selvedge denim, bespoke fits, and raw cuts — loomed for denim purists who demand lifetime quality.
+          </p>
+
+          <!-- Social Links -->
+          <div id="footer-social-links" style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+            <!-- dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Shop Links -->
+        <div>
+          <div style="font-size:0.7rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:#DAA520; margin-bottom:1rem;">Shop</div>
+          <nav id="footer-nav-links" style="display:flex; flex-direction:column; gap:0.6rem;">
+            <a href="/#shop" style="color:#7a8fa8; text-decoration:none; font-size:0.87rem; transition:color 0.2s;" onmouseover="this.style.color='#e8dcc8'" onmouseout="this.style.color='#7a8fa8'">All Denim</a>
+            <a href="/#new-arrivals" style="color:#7a8fa8; text-decoration:none; font-size:0.87rem; transition:color 0.2s;" onmouseover="this.style.color='#e8dcc8'" onmouseout="this.style.color='#7a8fa8'">New Arrivals</a>
+            <a href="/#bestsellers" style="color:#7a8fa8; text-decoration:none; font-size:0.87rem; transition:color 0.2s;" onmouseover="this.style.color='#e8dcc8'" onmouseout="this.style.color='#7a8fa8'">Bestsellers</a>
+            <a href="/#collections" style="color:#7a8fa8; text-decoration:none; font-size:0.87rem; transition:color 0.2s;" onmouseover="this.style.color='#e8dcc8'" onmouseout="this.style.color='#7a8fa8'">Collections</a>
+            <a href="/#sale" style="color:#DAA520; text-decoration:none; font-size:0.87rem; font-weight:600;">Sale Archive</a>
+          </nav>
+        </div>
+
+        <!-- Customer Support -->
+        <div>
+          <div style="font-size:0.7rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:#DAA520; margin-bottom:1rem;">Support</div>
+          <nav style="display:flex; flex-direction:column; gap:0.6rem;">
+            <a href="/track" style="color:#7a8fa8; text-decoration:none; font-size:0.87rem; transition:color 0.2s;" onmouseover="this.style.color='#e8dcc8'" onmouseout="this.style.color='#7a8fa8'">Track My Order</a>
+            <a href="/login" style="color:#7a8fa8; text-decoration:none; font-size:0.87rem; transition:color 0.2s;" onmouseover="this.style.color='#e8dcc8'" onmouseout="this.style.color='#7a8fa8'">My Account / Sign In</a>
+            <a href="/return-policy" style="color:#7a8fa8; text-decoration:none; font-size:0.87rem; transition:color 0.2s;" onmouseover="this.style.color='#e8dcc8'" onmouseout="this.style.color='#7a8fa8'">Returns &amp; Exchanges</a>
+            <a href="/refund-policy" style="color:#7a8fa8; text-decoration:none; font-size:0.87rem; transition:color 0.2s;" onmouseover="this.style.color='#e8dcc8'" onmouseout="this.style.color='#7a8fa8'">Refund Policy</a>
+            <a href="/#about" style="color:#7a8fa8; text-decoration:none; font-size:0.87rem; transition:color 0.2s;" onmouseover="this.style.color='#e8dcc8'" onmouseout="this.style.color='#7a8fa8'">Size Consultation</a>
+          </nav>
+        </div>
+
+        <!-- Contact Us Section -->
+        <div id="footer-contact-section">
+          <div style="font-size:0.7rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:#DAA520; margin-bottom:1rem;">Contact Us</div>
+          <div style="display:flex; flex-direction:column; gap:0.75rem;">
+            <a href="tel:907617347" style="display:flex; align-items:center; gap:0.6rem; color:#e2e8f0; text-decoration:none; font-size:0.87rem; font-weight:500; transition:color 0.2s;" onmouseover="this.style.color='#DAA520'" onmouseout="this.style.color='#e2e8f0'">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#DAA520" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.64A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.27-.63a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              907617347
+            </a>
+            <a href="mailto:harry23yt@gmail.com" style="display:flex; align-items:center; gap:0.6rem; color:#e2e8f0; text-decoration:none; font-size:0.87rem; font-weight:500; transition:color 0.2s;" onmouseover="this.style.color='#DAA520'" onmouseout="this.style.color='#e2e8f0'">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#DAA520" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              harry23yt@gmail.com
+            </a>
+            <div style="font-size:0.78rem; color:#7a8fa8; line-height:1.5; margin-top:0.25rem;">
+              <div>🕒 Mon – Sat: 10:00 AM – 7:00 PM IST</div>
+              <div>📍 Atelier &amp; Logistics, India</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Policies & Legal -->
+        <div>
+          <div style="font-size:0.7rem; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:#DAA520; margin-bottom:1rem;">Policies &amp; Legal</div>
+          <nav style="display:flex; flex-direction:column; gap:0.6rem;">
+            <a href="/privacy-policy" style="color:#7a8fa8; text-decoration:none; font-size:0.87rem; transition:color 0.2s;" onmouseover="this.style.color='#e8dcc8'" onmouseout="this.style.color='#7a8fa8'">Privacy Policy</a>
+            <a href="/refund-policy" style="color:#7a8fa8; text-decoration:none; font-size:0.87rem; transition:color 0.2s;" onmouseover="this.style.color='#e8dcc8'" onmouseout="this.style.color='#7a8fa8'">Refund Policy</a>
+            <a href="/return-policy" style="color:#7a8fa8; text-decoration:none; font-size:0.87rem; transition:color 0.2s;" onmouseover="this.style.color='#e8dcc8'" onmouseout="this.style.color='#7a8fa8'">Return Policy</a>
+            <a href="/disclaimer" style="color:#7a8fa8; text-decoration:none; font-size:0.87rem; transition:color 0.2s;" onmouseover="this.style.color='#e8dcc8'" onmouseout="this.style.color='#7a8fa8'">Disclaimer</a>
+          </nav>
+        </div>
+
+      </div><!-- /grid -->
+
+      <!-- Newsletter Bar -->
+      <div style="background:rgba(184,134,11,0.06); border:1px solid rgba(184,134,11,0.18); border-radius:12px; padding:1.75rem 2rem; margin-bottom:2.5rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.5rem;">
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:600; color:#DAA520; margin-bottom:0.3rem;">The Archive — Members Only</div>
+          <div style="font-size:0.83rem; color:#7a8fa8;">Exclusive early access to small-batch drops, raw selvedge restocks &amp; insider events.</div>
+        </div>
+        <form onsubmit="subscribeNewsletter(event)" style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+          <input id="footer-nl-email" type="email" placeholder="your@email.com" required style="
+            background:#0d1a2e; border:1px solid rgba(255,255,255,0.12); border-radius:6px;
+            padding:0.7rem 1.1rem; color:#e8dcc8; font-family:'Outfit',sans-serif; font-size:0.9rem;
+            outline:none; min-width:220px;
+          ">
+          <button type="submit" style="
+            background:linear-gradient(135deg,#B8860B,#DAA520); border:none; border-radius:6px;
+            padding:0.7rem 1.5rem; color:#fff; font-family:'Outfit',sans-serif; font-size:0.82rem;
+            font-weight:700; letter-spacing:0.1em; cursor:pointer;
+          ">SUBSCRIBE</button>
+        </form>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div style="border-top:1px solid rgba(255,255,255,0.06); padding-top:1.5rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+        <div style="font-size:0.8rem; color:#4a6080;">
+          &copy; <span id="footer-year"></span> Harry &amp; Co Jeans. All rights reserved.
+        </div>
+        <div style="font-size:0.78rem; color:#4a6080; display:flex; gap:1.5rem; flex-wrap:wrap;">
+          <a href="/privacy-policy" style="color:#4a6080; text-decoration:none;" onmouseover="this.style.color='#DAA520'" onmouseout="this.style.color='#4a6080'">Privacy</a>
+          <a href="/refund-policy" style="color:#4a6080; text-decoration:none;" onmouseover="this.style.color='#DAA520'" onmouseout="this.style.color='#4a6080'">Refunds</a>
+          <a href="/return-policy" style="color:#4a6080; text-decoration:none;" onmouseover="this.style.color='#DAA520'" onmouseout="this.style.color='#4a6080'">Returns</a>
+          <a href="/disclaimer" style="color:#4a6080; text-decoration:none;" onmouseover="this.style.color='#DAA520'" onmouseout="this.style.color='#4a6080'">Disclaimer</a>
+        </div>
+        <div style="font-size:0.78rem; color:#4a6080;">
+          Made with ♥ in India
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+    async function subscribeNewsletter(e) {
+      e.preventDefault();
+      const email = document.getElementById('footer-nl-email').value.trim();
+      const btn = e.target.querySelector('button');
+      btn.textContent = 'Subscribing...';
+      btn.disabled = true;
+      try {
+        const res = await fetch('/api/v1/newsletter/subscribe', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({email, source: 'footer'})
+        });
+        const data = await res.json();
+        if(data.success) {
+          btn.textContent = '✓ Subscribed!';
+          btn.style.background = 'linear-gradient(135deg,#22c55e,#16a34a)';
+          document.getElementById('footer-nl-email').value = '';
+        } else {
+          btn.textContent = 'Try Again';
+          btn.disabled = false;
+        }
+      } catch(err) {
+        btn.textContent = 'Error';
+        btn.disabled = false;
+      }
+    }
+    window.subscribeNewsletter = subscribeNewsletter;
+  </script>
+
+  <!-- Slide-In Cart Drawer -->
+  <div id="cart-drawer-backdrop" class="drawer-backdrop" role="dialog" aria-modal="true" aria-label="Shopping Cart">
+    <div class="cart-drawer">
+      <div class="drawer-header">
+        <h3 class="drawer-title">Shopping Bag (<span class="cart-badge-count">0</span>)</h3>
+        <button id="cart-drawer-close" class="drawer-close-btn" aria-label="Close cart">&times;</button>
+      </div>
+
+      <div id="cart-drawer-items-list" class="cart-drawer-items">
+        <!-- Dynamically rendered -->
+      </div>
+
+      <div class="cart-drawer-footer">
+        <div class="cart-subtotal-row">
+          <span>Subtotal</span>
+          <span id="cart-drawer-subtotal">₹0</span>
+        </div>
+        <p style="font-size:0.75rem; color:var(--color-text-muted); margin-bottom:1rem;">
+          Taxes and shipping calculated at checkout. Cash on Delivery available.
+        </p>
+        <button class="btn btn-primary btn-block" onclick="closeCartDrawer(); window.location.hash='#checkout';">
+          PROCEED TO CHECKOUT &rarr;
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Sticky Bottom Bar (Optimized touch experience) -->
+  <div class="mobile-bottom-bar" id="mobile-bottom-nav">
+    <a href="#home" style="display:flex; flex-direction:column; align-items:center; font-size:0.7rem; font-weight:700; color:var(--color-text-main);">
+      <span>🏠</span> Home
+    </a>
+    <a href="#shop" style="display:flex; flex-direction:column; align-items:center; font-size:0.7rem; font-weight:700; color:var(--color-text-main);">
+      <span>👖</span> Denim
+    </a>
+    <a href="#track" style="display:flex; flex-direction:column; align-items:center; font-size:0.7rem; font-weight:700; color:var(--color-text-main);">
+      <span>📦</span> Track
+    </a>
+    <button onclick="openCartDrawer()" style="display:flex; flex-direction:column; align-items:center; font-size:0.7rem; font-weight:700; color:var(--color-copper);">
+      <span>🛍️ (<span class="cart-badge-count">0</span>)</span> Cart
+    </button>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" aria-live="polite"></div>
+
+  <style>
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+
+  <!-- ES Module Script -->
+  <script type="module" src="/js/store.js"></script>
+</body>
+</html>
