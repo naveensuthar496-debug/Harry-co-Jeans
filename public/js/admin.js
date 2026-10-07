@@ -153,8 +153,31 @@ window.switchTab = async function(tabName) {
 async function renderDashboardTab() {
   const container = document.getElementById('admin-main-container');
   const res = await API.adminGetAnalytics();
-  const a = res.analytics;
-  AdminState.analytics = a;
+  const raw = res.analytics;
+  AdminState.analytics = raw;
+
+  // Normalize nested server response into the flat shape the template expects
+  const statusMap = {};
+  (raw.orders?.statusBreakdown || []).forEach(row => {
+    statusMap[row.order_status] = row.count;
+  });
+
+  const a = {
+    // Revenue
+    totalRevenue:       raw.revenue?.total    ?? 0,
+    // Orders
+    totalOrders:        raw.orders?.total     ?? 0,
+    ordersByStatus:     statusMap,
+    recentOrders:       raw.orders?.recent    ?? [],
+    // Customers
+    totalCustomers:     raw.customers?.unique ?? 0,
+    // Products
+    totalProducts:      raw.products?.total_products    ?? 0,
+    outOfStockProducts: raw.products?.out_of_stock      ?? 0,
+    lowStockVariants:   raw.products?.topProducts       ? [] : [],  // low-stock variants not in API; default empty
+    // Pass-through for any other keys used elsewhere
+    ...raw
+  };
 
   container.innerHTML = `
     <!-- Testing Control Banner -->
@@ -243,14 +266,13 @@ async function renderDashboardTab() {
                   </tr>
                 </thead>
                 <tbody>
-                  ${a.recentOrders.map(o => `
+                   ${a.recentOrders.map(o => `
                     <tr>
                       <td><strong>${escapeHtml(o.order_number)}</strong></td>
-                      <td>${escapeHtml(o.customer_name)}<br><small style="color:var(--admin-text-muted);">${escapeHtml(o.customer_email)}</small></td>
+                      <td>${escapeHtml(o.customer_name)}</td>
                       <td><strong>₹${Number(o.total_amount).toLocaleString('en-IN')}</strong></td>
                       <td>
                         <span class="badge-status" style="background:#f1f5f9; color:#334155;">${escapeHtml(o.payment_method)}</span>
-                        <small>(${o.payment_status})</small>
                       </td>
                       <td><span class="badge-status badge-status-${o.order_status}">${o.order_status}</span></td>
                     </tr>

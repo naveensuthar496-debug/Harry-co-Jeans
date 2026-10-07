@@ -586,11 +586,14 @@
           </button>
         </form>
 
-        <!-- 4. Customer Logged In / Order History View -->
+        <!-- 4. Customer Logged In / Order History & Profile Management View -->
         <div id="customer-dashboard-view" class="customer-dashboard">
           <div class="customer-profile-card">
             <div style="display:flex; align-items:center; gap:0.85rem;">
-              <div class="customer-avatar" id="cust-avatar-letter">H</div>
+              <div class="customer-avatar" id="cust-avatar-container" style="overflow:hidden; display:flex; align-items:center; justify-content:center;">
+                <span id="cust-avatar-letter">H</span>
+                <img id="cust-avatar-img" src="" alt="Avatar" style="display:none; width:100%; height:100%; object-fit:cover;">
+              </div>
               <div>
                 <div style="font-weight:700; color:#fff;" id="cust-dash-name">Customer</div>
                 <div style="font-size:0.8rem; color:var(--color-text-muted);" id="cust-dash-email">email</div>
@@ -599,19 +602,99 @@
             <button class="btn-logout" onclick="logoutCustomer()">Sign Out</button>
           </div>
 
-          <div style="font-size:0.75rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--color-copper); margin-bottom:0.75rem; display:flex; justify-content:space-between; align-items:center;">
-            <span>Your Orders &amp; Production Status</span>
-            <span id="cust-order-count" style="color:var(--color-text-muted); font-weight:400;"></span>
+          <!-- Customer Dashboard Tabs -->
+          <div style="display:flex; gap:0.75rem; border-bottom:1px solid var(--color-border); margin-bottom:1.25rem; padding-bottom:0.5rem;">
+            <button type="button" class="sub-tab-btn active" id="dash-btn-orders" onclick="switchDashboardTab('orders')">📦 My Orders (<span id="cust-orders-badge">0</span>)</button>
+            <button type="button" class="sub-tab-btn" id="dash-btn-profile" onclick="switchDashboardTab('profile')">👤 Edit Profile &amp; Address</button>
           </div>
 
-          <div id="cust-orders-container" class="orders-list">
-            <!-- Dynamically populated -->
+          <!-- TAB A: ORDERS & TRACKING -->
+          <div id="dash-tab-orders">
+            <div style="font-size:0.75rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--color-copper); margin-bottom:0.75rem; display:flex; justify-content:space-between; align-items:center;">
+              <span>Your Orders &amp; Production Status</span>
+              <span id="cust-order-count" style="color:var(--color-text-muted); font-weight:400;"></span>
+            </div>
+
+            <div id="cust-orders-container" class="orders-list">
+              <!-- Dynamically populated -->
+            </div>
+
+            <div style="margin-top:1.5rem; text-align:center;">
+              <a href="/track" style="font-size:0.85rem; color:var(--color-copper); text-decoration:none; font-weight:500;">
+                Have a tracking number? View Full Visual Tracking &rarr;
+              </a>
+            </div>
           </div>
 
-          <div style="margin-top:1.5rem; text-align:center;">
-            <a href="/track" style="font-size:0.85rem; color:var(--color-copper); text-decoration:none; font-weight:500;">
-              Have a tracking number? View Full Visual Tracking &rarr;
-            </a>
+          <!-- TAB B: PROFILE & SAVED ADDRESS EDIT -->
+          <div id="dash-tab-profile" style="display:none;">
+            <form id="form-edit-profile" class="auth-form" onsubmit="handleSaveProfile(event)">
+              <!-- Profile Picture Preview & Input -->
+              <div style="background:rgba(7,13,25,0.5); padding:1rem; border-radius:10px; border:1px solid var(--color-border); display:flex; align-items:center; gap:1.2rem;">
+                <div id="cust-profile-avatar-preview" style="width:60px; height:60px; border-radius:50%; background:var(--color-copper); color:#070d19; display:flex; align-items:center; justify-content:center; font-size:1.5rem; font-weight:700; overflow:hidden; border:2px solid var(--color-border-active); flex-shrink:0;">
+                  <span id="cust-profile-avatar-initial">H</span>
+                  <img id="cust-profile-avatar-preview-img" src="" alt="Avatar" style="display:none; width:100%; height:100%; object-fit:cover;">
+                </div>
+                <div style="flex:1;">
+                  <label class="form-label" for="cust-profile-avatar-input" style="margin-bottom:0.3rem;">Profile Picture URL</label>
+                  <input type="url" id="cust-profile-avatar-input" class="form-input" placeholder="https://example.com/photo.jpg" oninput="updateAvatarPreview(this.value)" style="font-size:0.85rem; padding:0.6rem 0.85rem;">
+                </div>
+              </div>
+
+              <!-- Contact Information -->
+              <div class="form-group">
+                <label class="form-label" for="cust-profile-name">Full Name *</label>
+                <input type="text" id="cust-profile-name" class="form-input" required placeholder="Naveen Suthar">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="cust-profile-phone">Mobile / Phone Number *</label>
+                <input type="tel" id="cust-profile-phone" class="form-input" placeholder="e.g. 9076173470">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="cust-profile-email">Account Email (Verified)</label>
+                <input type="email" id="cust-profile-email" class="form-input" readonly disabled style="opacity:0.65; cursor:not-allowed;">
+              </div>
+
+              <!-- Saved Shipping Address -->
+              <div style="border-top:1px solid var(--color-border); padding-top:1.1rem; margin-top:0.4rem;">
+                <div style="font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-copper); margin-bottom:0.75rem;">
+                  Saved Shipping &amp; Fitting Address
+                </div>
+
+                <div class="form-group" style="margin-bottom:0.85rem;">
+                  <label class="form-label" for="cust-profile-address">Street Address &amp; Landmark</label>
+                  <input type="text" id="cust-profile-address" class="form-input" placeholder="House/Flat No., Street Name, Landmark">
+                </div>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.85rem; margin-bottom:0.85rem;">
+                  <div class="form-group">
+                    <label class="form-label" for="cust-profile-city">City</label>
+                    <input type="text" id="cust-profile-city" class="form-input" placeholder="e.g. Mumbai">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="cust-profile-state">State</label>
+                    <input type="text" id="cust-profile-state" class="form-input" placeholder="e.g. Maharashtra">
+                  </div>
+                </div>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.85rem;">
+                  <div class="form-group">
+                    <label class="form-label" for="cust-profile-pincode">PIN Code</label>
+                    <input type="text" id="cust-profile-pincode" class="form-input" placeholder="e.g. 400001">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="cust-profile-country">Country</label>
+                    <input type="text" id="cust-profile-country" class="form-input" value="India" placeholder="India">
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn-submit" id="cust-save-profile-btn" style="margin-top:0.75rem;">
+                💾 Save Profile Changes &amp; Address
+              </button>
+            </form>
           </div>
         </div>
       </div>
@@ -919,6 +1002,33 @@
       }
     }
 
+    // Switch Customer Dashboard Tabs (Orders vs Profile)
+    function switchDashboardTab(tab) {
+      clearAlert();
+      const isOrders = tab === 'orders';
+      document.getElementById('dash-btn-orders').classList.toggle('active', isOrders);
+      document.getElementById('dash-btn-profile').classList.toggle('active', !isOrders);
+      document.getElementById('dash-tab-orders').style.display = isOrders ? 'block' : 'none';
+      document.getElementById('dash-tab-profile').style.display = !isOrders ? 'block' : 'none';
+    }
+
+    function updateAvatarPreview(url) {
+      const img = document.getElementById('cust-profile-avatar-preview-img');
+      const initial = document.getElementById('cust-profile-avatar-initial');
+      if (url && url.trim().length > 5) {
+        img.src = url.trim();
+        img.style.display = 'block';
+        img.onerror = () => {
+          img.style.display = 'none';
+          initial.style.display = 'block';
+        };
+        initial.style.display = 'none';
+      } else {
+        if (img) img.style.display = 'none';
+        if (initial) initial.style.display = 'block';
+      }
+    }
+
     // Render Dashboard View
     function renderCustomerDashboard(customer, orders, isQuickLookup = false) {
       clearAlert();
@@ -940,8 +1050,48 @@
 
       document.getElementById('cust-dash-name').textContent = customer.name || 'Valued Client';
       document.getElementById('cust-dash-email').textContent = customer.email || '';
-      document.getElementById('cust-avatar-letter').textContent = (customer.name || 'H').charAt(0).toUpperCase();
-      document.getElementById('cust-order-count').textContent = `${orders.length} Order${orders.length === 1 ? '' : 's'}`;
+      
+      // Avatar top card display
+      const topAvatarImg = document.getElementById('cust-avatar-img');
+      const topAvatarLetter = document.getElementById('cust-avatar-letter');
+      if (customer.avatar_url && customer.avatar_url.trim().length > 5) {
+        topAvatarImg.src = customer.avatar_url.trim();
+        topAvatarImg.style.display = 'block';
+        topAvatarImg.onerror = () => {
+          topAvatarImg.style.display = 'none';
+          topAvatarLetter.style.display = 'block';
+        };
+        topAvatarLetter.style.display = 'none';
+      } else {
+        topAvatarImg.style.display = 'none';
+        topAvatarLetter.style.display = 'block';
+        topAvatarLetter.textContent = (customer.name || 'H').charAt(0).toUpperCase();
+      }
+
+      // Populate profile edit form inputs
+      document.getElementById('cust-profile-name').value = customer.name || '';
+      document.getElementById('cust-profile-phone').value = customer.phone || '';
+      document.getElementById('cust-profile-email').value = customer.email || '';
+      document.getElementById('cust-profile-avatar-input').value = customer.avatar_url || '';
+      document.getElementById('cust-profile-address').value = customer.address || '';
+      document.getElementById('cust-profile-city').value = customer.city || '';
+      document.getElementById('cust-profile-state').value = customer.state || '';
+      document.getElementById('cust-profile-pincode').value = customer.pincode || '';
+      document.getElementById('cust-profile-country').value = customer.country || 'India';
+      document.getElementById('cust-profile-avatar-initial').textContent = (customer.name || 'H').charAt(0).toUpperCase();
+      updateAvatarPreview(customer.avatar_url);
+
+      const orderCountText = `${orders.length} Order${orders.length === 1 ? '' : 's'}`;
+      document.getElementById('cust-order-count').textContent = orderCountText;
+      const badgeEl = document.getElementById('cust-orders-badge');
+      if (badgeEl) badgeEl.textContent = orders.length;
+
+      // Disable or hide Profile tab if quick lookup (guest without login token)
+      const isGuest = isQuickLookup && !localStorage.getItem('hc_customer_token');
+      const profileTabBtn = document.getElementById('dash-btn-profile');
+      if (profileTabBtn) {
+        profileTabBtn.style.display = isGuest ? 'none' : 'inline-block';
+      }
 
       const listContainer = document.getElementById('cust-orders-container');
       if (orders.length === 0) {
@@ -970,7 +1120,7 @@
               <span style="font-weight:700; color:#fff;">₹${totalFormatted}</span>
             </div>
             <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
-              <span style="font-size:0.78rem; color:var(--color-text-dim);">Payment: ${ord.payment_method || 'COD'}</span>
+              <span style="font-size:0.78rem; color:var(--color-text-dim);">Payment: ${ord.payment_method || 'COD'} (${ord.payment_status || 'PENDING'})</span>
               <a href="/track?order=${encodeURIComponent(ord.order_number)}&email=${encodeURIComponent(ord.customer_email || '')}" class="order-track-btn">
                 Live Timeline Tracking &rarr;
               </a>
@@ -978,6 +1128,82 @@
           </div>
         `;
       }).join('');
+    }
+
+    // Save Customer Profile & Address Handler
+    async function handleSaveProfile(e) {
+      e.preventDefault();
+      clearAlert();
+
+      const token = localStorage.getItem('hc_customer_token');
+      if (!token) {
+        showAlert('Please sign in to update your profile.');
+        return;
+      }
+
+      const name = document.getElementById('cust-profile-name').value.trim();
+      const phone = document.getElementById('cust-profile-phone').value.trim();
+      const avatar_url = document.getElementById('cust-profile-avatar-input').value.trim();
+      const address = document.getElementById('cust-profile-address').value.trim();
+      const city = document.getElementById('cust-profile-city').value.trim();
+      const state = document.getElementById('cust-profile-state').value.trim();
+      const pincode = document.getElementById('cust-profile-pincode').value.trim();
+      const country = document.getElementById('cust-profile-country').value.trim();
+      const btn = document.getElementById('cust-save-profile-btn');
+
+      try {
+        btn.disabled = true;
+        btn.textContent = 'Saving Changes...';
+
+        const res = await fetch('/api/v1/auth/customer/profile', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            name,
+            phone,
+            avatar_url,
+            address,
+            city,
+            state,
+            pincode,
+            country
+          })
+        });
+
+        const data = await res.json();
+        btn.disabled = false;
+        btn.textContent = '💾 Save Profile Changes & Address';
+
+        if (!res.ok || !data.success) {
+          throw new Error(data.message || 'Failed to update profile.');
+        }
+
+        // Update local storage and UI
+        localStorage.setItem('hc_customer_user', JSON.stringify(data.customer));
+        document.getElementById('cust-dash-name').textContent = data.customer.name;
+        
+        // Update top avatar
+        const topAvatarImg = document.getElementById('cust-avatar-img');
+        const topAvatarLetter = document.getElementById('cust-avatar-letter');
+        if (data.customer.avatar_url) {
+          topAvatarImg.src = data.customer.avatar_url;
+          topAvatarImg.style.display = 'block';
+          topAvatarLetter.style.display = 'none';
+        } else {
+          topAvatarImg.style.display = 'none';
+          topAvatarLetter.style.display = 'block';
+          topAvatarLetter.textContent = (data.customer.name || 'H').charAt(0).toUpperCase();
+        }
+
+        showAlert('✓ Profile details and shipping address saved successfully!', 'success');
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = '💾 Save Profile Changes & Address';
+        showAlert(err.message || 'Error updating profile.');
+      }
     }
 
     function logoutCustomer() {

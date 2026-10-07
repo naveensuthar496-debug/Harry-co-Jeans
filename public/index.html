@@ -7,6 +7,8 @@
   <meta name="description" content="Handcrafted Japanese selvedge denim, bespoke fits, raw cuts, and lifetime quality loomed for denim purists.">
   <meta name="theme-color" content="#070d19">
   <link rel="stylesheet" href="/css/storefront.css">
+  <!-- Razorpay Checkout SDK -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
 
@@ -251,6 +253,44 @@
     window.subscribeNewsletter = subscribeNewsletter;
   </script>
 
+  <!-- Immediate Synchronous Bridge for Inline Event Handlers -->
+  <script>
+    window.openCartDrawer = function() {
+      const backdrop = document.getElementById('cart-drawer-backdrop');
+      if (backdrop) backdrop.classList.add('open');
+      if (typeof window.__hc_renderCartDrawer === 'function') {
+        window.__hc_renderCartDrawer();
+      }
+    };
+    window.closeCartDrawer = function() {
+      const backdrop = document.getElementById('cart-drawer-backdrop');
+      if (backdrop) backdrop.classList.remove('open');
+    };
+    window.openMobileNav = function() {
+      const nav = document.getElementById('mobile-nav-drawer');
+      if (nav) nav.classList.add('open');
+    };
+    window.closeMobileNav = function() {
+      const nav = document.getElementById('mobile-nav-drawer');
+      if (nav) nav.classList.remove('open');
+    };
+    window.updateCartQuantity = function(productId, size, qty) {
+      if (typeof window.__hc_updateCartQuantity === 'function') {
+        window.__hc_updateCartQuantity(productId, size, qty);
+      }
+    };
+    window.removeFromCart = function(productId, size) {
+      if (typeof window.__hc_removeFromCart === 'function') {
+        window.__hc_removeFromCart(productId, size);
+      }
+    };
+    window.addToCart = function(productId, size) {
+      if (typeof window.__hc_addToCart === 'function') {
+        window.__hc_addToCart(productId, size);
+      }
+    };
+  </script>
+
   <!-- Slide-In Cart Drawer -->
   <div id="cart-drawer-backdrop" class="drawer-backdrop" role="dialog" aria-modal="true" aria-label="Shopping Cart">
     <div class="cart-drawer">
@@ -301,7 +341,7 @@
     @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 
-  <!-- ES Module Script -->
-  <script type="module" src="/js/store.js"></script>
+  <!-- ES Module Script with Cache Busting -->
+  <script type="module" src="/js/store.js?v=20261007_v4"></script>
 </body>
 </html>

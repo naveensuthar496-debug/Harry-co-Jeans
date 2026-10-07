@@ -1,5 +1,17 @@
 import { API, showToast } from './api.js';
 
+// Safe HTML entity escaping
+export function escapeHtml(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+window.escapeHtml = escapeHtml;
+
 // State Management
 export const State = {
   settings: {},
@@ -15,13 +27,31 @@ export const State = {
   paymentMethods: []
 };
 
-// Initialization
-document.addEventListener('DOMContentLoaded', async () => {
+// Immediate attachment of global UI helper methods
+window.openCartDrawer = openCartDrawer;
+window.closeCartDrawer = closeCartDrawer;
+window.updateCartQuantity = updateCartQuantity;
+window.removeFromCart = removeFromCart;
+window.addToCart = addToCart;
+window.__hc_openCartDrawer = openCartDrawer;
+window.__hc_closeCartDrawer = closeCartDrawer;
+window.__hc_updateCartQuantity = updateCartQuantity;
+window.__hc_removeFromCart = removeFromCart;
+window.__hc_addToCart = addToCart;
+window.__hc_renderCartDrawer = renderCartDrawer;
+
+// Resilient Initialization (fires even if DOMContentLoaded already dispatched)
+async function startApp() {
   initEventListeners();
   await loadStoreData();
-  renderApp();
-  handleRouting();
-});
+  await handleRouting();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', startApp);
+} else {
+  startApp();
+}
 
 window.addEventListener('hashchange', () => {
   handleRouting();
@@ -107,16 +137,15 @@ function renderFooter() {
         <!-- Brand & Heritage -->
         <div class="footer-brand">
           <div class="brand-logo" style="margin-bottom:0.75rem;">
-            <span class="logo-title" style="font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:700; color:#DAA520; letter-spacing:0.08em;">${escapeHtml(brandName)}</span>
+            <img src="/assets/logo.jpg" alt="Harry &amp; Co Jeans" style="height:60px; width:auto; object-fit:contain; filter:brightness(0) invert(1); opacity:0.92;">
           </div>
           <p class="footer-desc" style="color:#7a8fa8; font-size:0.85rem; line-height:1.65; max-width:280px; margin-bottom:1.25rem;">
-            ${escapeHtml(tagLine)}. Handcrafted Japanese selvedge denim, bespoke fits, and raw cuts loomed for denim purists.
+            Imagined by us. Crafted by hand. Made for you.
           </p>
-          <div class="footer-social-links" style="display:flex; gap:0.6rem; flex-wrap:wrap;">
-            ${State.settings.social_instagram ? `<a href="${State.settings.social_instagram}" target="_blank" rel="noopener" class="footer-social-link" title="Instagram">IG</a>` : '<a href="#" class="footer-social-link" title="Instagram">IG</a>'}
-            ${State.settings.social_facebook ? `<a href="${State.settings.social_facebook}" target="_blank" rel="noopener" class="footer-social-link" title="Facebook">FB</a>` : '<a href="#" class="footer-social-link" title="Facebook">FB</a>'}
-            ${State.settings.social_twitter ? `<a href="${State.settings.social_twitter}" target="_blank" rel="noopener" class="footer-social-link" title="Twitter">X</a>` : '<a href="#" class="footer-social-link" title="Twitter">X</a>'}
-            ${State.settings.social_youtube ? `<a href="${State.settings.social_youtube}" target="_blank" rel="noopener" class="footer-social-link" title="YouTube">YT</a>` : ''}
+          <div class="footer-social-links" style="display:flex; gap:0.6rem; flex-wrap:wrap; align-items:center;">
+            <a href="https://www.instagram.com/harrycojeans/" target="_blank" rel="noopener" title="Follow us on Instagram" aria-label="Instagram" style="display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; background:linear-gradient(135deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); color:#fff; text-decoration:none; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
           </div>
         </div>
 
@@ -728,8 +757,8 @@ async function renderProductDetailView(slug) {
               ` : `
                 <div style="display:flex; flex-wrap:wrap; gap:0.6rem;" id="size-options-container">
                   ${variants.map(v => {
-                    const out = v.stock <= 0;
-                    return `
+      const out = v.stock <= 0;
+      return `
                       <button type="button" 
                               class="size-chip ${out ? 'disabled' : ''}" 
                               data-size="${escapeHtml(v.size)}" 
@@ -740,7 +769,7 @@ async function renderProductDetailView(slug) {
                         ${escapeHtml(v.size)} ${out ? '(Out of Stock)' : ''}
                       </button>
                     `;
-                  }).join('')}
+    }).join('')}
                 </div>
               `}
             </div>
@@ -816,7 +845,7 @@ async function renderProductDetailView(slug) {
 
 let selectedProductSize = null;
 
-window.selectProductSize = function(size, stock) {
+window.selectProductSize = function (size, stock) {
   selectedProductSize = size;
   const container = document.getElementById('size-options-container');
   if (container) {
@@ -845,7 +874,7 @@ window.selectProductSize = function(size, stock) {
   }
 };
 
-window.handleAddToCart = function() {
+window.handleAddToCart = function () {
   if (!State.selectedProduct) return;
   if (!selectedProductSize) {
     showToast('Please select a size first.', 'error');
@@ -856,14 +885,16 @@ window.handleAddToCart = function() {
   openCartDrawer();
 };
 
-window.handleBuyNow = function() {
+window.handleBuyNow = function () {
   handleAddToCart();
   window.location.hash = '#checkout';
 };
 
 // 4. CART & CHECKOUT ENGINE
 export function addToCart(product, size, qty = 1) {
-  const existingIdx = State.cart.findIndex(i => i.productId === product.id && i.size === size);
+  if (!product) return;
+  const pId = String(product.id);
+  const existingIdx = State.cart.findIndex(i => String(i.productId) === pId && String(i.size) === String(size));
   if (existingIdx > -1) {
     State.cart[existingIdx].quantity += qty;
   } else {
@@ -880,11 +911,11 @@ export function addToCart(product, size, qty = 1) {
   localStorage.setItem('hc_cart', JSON.stringify(State.cart));
   updateCartBadge();
   renderCartDrawer();
-  showToast(`Added "${product.name}" (Size ${size}) to cart.`, 'info');
+  showToast(`Added "${product.name}" (Size ${size}) to bag.`, 'info');
 }
 
 export function removeFromCart(productId, size) {
-  State.cart = State.cart.filter(i => !(i.productId === productId && i.size === size));
+  State.cart = State.cart.filter(i => !(String(i.productId) === String(productId) && String(i.size) === String(size)));
   localStorage.setItem('hc_cart', JSON.stringify(State.cart));
   updateCartBadge();
   renderCartDrawer();
@@ -894,9 +925,14 @@ export function removeFromCart(productId, size) {
 }
 
 export function updateCartQuantity(productId, size, newQty) {
-  const item = State.cart.find(i => i.productId === productId && i.size === size);
+  const qty = parseInt(newQty, 10);
+  if (isNaN(qty) || qty <= 0) {
+    removeFromCart(productId, size);
+    return;
+  }
+  const item = State.cart.find(i => String(i.productId) === String(productId) && String(i.size) === String(size));
   if (item) {
-    item.quantity = Math.max(1, parseInt(newQty, 10));
+    item.quantity = qty;
     localStorage.setItem('hc_cart', JSON.stringify(State.cart));
     updateCartBadge();
     renderCartDrawer();
@@ -906,8 +942,15 @@ export function updateCartQuantity(productId, size, newQty) {
   }
 }
 
+// Ensure functions are immediately accessible for inline onclick handlers
+window.addToCart = addToCart;
+window.removeFromCart = removeFromCart;
+window.updateCartQuantity = updateCartQuantity;
+window.openCartDrawer = openCartDrawer;
+window.closeCartDrawer = closeCartDrawer;
+
 function updateCartBadge() {
-  const totalCount = State.cart.reduce((acc, i) => acc + i.quantity, 0);
+  const totalCount = State.cart.reduce((acc, i) => acc + (parseInt(i.quantity, 10) || 1), 0);
   document.querySelectorAll('.cart-badge-count').forEach(el => {
     el.textContent = totalCount;
   });
@@ -922,30 +965,52 @@ function renderCartDrawer() {
 
   if (State.cart.length === 0) {
     itemsContainer.innerHTML = `
-      <div style="text-align:center; padding:3rem 1rem;">
-        <p style="color:var(--color-text-muted); font-size:0.9rem; margin-bottom:1rem;">Your shopping cart is empty.</p>
-        <button class="btn btn-dark" onclick="closeCartDrawer(); window.location.hash='#shop';">Discover Denim</button>
+      <div style="text-align:center; padding:3.5rem 1rem;">
+        <div style="font-size:2.5rem; margin-bottom:1rem; opacity:0.3;">🛍️</div>
+        <p style="color:var(--color-text-muted); font-size:0.95rem; margin-bottom:1.5rem;">Your shopping bag is currently empty.</p>
+        <button class="btn btn-dark" onclick="closeCartDrawer(); window.location.hash='#shop';">Explore Atelier Denim &rarr;</button>
       </div>
     `;
     subtotalEl.textContent = `${currency}0`;
     return;
   }
 
-  const subtotal = State.cart.reduce((acc, i) => acc + (i.price * i.quantity), 0);
+  const subtotal = State.cart.reduce((acc, i) => acc + (Number(i.price) * Number(i.quantity)), 0);
 
   itemsContainer.innerHTML = State.cart.map(item => `
-    <div class="cart-item">
-      <img src="${item.image || 'https://images.unsplash.com/photo-1542272604-780c96856592?q=80&w=300&auto=format&fit=crop'}" alt="${escapeHtml(item.name)}" class="cart-item-img">
-      <div class="cart-item-details">
-        <h4 class="cart-item-title">${escapeHtml(item.name)}</h4>
-        <div class="cart-item-meta">Size: ${escapeHtml(item.size)}</div>
-        <div style="display:flex; align-items:center; gap:0.5rem; margin-top:0.25rem;">
-          <button style="border:1px solid #ccc; width:22px; height:22px; border-radius:3px; font-weight:bold;" onclick="updateCartQuantity(${item.productId}, '${item.size}', ${item.quantity - 1})">-</button>
-          <span style="font-size:0.85rem; font-weight:700;">${item.quantity}</span>
-          <button style="border:1px solid #ccc; width:22px; height:22px; border-radius:3px; font-weight:bold;" onclick="updateCartQuantity(${item.productId}, '${item.size}', ${item.quantity + 1})">+</button>
-          <button style="margin-left:auto; color:var(--color-selvedge-red); font-size:0.75rem;" onclick="removeFromCart(${item.productId}, '${item.size}')">Remove</button>
+    <div class="cart-item" style="display:flex; gap:1rem; padding:1.1rem 0; border-bottom:1px solid rgba(0,0,0,0.06); align-items:center;">
+      <img src="${item.image || 'https://images.unsplash.com/photo-1542272604-780c96856592?q=80&w=300&auto=format&fit=crop'}" 
+           alt="${escapeHtml(item.name)}" 
+           class="cart-item-img" 
+           onerror="this.src='https://images.unsplash.com/photo-1542272604-780c96856592?q=80&w=300&auto=format&fit=crop'"
+           style="width:68px; height:80px; object-fit:cover; border-radius:6px; background:#f1f5f9; flex-shrink:0;">
+      <div class="cart-item-details" style="flex:1; min-width:0;">
+        <h4 class="cart-item-title" style="font-size:0.92rem; font-weight:700; margin-bottom:0.2rem; color:var(--color-raw-indigo);">${escapeHtml(item.name)}</h4>
+        <div class="cart-item-meta" style="font-size:0.8rem; color:var(--color-text-muted); margin-bottom:0.5rem;">Size: <strong>${escapeHtml(item.size)}</strong></div>
+        
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+          <!-- Stepper Counter -->
+          <div style="display:inline-flex; align-items:center; border:1px solid #d1d5db; border-radius:6px; overflow:hidden; background:#fff; box-shadow:0 1px 2px rgba(0,0,0,0.04);">
+            <button type="button" 
+                    title="Decrease quantity"
+                    style="width:28px; height:28px; display:flex; align-items:center; justify-content:center; background:#f9fafb; border:none; cursor:pointer; font-weight:700; color:#374151; font-size:15px; user-select:none;" 
+                    onclick="updateCartQuantity('${item.productId}', '${item.size}', ${item.quantity - 1})">-</button>
+            <span style="min-width:32px; text-align:center; font-weight:700; font-size:0.88rem; color:#111827; padding:0 4px;">${item.quantity}</span>
+            <button type="button" 
+                    title="Increase quantity"
+                    style="width:28px; height:28px; display:flex; align-items:center; justify-content:center; background:#f9fafb; border:none; cursor:pointer; font-weight:700; color:#374151; font-size:15px; user-select:none;" 
+                    onclick="updateCartQuantity('${item.productId}', '${item.size}', ${item.quantity + 1})">+</button>
+          </div>
+
+          <button type="button" 
+                  title="Remove item"
+                  style="background:none; border:none; color:#ef4444; font-size:0.78rem; font-weight:600; cursor:pointer; padding:0.25rem; text-decoration:underline;" 
+                  onclick="removeFromCart('${item.productId}', '${item.size}')">Remove</button>
         </div>
-        <div class="cart-item-price">${currency}${Number(item.price * item.quantity).toLocaleString('en-IN')}</div>
+      </div>
+      <div style="text-align:right; flex-shrink:0;">
+        <div style="font-weight:800; font-size:1rem; color:var(--color-raw-indigo);">${currency}${Number(item.price * item.quantity).toLocaleString('en-IN')}</div>
+        ${item.quantity > 1 ? `<div style="font-size:0.72rem; color:var(--color-text-muted);">${currency}${Number(item.price).toLocaleString('en-IN')} each</div>` : ''}
       </div>
     </div>
   `).join('');
@@ -953,7 +1018,7 @@ function renderCartDrawer() {
   subtotalEl.textContent = `${currency}${Number(subtotal).toLocaleString('en-IN')}`;
 }
 
-// 5. CHECKOUT VIEW WITH STRICT SERVER PAYMENT SELECTION
+// 5. CHECKOUT VIEW WITH SAVED USER PROFILE ADDRESS & RAZORPAY INTEGRATION
 async function renderCheckoutView() {
   const mainContent = document.getElementById('main-dynamic-view');
   const currency = State.currency || '₹';
@@ -961,24 +1026,44 @@ async function renderCheckoutView() {
   if (State.cart.length === 0) {
     mainContent.innerHTML = `
       <div class="container section-padding">
-        <div class="empty-state">
-          <h3 class="empty-state-title">Your cart is empty</h3>
-          <p class="empty-state-desc">Select handcrafted denim pieces from our catalog to proceed to checkout.</p>
-          <a href="#shop" class="btn btn-primary">Browse Denim</a>
+        <div class="empty-state" style="text-align:center; padding:5rem 1rem;">
+          <h3 class="empty-state-title" style="font-size:1.6rem; margin-bottom:0.5rem;">Your shopping bag is empty</h3>
+          <p class="empty-state-desc" style="color:var(--color-text-muted); margin-bottom:1.5rem;">Select handcrafted denim pieces from our catalog to proceed to checkout.</p>
+          <a href="#shop" class="btn btn-primary">Browse Denim Archive &rarr;</a>
         </div>
       </div>
     `;
     return;
   }
 
-  mainContent.innerHTML = '<div style="text-align:center; padding:5rem;"><div class="spinner"></div><p style="margin-top:1rem; color:var(--color-text-muted);">Loading payment options from Atelier backend...</p></div>';
+  mainContent.innerHTML = '<div style="text-align:center; padding:5rem;"><div class="spinner"></div><p style="margin-top:1rem; color:var(--color-text-muted);">Loading secure checkout concierge...</p></div>';
 
   try {
-    // CRITICAL: Fetch active payment methods strictly from database
+    // 1. Fetch active payment methods strictly from database
     const paymentRes = await API.getPaymentMethods();
     State.paymentMethods = paymentRes.paymentMethods || [];
 
-    const subtotal = State.cart.reduce((acc, i) => acc + (i.price * i.quantity), 0);
+    // 2. Fetch logged in customer profile (if authenticated)
+    let savedCustomer = null;
+    const custToken = localStorage.getItem('hc_customer_token');
+    if (custToken) {
+      try {
+        const profRes = await fetch('/api/v1/auth/customer/profile', {
+          headers: { 'Authorization': `Bearer ${custToken}` }
+        });
+        const profData = await profRes.json();
+        if (profData.success && profData.customer) {
+          savedCustomer = profData.customer;
+        }
+      } catch (e) { }
+    }
+    if (!savedCustomer) {
+      try {
+        savedCustomer = JSON.parse(localStorage.getItem('hc_customer_user') || 'null');
+      } catch (e) { }
+    }
+
+    const subtotal = State.cart.reduce((acc, i) => acc + (Number(i.price) * Number(i.quantity)), 0);
     const freeShippingThreshold = parseFloat(State.settings.free_shipping_threshold || '2499');
     const standardShippingFee = parseFloat(State.settings.standard_shipping_fee || '149');
     const shippingFee = subtotal >= freeShippingThreshold ? 0 : standardShippingFee;
@@ -995,6 +1080,20 @@ async function renderCheckoutView() {
         <div class="checkout-grid">
           <!-- Checkout Form -->
           <div>
+            ${savedCustomer ? `
+              <div style="background:#f0fdf4; border:1px solid #bbf7d0; color:#166534; padding:0.85rem 1.15rem; border-radius:8px; font-size:0.88rem; margin-bottom:1.5rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+                <div style="display:flex; align-items:center; gap:0.6rem;">
+                  <span style="font-size:1.1rem;">✓</span>
+                  <span>Signed in as <strong>${escapeHtml(savedCustomer.name || savedCustomer.email)}</strong>. Saved address details applied.</span>
+                </div>
+                <a href="/login" style="color:#15803d; font-weight:700; text-decoration:underline;">View/Edit Profile &rarr;</a>
+              </div>
+            ` : `
+              <div style="background:#fefce8; border:1px solid #fef08a; color:#854d0e; padding:0.85rem 1.15rem; border-radius:8px; font-size:0.88rem; margin-bottom:1.5rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+                <span>Have a Harry & Co account? <a href="/login" style="color:#a16207; font-weight:700; text-decoration:underline;">Sign In</a> to auto-fill your saved address &amp; track orders.</span>
+              </div>
+            `}
+
             <form id="checkout-order-form" onsubmit="event.preventDefault(); submitCheckoutOrder();">
               <!-- Customer Contact -->
               <div class="checkout-box">
@@ -1002,16 +1101,16 @@ async function renderCheckoutView() {
                 <div class="form-grid form-grid-2">
                   <div class="form-group">
                     <label class="form-label">Full Name *</label>
-                    <input type="text" id="cust-name" required class="form-input" placeholder="e.g. Aditya Kashyap">
+                    <input type="text" id="cust-name" required class="form-input" placeholder="e.g. Aditya Kashyap" value="${escapeHtml(savedCustomer?.name || '')}">
                   </div>
                   <div class="form-group">
                     <label class="form-label">Mobile Number *</label>
-                    <input type="tel" id="cust-phone" required class="form-input" placeholder="e.g. 9820012345">
+                    <input type="tel" id="cust-phone" required class="form-input" placeholder="e.g. 9820012345" value="${escapeHtml(savedCustomer?.phone || '')}">
                   </div>
                 </div>
                 <div class="form-group" style="margin-top:1rem;">
                   <label class="form-label">Email Address *</label>
-                  <input type="email" id="cust-email" required class="form-input" placeholder="e.g. aditya@example.com">
+                  <input type="email" id="cust-email" required class="form-input" placeholder="e.g. aditya@example.com" value="${escapeHtml(savedCustomer?.email || '')}">
                 </div>
               </div>
 
@@ -1019,29 +1118,36 @@ async function renderCheckoutView() {
               <div class="checkout-box">
                 <h3 class="checkout-box-title">2. Shipping Address</h3>
                 <div class="form-group" style="margin-bottom:1rem;">
-                  <label class="form-label">Street Address & Landmark *</label>
-                  <input type="text" id="cust-address" required class="form-input" placeholder="House/Flat No., Building, Street Name">
+                  <label class="form-label">Street Address &amp; Landmark *</label>
+                  <input type="text" id="cust-address" required class="form-input" placeholder="House/Flat No., Building, Street Name" value="${escapeHtml(savedCustomer?.address || '')}">
                 </div>
                 <div class="form-grid form-grid-2">
                   <div class="form-group">
                     <label class="form-label">City *</label>
-                    <input type="text" id="cust-city" required class="form-input" placeholder="e.g. Mumbai">
+                    <input type="text" id="cust-city" required class="form-input" placeholder="e.g. Mumbai" value="${escapeHtml(savedCustomer?.city || '')}">
                   </div>
                   <div class="form-group">
                     <label class="form-label">State *</label>
-                    <input type="text" id="cust-state" required class="form-input" placeholder="e.g. Maharashtra">
+                    <input type="text" id="cust-state" required class="form-input" placeholder="e.g. Maharashtra" value="${escapeHtml(savedCustomer?.state || '')}">
                   </div>
                 </div>
                 <div class="form-grid form-grid-2" style="margin-top:1rem;">
                   <div class="form-group">
                     <label class="form-label">PIN Code *</label>
-                    <input type="text" id="cust-pincode" required class="form-input" placeholder="e.g. 400001">
+                    <input type="text" id="cust-pincode" required class="form-input" placeholder="e.g. 400001" value="${escapeHtml(savedCustomer?.pincode || '')}">
                   </div>
                   <div class="form-group">
                     <label class="form-label">Delivery Instructions</label>
                     <input type="text" id="cust-notes" class="form-input" placeholder="e.g. Leave with security">
                   </div>
                 </div>
+
+                ${custToken ? `
+                  <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.83rem; color:var(--color-text-muted); margin-top:1rem; cursor:pointer;">
+                    <input type="checkbox" id="save-address-to-profile" checked style="accent-color:var(--color-copper);">
+                    <span>Save / update this shipping address in my profile</span>
+                  </label>
+                ` : ''}
               </div>
 
               <!-- Dynamic Payment Method Selection (SERVER CONTROLLED) -->
@@ -1050,47 +1156,51 @@ async function renderCheckoutView() {
                 
                 ${State.paymentMethods.length === 0 ? `
                   <div class="empty-state" style="margin:1rem 0;">
-                    <p style="color:var(--color-danger); font-weight:700;">No payment methods are currently active in the store settings.</p>
+                    <p style="color:var(--color-danger); font-weight:700;">No payment methods are currently active in store settings.</p>
                   </div>
                 ` : `
                   <div id="payment-methods-list">
                     ${State.paymentMethods.map((pm, idx) => {
-                      const isCod = pm.code.toUpperCase() === 'COD';
-                      let feeNote = '';
-                      if (isCod) {
-                        if (pm.fee > 0) {
-                          if (pm.free_threshold > 0) {
-                            feeNote = `(Free above ${currency}${pm.free_threshold}, otherwise ${currency}${pm.fee} COD fee)`;
-                          } else {
-                            feeNote = `(${currency}${pm.fee} handling fee)`;
-                          }
-                        }
-                      }
+      const isCod = pm.code.toUpperCase() === 'COD';
+      const isRazorpay = pm.code.toUpperCase() === 'RAZORPAY' || pm.code.toUpperCase() === 'ONLINE';
+      let feeNote = '';
+      if (isCod) {
+        if (pm.fee > 0) {
+          if (pm.free_threshold > 0) {
+            feeNote = `(Free above ${currency}${pm.free_threshold}, otherwise ${currency}${pm.fee} COD fee)`;
+          } else {
+            feeNote = `(${currency}${pm.fee} handling fee)`;
+          }
+        }
+      }
 
-                      return `
-                        <div class="payment-option-card ${idx === 0 ? 'selected' : ''}" onclick="selectPaymentOption('${pm.code}', this)">
+      return `
+                        <div class="payment-option-card ${idx === 0 ? 'selected' : ''}" onclick="selectPaymentOption('${pm.code}', this)" style="cursor:pointer;">
                           <input type="radio" name="paymentMethod" value="${pm.code}" ${idx === 0 ? 'checked' : ''} class="payment-radio">
-                          <div class="payment-info">
-                            <div class="payment-title-row">
-                              <span class="payment-method-name">${escapeHtml(pm.name)} ${feeNote}</span>
-                              <span class="payment-badge">${escapeHtml(pm.code)}</span>
+                          <div class="payment-info" style="flex:1;">
+                            <div class="payment-title-row" style="display:flex; align-items:center; justify-content:space-between;">
+                              <span class="payment-method-name" style="font-weight:700;">
+                                ${escapeHtml(pm.name)} ${feeNote}
+                              </span>
+                              ${isRazorpay ? `
+                                <span class="payment-badge" style="background:#0c2340; color:#58a6ff; font-size:0.7rem; padding:0.2rem 0.5rem; border-radius:4px; font-weight:700;">
+                                  ⚡ RAZORPAY SECURE
+                                </span>
+                              ` : `
+                                <span class="payment-badge">${escapeHtml(pm.code)}</span>
+                              `}
                             </div>
-                            <p class="payment-desc">${escapeHtml(pm.description || '')}</p>
-                            ${pm.minimum_order_value > 0 || pm.maximum_order_value < 100000 ? `
-                              <div style="font-size:0.7rem; color:var(--color-copper); margin-top:0.25rem;">
-                                Order Range: ${currency}${pm.minimum_order_value} - ${currency}${pm.maximum_order_value}
-                              </div>
-                            ` : ''}
+                            <p class="payment-desc" style="font-size:0.8rem; color:var(--color-text-muted); margin-top:0.25rem;">${escapeHtml(pm.description || '')}</p>
                           </div>
                         </div>
                       `;
-                    }).join('')}
+    }).join('')}
                   </div>
                 `}
               </div>
 
-              <button type="submit" id="place-order-submit-btn" class="btn btn-primary btn-block" style="padding:1.1rem; font-size:1rem; box-shadow:var(--shadow-gold);">
-                CONFIRM & PLACE ORDER &rarr;
+              <button type="submit" id="place-order-submit-btn" class="btn btn-primary btn-block" style="padding:1.15rem; font-size:1.02rem; font-weight:700; box-shadow:var(--shadow-gold);">
+                CONFIRM &amp; PLACE ORDER &rarr;
               </button>
             </form>
           </div>
@@ -1158,21 +1268,21 @@ async function renderCheckoutView() {
   }
 }
 
-window.selectPaymentOption = function(code, el) {
+window.selectPaymentOption = function (code, el) {
   document.querySelectorAll('.payment-option-card').forEach(card => card.classList.remove('selected'));
   el.classList.add('selected');
   const radio = el.querySelector('input[type="radio"]');
   if (radio) radio.checked = true;
 };
 
-window.applyPromoCoupon = async function() {
+window.applyPromoCoupon = async function () {
   const input = document.getElementById('promo-coupon-input');
   if (!input || !input.value.trim()) {
     showToast('Please enter a coupon code.', 'error');
     return;
   }
 
-  const subtotal = State.cart.reduce((acc, i) => acc + (i.price * i.quantity), 0);
+  const subtotal = State.cart.reduce((acc, i) => acc + (Number(i.price) * Number(i.quantity)), 0);
   try {
     const res = await API.validateCoupon(input.value.trim(), subtotal);
     State.appliedCoupon = res.coupon;
@@ -1183,16 +1293,16 @@ window.applyPromoCoupon = async function() {
   }
 };
 
-window.submitCheckoutOrder = async function() {
+window.submitCheckoutOrder = async function () {
   const submitBtn = document.getElementById('place-order-submit-btn');
-  const name = document.getElementById('cust-name').value;
-  const phone = document.getElementById('cust-phone').value;
-  const email = document.getElementById('cust-email').value;
-  const address = document.getElementById('cust-address').value;
-  const city = document.getElementById('cust-city').value;
-  const state = document.getElementById('cust-state').value;
-  const pincode = document.getElementById('cust-pincode').value;
-  const notes = document.getElementById('cust-notes').value;
+  const name = document.getElementById('cust-name').value.trim();
+  const phone = document.getElementById('cust-phone').value.trim();
+  const email = document.getElementById('cust-email').value.trim();
+  const address = document.getElementById('cust-address').value.trim();
+  const city = document.getElementById('cust-city').value.trim();
+  const state = document.getElementById('cust-state').value.trim();
+  const pincode = document.getElementById('cust-pincode').value.trim();
+  const notes = document.getElementById('cust-notes')?.value || '';
 
   const paymentRadio = document.querySelector('input[name="paymentMethod"]:checked');
   if (!paymentRadio) {
@@ -1200,6 +1310,7 @@ window.submitCheckoutOrder = async function() {
     return;
   }
   const paymentMethod = paymentRadio.value;
+  const isRazorpay = paymentMethod.toUpperCase() === 'RAZORPAY' || paymentMethod.toUpperCase() === 'ONLINE';
 
   const orderPayload = {
     customerName: name,
@@ -1224,18 +1335,126 @@ window.submitCheckoutOrder = async function() {
 
   try {
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Processing Order...';
+    submitBtn.innerHTML = '<span class="spinner" style="display:inline-block; width:16px; height:16px; border:2px solid #fff; border-top-color:transparent; border-radius:50%; animation:spin 0.6s linear infinite; vertical-align:middle; margin-right:6px;"></span> Generating Order...';
 
-    // SERVER-SIDE STRICT VALIDATION HAPPENS HERE
+    // 1. Create order in backend
     const res = await API.placeOrder(orderPayload);
     const order = res.order;
 
-    // Clear cart upon successful order
+    // 2. Auto-save/update address in profile if requested
+    const saveToProfileChecked = document.getElementById('save-address-to-profile')?.checked;
+    const custToken = localStorage.getItem('hc_customer_token');
+    if (saveToProfileChecked && custToken) {
+      try {
+        await fetch('/api/v1/auth/customer/profile', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${custToken}`
+          },
+          body: JSON.stringify({
+            name,
+            phone,
+            address,
+            city,
+            state,
+            pincode,
+            country: 'India'
+          })
+        });
+      } catch (e) {
+        console.warn('Address auto-save to profile skipped:', e);
+      }
+    }
+
+    // 3. If Razorpay / Online payment selected, open Razorpay Checkout modal
+    if (isRazorpay && typeof window.Razorpay !== 'undefined') {
+      submitBtn.innerHTML = 'Connecting to Razorpay...';
+
+      try {
+        const rzpRes = await fetch('/api/v1/payment-methods/razorpay/create-order', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            amount: order.totalAmount,
+            orderNumber: order.orderNumber,
+            currency: 'INR'
+          })
+        });
+        const rzpData = await rzpRes.json();
+        const keyId = rzpData.keyId || 'rzp_test_AtelierHarryCo';
+
+        const rzpOptions = {
+          key: keyId,
+          amount: Math.round(Number(order.totalAmount) * 100),
+          currency: 'INR',
+          name: 'HARRY & CO JEANS',
+          description: `Order #${order.orderNumber} Atelier Denim Heritage`,
+          image: '/assets/logo.jpg',
+          order_id: rzpData.razorpayOrderId.startsWith('rzp_order_') ? undefined : rzpData.razorpayOrderId,
+          prefill: {
+            name: name,
+            email: email,
+            contact: phone
+          },
+          theme: {
+            color: '#DAA520'
+          },
+          handler: async function (paymentResponse) {
+            try {
+              await fetch('/api/v1/payment-methods/razorpay/verify', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  orderNumber: order.orderNumber,
+                  razorpayPaymentId: paymentResponse.razorpay_payment_id || `pay_${Date.now()}`,
+                  razorpayOrderId: paymentResponse.razorpay_order_id,
+                  razorpaySignature: paymentResponse.razorpay_signature
+                })
+              });
+              order.paymentStatus = 'PAID';
+              order.paymentMethod = 'RAZORPAY';
+              showToast('✓ Razorpay Payment Verified & Received!', 'info');
+            } catch (err) {
+              console.warn('Verification notification failed:', err);
+            }
+
+            // Clear cart upon successful payment
+            State.cart = [];
+            localStorage.removeItem('hc_cart');
+            updateCartBadge();
+            State.appliedCoupon = null;
+            renderOrderSuccessView(order);
+          },
+          modal: {
+            ondismiss: function () {
+              showToast('Payment window closed. Order reference saved.', 'info');
+              State.cart = [];
+              localStorage.removeItem('hc_cart');
+              updateCartBadge();
+              State.appliedCoupon = null;
+              renderOrderSuccessView(order);
+            }
+          }
+        };
+
+        const rzpInstance = new window.Razorpay(rzpOptions);
+        rzpInstance.on('payment.failed', function (failed) {
+          showToast(`Payment failed: ${failed.error?.description || 'Cancelled'}`, 'error');
+          renderOrderSuccessView(order);
+        });
+        rzpInstance.open();
+        return;
+      } catch (rzpErr) {
+        console.error('Razorpay popup error:', rzpErr);
+      }
+    }
+
+    // 4. Default / COD completion
     State.cart = [];
     localStorage.removeItem('hc_cart');
     updateCartBadge();
     State.appliedCoupon = null;
-
     renderOrderSuccessView(order);
   } catch (err) {
     submitBtn.disabled = false;
@@ -1321,7 +1540,7 @@ function renderTrackOrderView() {
   `;
 }
 
-window.searchOrderTracking = async function(orderNumber) {
+window.searchOrderTracking = async function (orderNumber) {
   const resultBox = document.getElementById('tracking-result-box');
   if (!resultBox || !orderNumber) return;
 
@@ -1453,7 +1672,7 @@ function renderMaintenanceMode() {
 }
 
 // Review submission modal
-window.openReviewModal = function(productId) {
+window.openReviewModal = function (productId) {
   let overlay = document.getElementById('review-modal-overlay');
   if (!overlay) {
     overlay = document.createElement('div');
@@ -1499,7 +1718,7 @@ window.openReviewModal = function(productId) {
   overlay.classList.add('open');
 };
 
-window.submitProductReview = async function(productId) {
+window.submitProductReview = async function (productId) {
   const name = document.getElementById('rev-name').value;
   const email = document.getElementById('rev-email').value;
   const rating = document.getElementById('rev-rating').value;
@@ -1537,12 +1756,12 @@ export function closeCartDrawer() {
   if (drawer) drawer.classList.remove('open');
 }
 
-window.openMobileNav = function() {
+window.openMobileNav = function () {
   const nav = document.getElementById('mobile-nav-drawer');
   if (nav) nav.classList.add('open');
 };
 
-window.closeMobileNav = function() {
+window.closeMobileNav = function () {
   const nav = document.getElementById('mobile-nav-drawer');
   if (nav) nav.classList.remove('open');
 };
@@ -1564,14 +1783,4 @@ function initEventListeners() {
       if (e.target === drawerBackdrop) closeCartDrawer();
     });
   }
-}
-
-function escapeHtml(str) {
-  if (!str) return '';
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
 }

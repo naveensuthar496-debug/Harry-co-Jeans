@@ -467,6 +467,14 @@ function runMigrations() {
   safeAdd('orders', 'delivered_at', 'DATETIME');
   safeAdd('orders', 'cod_fee', 'REAL DEFAULT 0');
 
+  // Customer Profile & Address Fields
+  safeAdd('customers', 'avatar_url', "TEXT DEFAULT ''");
+  safeAdd('customers', 'address', "TEXT DEFAULT ''");
+  safeAdd('customers', 'city', "TEXT DEFAULT ''");
+  safeAdd('customers', 'state', "TEXT DEFAULT ''");
+  safeAdd('customers', 'pincode', "TEXT DEFAULT ''");
+  safeAdd('customers', 'country', "TEXT DEFAULT 'India'");
+
   // order_timeline (safe table create if server upgraded)
   try {
     db.exec(`CREATE TABLE IF NOT EXISTS order_timeline (
@@ -555,11 +563,22 @@ function seedDefaultAdmin() {
 function seedDefaultPaymentMethods() {
   const methods = [
     {
+      code: 'RAZORPAY',
+      name: 'Razorpay (UPI / QR / Cards / Net Banking)',
+      description: 'Instant secure checkout via Google Pay, PhonePe, Paytm, All Cards & 50+ Banks.',
+      enabled: 1,
+      display_order: 1,
+      minimum_order_value: 1,
+      maximum_order_value: 500000,
+      fee: 0,
+      free_threshold: 0
+    },
+    {
       code: 'COD',
       name: 'Cash on Delivery',
       description: 'Pay with cash or UPI QR upon doorstep delivery. Subject to order limit verification.',
       enabled: 1,
-      display_order: 1,
+      display_order: 2,
       minimum_order_value: 500,
       maximum_order_value: 10000,
       fee: 49,
