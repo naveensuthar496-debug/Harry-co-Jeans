@@ -4,6 +4,16 @@ An enterprise-grade, database-driven e-commerce platform and CMS for **HARRY & C
 
 ---
 
+## Netlify Deployment
+
+The repository's `netlify.toml` publishes the existing `public` directory directly. No frontend build command is required. This ensures that `public/index.html` is served at the site root and that styles, scripts, and images are included in the deployment. Explicit rewrites preserve the extensionless admin, login, tracking, and policy page URLs.
+
+This configuration deploys the frontend only. The Express server in `server/index.js` is a separate, long-running backend and is not started by a static Netlify deployment. The storefront requires its `/api/*` endpoints for products, content, authentication, orders, and payments. Those endpoints must be hosted separately and proxied to the site, or migrated to Netlify Functions with persistent storage, before those features work on Netlify. API URLs are intentionally not rewritten to HTML pages.
+
+Push changes to the connected GitHub repository's `main` branch to trigger the configured Git-based deployment.
+
+---
+
 ## 🏛 Architecture Overview
 
 ```
