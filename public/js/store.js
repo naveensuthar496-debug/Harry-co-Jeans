@@ -1372,26 +1372,32 @@ window.submitCheckoutOrder = async function () {
       submitBtn.innerHTML = 'Connecting to Razorpay...';
 
       try {
-        const rzpRes = await fetch('/api/v1/payment-methods/razorpay/create-order', {
+        const amountInPaise = Math.round(Number(order.totalAmount) * 100);
+        const rzpRes = await fetch('/api/create-order', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            amount: order.totalAmount,
+            amount: amountInPaise,
+            receipt: order.orderNumber,
             orderNumber: order.orderNumber,
             currency: 'INR'
           })
         });
         const rzpData = await rzpRes.json();
-        const keyId = rzpData.keyId || 'rzp_test_AtelierHarryCo';
+        if (!rzpData.success) {
+          throw new Error(rzpData.message || 'Failed to initiate Razorpay order');
+        }
+        const keyId = rzpData.key_id || rzpData.keyId;
+        const razorpayOrderId = rzpData.order_id || rzpData.razorpayOrderId;
 
         const rzpOptions = {
           key: keyId,
-          amount: Math.round(Number(order.totalAmount) * 100),
-          currency: 'INR',
+          amount: rzpData.amount || amountInPaise,
+          currency: rzpData.currency || 'INR',
           name: 'HARRY & CO JEANS',
           description: `Order #${order.orderNumber} Atelier Denim Heritage`,
           image: '/assets/logo.jpg',
-          order_id: rzpData.razorpayOrderId.startsWith('rzp_order_') ? undefined : rzpData.razorpayOrderId,
+          order_id: razorpayOrderId,
           prefill: {
             name: name,
             email: email,
@@ -1402,19 +1408,24 @@ window.submitCheckoutOrder = async function () {
           },
           handler: async function (paymentResponse) {
             try {
-              await fetch('/api/v1/payment-methods/razorpay/verify', {
+              const verifyRes = await fetch('/api/verify-payment', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                   orderNumber: order.orderNumber,
-                  razorpayPaymentId: paymentResponse.razorpay_payment_id || `pay_${Date.now()}`,
-                  razorpayOrderId: paymentResponse.razorpay_order_id,
-                  razorpaySignature: paymentResponse.razorpay_signature
+                  razorpay_order_id: paymentResponse.razorpay_order_id,
+                  razorpay_payment_id: paymentResponse.razorpay_payment_id,
+                  razorpay_signature: paymentResponse.razorpay_signature
                 })
               });
-              order.paymentStatus = 'PAID';
-              order.paymentMethod = 'RAZORPAY';
-              showToast('✓ Razorpay Payment Verified & Received!', 'info');
+              const verifyData = await verifyRes.json();
+              if (verifyData.success) {
+                order.paymentStatus = 'PAID';
+                order.paymentMethod = 'RAZORPAY';
+                showToast('✓ Razorpay Payment Verified & Received!', 'info');
+              } else {
+                showToast(`Verification notice: ${verifyData.message || 'Signature mismatch'}`, 'error');
+              }
             } catch (err) {
               console.warn('Verification notification failed:', err);
             }
@@ -1440,13 +1451,14 @@ window.submitCheckoutOrder = async function () {
 
         const rzpInstance = new window.Razorpay(rzpOptions);
         rzpInstance.on('payment.failed', function (failed) {
-          showToast(`Payment failed: ${failed.error?.description || 'Cancelled'}`, 'error');
+          showToast(`Payment failed: ${failed.error?.description || 'Transaction incomplete'}`, 'error');
           renderOrderSuccessView(order);
         });
         rzpInstance.open();
         return;
       } catch (rzpErr) {
         console.error('Razorpay popup error:', rzpErr);
+        showToast(rzpErr.message || 'Unable to open Razorpay payment window.', 'error');
       }
     }
 

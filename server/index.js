@@ -8,7 +8,7 @@ import { checkMaintenanceMode } from './middleware/maintenance.js';
 
 import productsRouter from './routes/products.js';
 import ordersRouter from './routes/orders.js';
-import paymentsRouter from './routes/payments.js';
+import paymentsRouter, { handleCreateRazorpayOrder, handleVerifyRazorpayPayment } from './routes/payments.js';
 import contentRouter from './routes/content.js';
 import couponsRouter from './routes/coupons.js';
 import adminRouter from './routes/admin.js';
@@ -95,6 +95,9 @@ app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/products', productsRouter);
 app.use('/api/v1/orders', ordersRouter);
 app.use('/api/v1/payment-methods', paymentsRouter);
+// Standard Razorpay Checkout Endpoints
+app.post('/api/create-order', handleCreateRazorpayOrder);
+app.post('/api/verify-payment', handleVerifyRazorpayPayment);
 app.use('/api/v1/content', contentRouter);
 app.use('/api/v1/settings', (req, res) => res.redirect('/api/v1/content/settings'));
 app.use('/api/v1/coupons', couponsRouter);
